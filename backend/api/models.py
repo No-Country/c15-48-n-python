@@ -18,11 +18,13 @@ class Pet(models.Model):
     birth_date = models.DateField(
         verbose_name=_("Pet Birth Date"), auto_now=False, auto_now_add=False
     )
-    name = models.CharField(verbose_name=_("Name of Pet"), max_length=255)
-    species = models.Choices(PetSpecies)
-    breed = models.CharField(verbose_name=_("Breed of Pet"), verblank=True)
-    biography = models.TextField(verbose_name=_("Pet Biography"))
-    pet_picture = models.ImageField(verbose_name=_("Profile Picture for pe"))
+    name = models.CharField(verbose_name=_("Name of pet"), max_length=255)
+    species = models.IntegerField(
+        verbose_name=_("Species of pet"), choices=PetSpecies.choices
+    )
+    breed = models.CharField(verbose_name=_("Breed of pet"), blank=True, max_length=255)
+    biography = models.TextField(verbose_name=_("Pet biography"))
+    pet_picture = models.ImageField(verbose_name=_("Profile picture for pet"))
     pet_picture_comment = ImageSpecField(
         processors=[ResizeToFill(100, 100)],
         format="WEBM",
