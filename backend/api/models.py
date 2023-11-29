@@ -1,8 +1,8 @@
-from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext_noop
 from imagekit.processors import ResizeToFill
 from imagekit.models import ImageSpecField
+from django.db import models
 
 
 class Pet(models.Model):
@@ -23,3 +23,20 @@ class Pet(models.Model):
         format="WEBM",
         options={"quality": 80},
     )
+
+
+class Follower(models.Model):
+    followed = models.ForeignKey(
+        Pet, verbose_name=_("Pet being followed"), on_delete=models.CASCADE
+    )
+    follower = models.ForeignKey(
+        Pet, verbose_name=_("Pet following another pet"), on_delete=models.CASCADE
+    )
+    created_at = models.DateField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                name="not_same", check=~models.Q(first=models.F("second"))
+            )
+        ]
