@@ -2,6 +2,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext_noop
 from imagekit.processors import ResizeToFill
 from imagekit.models import ImageSpecField
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -41,9 +42,25 @@ class Follower(models.Model):
     )
     created_at = models.DateField(auto_now_add=True)
 
-    class Meta:
-        constraints = [
-            models.CheckConstraint(
-                name="not_same", check=~models.Q(first=models.F("second"))
-            )
-        ]
+    # class Meta:
+    #     constraints = [
+    #         models.CheckConstraint(
+    #             name="not_same_follower", check=~models.Q(followed=models.F("follower"))
+    #         )
+    #     ]
+
+
+class Blocker(models.Model):
+    blocked = models.ForeignKey(
+        User, verbose_name=_("User being blocked"), on_delete=models.CASCADE
+    )
+    blocker = models.ForeignKey(
+        User, verbose_name=_("User blocking another user"), on_delete=models.CASCADE
+    )
+
+    # class Meta:
+    #     constraints = [
+    #         models.CheckConstraint(
+    #             name="not_same_blocker", check=~models.Q(blocked=models.F("blocker"))
+    #         )
+    #     ]
