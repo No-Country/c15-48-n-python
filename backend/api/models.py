@@ -64,3 +64,11 @@ class Blocker(models.Model):
     #             name="not_same_blocker", check=~models.Q(blocked=models.F("blocker"))
     #         )
     #     ]
+
+
+class Post(models.Model):
+    pet = models.ForeignKey(
+        Pet, verbose_name=_("Author of post"), on_delete=models.CASCADE
+    )
+    caption = models.CharField(verbose_name=_("Post description"), max_length=255)
+    created_at = models.DateField(auto_now_add=True)
