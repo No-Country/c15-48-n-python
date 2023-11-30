@@ -94,3 +94,8 @@ class Comment(models.Model):
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
     description = models.CharField(max_length=255)
     created_at = models.DateField(auto_now_add=True)
+
+
+class Like(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
