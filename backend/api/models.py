@@ -36,7 +36,10 @@ class Pet(models.Model):
 
 class Follower(models.Model):
     followed = models.ForeignKey(
-        Pet, verbose_name=_("Pet being followed"), on_delete=models.CASCADE
+        Pet,
+        verbose_name=_("Pet being followed"),
+        on_delete=models.CASCADE,
+        related_name="followed_pet",
     )
     follower = models.ForeignKey(
         Pet, verbose_name=_("Pet following another pet"), on_delete=models.CASCADE
@@ -53,7 +56,10 @@ class Follower(models.Model):
 
 class Blocker(models.Model):
     blocked = models.ForeignKey(
-        User, verbose_name=_("User being blocked"), on_delete=models.CASCADE
+        User,
+        verbose_name=_("User being blocked"),
+        on_delete=models.CASCADE,
+        related_name="blocked_pet",
     )
     blocker = models.ForeignKey(
         User, verbose_name=_("User blocking another user"), on_delete=models.CASCADE
