@@ -77,11 +77,13 @@ class Post(models.Model):
 
 # TODO check more info
 class PostImage(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     image = ImageField()
     alt_text = models.CharField(verbose_name=_("Alterntive text"), max_length=2000)
 
 
 # TODO check more info
 class PostVideo(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     video = models.FileField()
     alt_text = models.CharField(verbose_name=_("Alterntive text"), max_length=2000)
