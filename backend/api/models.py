@@ -1,3 +1,4 @@
+from django.forms import ImageField
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext_noop
 from imagekit.processors import ResizeToFill
@@ -72,3 +73,15 @@ class Post(models.Model):
     )
     caption = models.CharField(verbose_name=_("Post description"), max_length=255)
     created_at = models.DateField(auto_now_add=True)
+
+
+# TODO check more info
+class PostImage(models.Model):
+    image = ImageField()
+    alt_text = models.CharField(verbose_name=_("Alterntive text"), max_length=2000)
+
+
+# TODO check more info
+class PostVideo(models.Model):
+    video = models.FileField()
+    alt_text = models.CharField(verbose_name=_("Alterntive text"), max_length=2000)
