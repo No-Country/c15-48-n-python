@@ -87,3 +87,10 @@ class PostVideo(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     video = models.FileField()
     alt_text = models.CharField(verbose_name=_("Alternative text"), max_length=2000)
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, verbose_name=_("Comment from post"))
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+    description = models.CharField(max_length=255)
+    created_at = models.DateField(auto_now_add=True)
