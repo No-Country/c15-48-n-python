@@ -17,6 +17,10 @@ class Pet(models.Model):
         DOG = 1, gettext_noop("DOG")
         CAT = 2, gettext_noop("CAT")
 
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
     birth_date = models.DateField(
         verbose_name=_("Pet Birth Date"), auto_now=False, auto_now_add=False
     )
@@ -36,35 +40,41 @@ class Pet(models.Model):
 
 class Follower(models.Model):
     followed = models.ForeignKey(
-        Pet, verbose_name=_("Pet being followed"), on_delete=models.CASCADE
+        Pet,
+        verbose_name=_("Pet being followed"),
+        on_delete=models.CASCADE,
+        related_name="followed_pet",
     )
     follower = models.ForeignKey(
         Pet, verbose_name=_("Pet following another pet"), on_delete=models.CASCADE
     )
     created_at = models.DateField(auto_now_add=True)
 
-    # class Meta:
-    #     constraints = [
-    #         models.CheckConstraint(
-    #             name="not_same_follower", check=~models.Q(followed=models.F("follower"))
-    #         )
-    #     ]
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                name="not_same_follower", check=~models.Q(followed=models.F("follower"))
+            )
+        ]
 
 
 class Blocker(models.Model):
     blocked = models.ForeignKey(
-        User, verbose_name=_("User being blocked"), on_delete=models.CASCADE
+        User,
+        verbose_name=_("User being blocked"),
+        on_delete=models.CASCADE,
+        related_name="blocked_pet",
     )
     blocker = models.ForeignKey(
         User, verbose_name=_("User blocking another user"), on_delete=models.CASCADE
     )
 
-    # class Meta:
-    #     constraints = [
-    #         models.CheckConstraint(
-    #             name="not_same_blocker", check=~models.Q(blocked=models.F("blocker"))
-    #         )
-    #     ]
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                name="not_same_blocker", check=~models.Q(blocked=models.F("blocker"))
+            )
+        ]
 
 
 class Post(models.Model):
@@ -90,7 +100,9 @@ class PostVideo(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, verbose_name=_("Comment from post"))
+    post = models.ForeignKey(
+        Post, verbose_name=_("Comment from post"), on_delete=models.CASCADE
+    )
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
     description = models.CharField(max_length=255)
     created_at = models.DateField(auto_now_add=True)
