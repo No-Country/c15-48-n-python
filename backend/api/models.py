@@ -17,6 +17,10 @@ class Pet(models.Model):
         DOG = 1, gettext_noop("DOG")
         CAT = 2, gettext_noop("CAT")
 
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
     birth_date = models.DateField(
         verbose_name=_("Pet Birth Date"), auto_now=False, auto_now_add=False
     )
@@ -46,12 +50,12 @@ class Follower(models.Model):
     )
     created_at = models.DateField(auto_now_add=True)
 
-    # class Meta:
-    #     constraints = [
-    #         models.CheckConstraint(
-    #             name="not_same_follower", check=~models.Q(followed=models.F("follower"))
-    #         )
-    #     ]
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                name="not_same_follower", check=~models.Q(followed=models.F("follower"))
+            )
+        ]
 
 
 class Blocker(models.Model):
@@ -65,12 +69,12 @@ class Blocker(models.Model):
         User, verbose_name=_("User blocking another user"), on_delete=models.CASCADE
     )
 
-    # class Meta:
-    #     constraints = [
-    #         models.CheckConstraint(
-    #             name="not_same_blocker", check=~models.Q(blocked=models.F("blocker"))
-    #         )
-    #     ]
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                name="not_same_blocker", check=~models.Q(blocked=models.F("blocker"))
+            )
+        ]
 
 
 class Post(models.Model):
