@@ -17,6 +17,14 @@ class PostImageSerializer(serializers.ModelSerializer):
         fields = ['post', 'image', 'alt_text']
 
 
+class PostVideoSerializer(serializers.ModelSerializer):
+    post = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+    class Meta:
+        model = PostVideo
+        fields = ['post', 'video', 'alt_text']
+
+
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
