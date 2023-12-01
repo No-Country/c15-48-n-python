@@ -12,7 +12,7 @@ class PetSerializer(serializers.ModelSerializer):
 class PetAbridgedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
-        fields = ("name", "species", "pet_picture_comment")
+        fields = ("name", "pet_picture_comment")
 
 
 class AccountSerializer(serializers.ModelSerializer):
