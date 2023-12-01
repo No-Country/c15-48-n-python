@@ -1,5 +1,12 @@
 from rest_framework import serializers
 from .models import *
+class PostSerializer(serializers.ModelSerializer):
+    pet = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+    class Meta:
+        model = Post
+        fields = ['pet', 'caption', 'created_at']
+        read_only_fields = ('created_at', )
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
