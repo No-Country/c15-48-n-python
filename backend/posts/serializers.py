@@ -8,6 +8,15 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ['pet', 'caption', 'created_at']
         read_only_fields = ('created_at', )
 
+
+class PostImageSerializer(serializers.ModelSerializer):
+    post = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+    class Meta:
+        model = PostImage
+        fields = ['post', 'image', 'alt_text']
+
+
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
