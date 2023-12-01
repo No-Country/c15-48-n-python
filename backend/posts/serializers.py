@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Comment
+from .models import *
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,3 +14,11 @@ class CommentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         comment = Comment.objects.create(**validated_data)
         return comment
+    
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = '__all__'
+
+    def create(self, validated_data):
+        return Like.objects.create(**validated_data)
