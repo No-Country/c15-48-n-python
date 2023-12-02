@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import *
+from .models import Post, PostImage, Pet, PostVideo, Like, Comment
 
 class PostSerializer(serializers.ModelSerializer):
     pet = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
