@@ -28,6 +28,7 @@ class PostVideoSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     post = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    pet = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Comment
@@ -41,4 +42,4 @@ class LikeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Like
-        fields = ['post', 'pet']
+        fields = ['pet', 'post']
