@@ -1,8 +1,9 @@
 from rest_framework import serializers
 from .models import Post, PostImage, Pet, PostVideo, Like, Comment
+from accounts.serializers import PetAbridgedSerializer
 
 class PostSerializer(serializers.ModelSerializer):
-    pet = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    pet = PetAbridgedSerializer(many=True, read_only=True)
 
     class Meta:
         model = Post
@@ -28,7 +29,7 @@ class PostVideoSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     post = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    pet = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    pet = PetAbridgedSerializer(many=True, read_only=True)
 
     class Meta:
         model = Comment
@@ -37,7 +38,7 @@ class CommentSerializer(serializers.ModelSerializer):
     
 
 class LikeSerializer(serializers.ModelSerializer):
-    pet = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    pet = PetAbridgedSerializer(many=True, read_only=True)
     post = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
