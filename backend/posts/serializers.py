@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+
 class PostSerializer(serializers.ModelSerializer):
     pet = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
@@ -26,23 +27,18 @@ class PostVideoSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    post = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
     class Meta:
         model = Comment
         fields = '__all__'
+        read_only_fields = ('created_at', )
+    
 
-    def validate_description(self, value):
-        if len(value) > 2000:
-            raise serializers.ValidationError("The description must be less than 2000 characters")
-        return value
-    
-    def create(self, validated_data):
-        comment = Comment.objects.create(**validated_data)
-        return comment
-    
 class LikeSerializer(serializers.ModelSerializer):
+    pet = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    post = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
     class Meta:
         model = Like
         fields = '__all__'
-
-    def create(self, validated_data):
-        return Like.objects.create(**validated_data)
