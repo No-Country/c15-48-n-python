@@ -1,4 +1,5 @@
 from .models import Post, PostImage, PostVideo, Comment, Like
+from .permissions import IsOwnerOrReadOnly
 from rest_framework import viewsets, permissions
 from .serializers import (
     PostSerializer,
@@ -9,7 +10,10 @@ from .serializers import (
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly,
+    )
     serializer_class = PostSerializer
 
 
@@ -27,12 +31,20 @@ class PostVideoViewSet(viewsets.ModelViewSet):
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly,
+    )
+    http_method_names = ("get", "post", "delete")
     serializer_class = CommentSerializer
 
 
 class LikeViewSet(viewsets.ModelViewSet):
     queryset = Like.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly,
+    )
+    http_method_names = ("get", "post", "delete")
     serializer_class = LikeSerializer
 
