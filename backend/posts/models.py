@@ -1,7 +1,7 @@
 from django.forms import ImageField
 from django.utils.translation import gettext_lazy as _
 from django.db import models
-from backend.accounts.models import Pet
+from accounts.models import Pet
 
 
 class Post(models.Model):
