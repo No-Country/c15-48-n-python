@@ -6,7 +6,9 @@ from .serializers import (
     PostImageSerializer,
     PostVideoSerializer,
     CommentSerializer,
-    LikeSerializer)
+    LikeSerializer,
+)
+
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
@@ -45,4 +47,3 @@ class LikeViewSet(viewsets.ModelViewSet):
     )
     http_method_names = ("get", "post", "delete")
     serializer_class = LikeSerializer
-
