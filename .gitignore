@@ -5,3 +5,5 @@
 /backend/posts/__pycache__
 /backend/db.sqlite3
 /backend/api/migrations
+/backend/posts/migrations
+/backend/accounts/migrations
