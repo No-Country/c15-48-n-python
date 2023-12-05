@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Blocker, Follower, Pet
+from .models import Blocker, Follower, Pet
 from django.conf import settings
 
 
