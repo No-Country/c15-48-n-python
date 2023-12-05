@@ -7,7 +7,7 @@ export default {
   theme: {
     colors: {
       'social-pink': '#F62E8E',
-      'social.blue': '#2E8AF6',
+      'social-blue': '#2E8AF6',
       'dark-black': '#181A1C',
       'light-white': '#ECEBED',
       'black': '#000000',
