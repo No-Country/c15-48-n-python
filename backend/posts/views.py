@@ -17,15 +17,13 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
 
 
-class PostImageViewSet(viewsets.ModelViewSet):
+class PostImageViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = PostImage.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
     serializer_class = PostImageSerializer
 
 
-class PostVideoViewSet(viewsets.ModelViewSet):
+class PostVideoViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = PostVideo.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
     serializer_class = PostVideoSerializer
 
 
