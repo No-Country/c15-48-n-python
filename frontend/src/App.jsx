@@ -1,6 +1,7 @@
 import React from "react";
 import Register from "./components/registerComponent/register";
 import HomeComp from "./components/homeComp";
+import Login from './views/login/login'
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -9,7 +10,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<HomeComp />} />
-        <Route path="/login" element={<h1>Login</h1>} />
+        <Route path='/login' element={<Login />}/>
         <Route path="/register" element={<Register />} />
         <Route path="/explore" element={<h1>Explore</h1>} />
         <Route path="/publish" element={<h1>Publish</h1>} />
