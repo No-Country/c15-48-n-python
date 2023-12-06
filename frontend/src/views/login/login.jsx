@@ -81,7 +81,6 @@ const Login = () => {
           ${error.email || error.password 
             ? 'bg-light-gray' 
             : 'active:bg-social-pink'}`}
-        //   {Object.keys(error).length !== 0}
           ></ButtonInSe>
         </form>
       </div>
