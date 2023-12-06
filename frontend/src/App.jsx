@@ -1,11 +1,12 @@
-import React from "react";
 import Register from "./components/registerComponent/register";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <>
+      <Navbar/>
       <Routes>
         <Route path="/" element={<h1>Home</h1>} />
         <Route path="/login" element={<h1>Login</h1>} />
