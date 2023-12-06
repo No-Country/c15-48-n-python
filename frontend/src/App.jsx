@@ -1,5 +1,6 @@
 import React from "react";
 import Register from "./components/registerComponent/register";
+import HomeComp from "./components/homeComp";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -7,7 +8,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
+        <Route path="/" element={<HomeComp />} />
         <Route path="/login" element={<h1>Login</h1>} />
         <Route path="/register" element={<Register />} />
         <Route path="/explore" element={<h1>Explore</h1>} />
