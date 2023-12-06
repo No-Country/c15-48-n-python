@@ -7,3 +7,4 @@
 /backend/api/migrations
 /backend/posts/migrations
 /backend/accounts/migrations
+/backend/core/.env
