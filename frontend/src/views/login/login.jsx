@@ -29,6 +29,12 @@ const Login = () => {
     }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError(validation(userInfo));
+    console.log(userInfo);
+  };
+
 
   return (
     <div className="bg-gray flex flex-col justify-between h-screen px-6 m-0">
@@ -67,7 +73,16 @@ const Login = () => {
               {error.password}
             </p>
           )}
-          <ButtonInSe></ButtonInSe>
+          <ButtonInSe
+          type='submit'
+          onClick={handleSubmit}
+          disabled={error.email || error.password}
+          className={`text-white font-semibold w-80 bg-social-pink rounded-3xl py-1.5 px-8 mt-6 
+          ${error.email || error.password 
+            ? 'bg-light-gray' 
+            : 'active:bg-social-pink'}`}
+        //   {Object.keys(error).length !== 0}
+          ></ButtonInSe>
         </form>
       </div>
       <div className="flex pb-14">
