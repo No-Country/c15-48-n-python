@@ -5,7 +5,6 @@ from imagekit.processors import ResizeToFill
 from imagekit.models import ImageSpecField
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
-from cloudinary.models import CloudinaryField
 
 
 class User(AbstractUser):
@@ -30,7 +29,7 @@ class Pet(models.Model):
     )
     breed = models.CharField(verbose_name=_("Breed of pet"), blank=True, max_length=255)
     biography = models.TextField(verbose_name=_("Pet biography"))
-    pet_picture = CloudinaryField(resource_type='image')
+    pet_picture = models.ImageField(verbose_name=_("Profile picture for pet"))
     pet_picture_comment = ImageSpecField(
         processors=[ResizeToFill(100, 100)],
         format="WEBM",
