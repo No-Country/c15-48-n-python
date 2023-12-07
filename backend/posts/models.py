@@ -1,4 +1,3 @@
-from django.forms import ImageField
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from accounts.models import Pet
@@ -15,14 +14,14 @@ class Post(models.Model):
 # TODO check more info
 class PostImage(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    image = ImageField()
+    image = models.URLField()
     alt_text = models.CharField(verbose_name=_("Alternative text"), max_length=2000)
 
 
 # TODO check more info
 class PostVideo(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    video = models.FileField()
+    image = models.URLField()
     alt_text = models.CharField(verbose_name=_("Alternative text"), max_length=2000)
 
 
