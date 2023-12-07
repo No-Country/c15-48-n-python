@@ -21,7 +21,7 @@ class PostImage(models.Model):
 # TODO check more info
 class PostVideo(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    video = models.URLField()
+    image = models.URLField()
     alt_text = models.CharField(verbose_name=_("Alternative text"), max_length=2000)
 
 
