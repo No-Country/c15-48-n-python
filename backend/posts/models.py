@@ -2,7 +2,6 @@ from django.forms import ImageField
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from accounts.models import Pet
-from cloudinary.models import CloudinaryField
 
 
 class Post(models.Model):
@@ -16,14 +15,14 @@ class Post(models.Model):
 # TODO check more info
 class PostImage(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    image = CloudinaryField(resource_type='image')
+    image = ImageField()
     alt_text = models.CharField(verbose_name=_("Alternative text"), max_length=2000)
 
 
 # TODO check more info
 class PostVideo(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    video = CloudinaryField(resource_type='video')
+    video = models.FileField()
     alt_text = models.CharField(verbose_name=_("Alternative text"), max_length=2000)
 
 
