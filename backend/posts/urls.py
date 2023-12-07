@@ -8,10 +8,10 @@ from .views import (
 )
 
 router = routers.DefaultRouter()
-router.register("api/posts", PostViewSet, "posts")
-router.register("api/images", PostImageViewSet, "images")
-router.register("api/videos", PostVideoViewSet, "videos")
-router.register("api/comments", CommentViewSet, "comments")
-router.register("api/likes", LikeViewSet, "likes")
+router.register("/posts/", PostViewSet, "posts")
+router.register("/images/", PostImageViewSet, "images")
+router.register("/videos/", PostVideoViewSet, "videos")
+router.register("/comments/", CommentViewSet, "comments")
+router.register("/likes/", LikeViewSet, "likes")
 
 urlpatterns = router.urls
