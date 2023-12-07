@@ -37,7 +37,7 @@ const Login = () => {
 
 
   return (
-    <div className="bg-gray flex flex-col justify-between h-screen px-6 m-0">
+    <div className="bg-dark-black flex flex-col justify-between h-screen px-6 m-0">
       <div className="justify-center pt-32">
         <h2 className="font-custom font-semibold text-left text-white text-3xl">
           Iniciar Sesión en
