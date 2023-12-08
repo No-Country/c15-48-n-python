@@ -1,5 +1,5 @@
 import React from "react";
-import SearchIcon from "../assets/placeholder/search.svg";
+import searchIcon from '../assets/icons/search.svg';
 
 const SearchBar = () => {
   return (
@@ -11,7 +11,7 @@ const SearchBar = () => {
           className="w-full bg-gray text-sm"
         />
         <button className="flex items-center justify-center w-12 h-full rounded-full">
-          <img src={SearchIcon} />
+          <img src={searchIcon} />
         </button>
       </div>
     </>

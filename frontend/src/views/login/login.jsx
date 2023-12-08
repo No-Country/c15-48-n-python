@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import InputComp from "../../components/InputComp";
 import ButtonInSe from "../../components/ButtonInSe";
-import { NavLink } from "react-router-dom";
 import validation from "./validation";
 
 const Login = () => {
