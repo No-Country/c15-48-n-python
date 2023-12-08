@@ -4,8 +4,8 @@ import perfiles_mascotas from "../../assets/placeholder/perfiles_mascotas.js";
 import arrowLeft from "../../assets/Arrow Left.png";
 import DotsVertical from "../../assets/Dots Vertical.svg";
 import FollowButton from "../../components/FollowButton.jsx";
-import { Link, useParams } from "react-router-dom";
-import human_icon from '../../assets/placeholder/human_icon.svg'
+import { Link, useParams, NavLink } from "react-router-dom";
+import human_icon from "../../assets/placeholder/human_icon.svg";
 import gatos from "../../assets/placeholder/gatos_info.js";
 
 export default function Profile() {
@@ -19,24 +19,28 @@ export default function Profile() {
   console.log(petProfile);
 
   if (!petProfile) {
-    return <h2 className="font-custom text-white font-bold text-3xl text-center m-10">Perfil no encontrado</h2>;
+    return (
+      <h2 className="font-custom text-white font-bold text-3xl text-center m-10">
+        Perfil no encontrado
+      </h2>
+    );
   }
 
   // estados de pestañas Fotos y Videos
-  const [ select, setSelect ] = useState('fotos');
+  const [select, setSelect] = useState("fotos");
 
   const handleClick = () => {
     if (select === undefined) {
-        console.error('Estado indefinido')
-    }  else if (select === 'fotos') {
-        setSelect('videos')
-    } else if (select === 'videos') {
-        setSelect('fotos')
+      console.error("Estado indefinido");
+    } else if (select === "fotos") {
+      setSelect("videos");
+    } else if (select === "videos") {
+      setSelect("fotos");
     }
   };
-  console.log(select)
+  console.log(select);
 
-  // placeholder publis 
+  // placeholder publis
   let gatosInfo = gatos;
 
   return (
@@ -66,9 +70,14 @@ export default function Profile() {
               Nací el: {petProfile.date}
             </p>
             <div className="text-sm mb-12 flex justify-center">
-              <p className="pr-1">Mi humana es:</p>
-              <span className="font-semibold pr-1">{petProfile.human}</span>
-              <img src={human_icon} alt="icono perfil de humano" />
+              <p className="pr-1">Mi dueño es:</p>
+              <NavLink
+                to={`${petProfile.human}`}
+                className="font-semibold pr-1"
+              >
+                {petProfile.human}
+              </NavLink>
+              <img className='mb-' src={human_icon} alt="icono perfil de humano" />
             </div>
           </div>
         </header>
@@ -84,19 +93,33 @@ export default function Profile() {
           <FollowButton />
         </div>
       </Link>
-      
+
       <div className="flex text-white font-custom font-semibold mt-8 mx-6 justify-center border-solid border-light-gray border-b">
-        <button onClick={handleClick} className={`px-8 pb-1 text-sm text-center w-1/2
-        ${(select === 'fotos') ? 'border-b-4 border-solid border-social-blue rounded-sm w-36 ' : '' }`}>
-            Fotos
+        <button
+          onClick={handleClick}
+          className={`px-8 pb-1 text-sm text-center w-1/2
+        ${
+          select === "fotos"
+            ? "border-b-4 border-solid border-social-blue rounded-sm w-36 "
+            : ""
+        }`}
+        >
+          Fotos
         </button>
-        <button onClick={handleClick} className={`px-8 pb-1 text-sm text-center w-1/2
-        ${(select === 'videos') ? 'border-b-4 border-solid border-social-blue rounded-sm w-36' : '' }`}>
-            Videos
+        <button
+          onClick={handleClick}
+          className={`px-8 pb-1 text-sm text-center w-1/2
+        ${
+          select === "videos"
+            ? "border-b-4 border-solid border-social-blue rounded-sm w-36"
+            : ""
+        }`}
+        >
+          Videos
         </button>
       </div>
       {Object.entries(gatosInfo).map(([key, value]) => (
-          <Publication gato={value} key={key} />
+        <Publication gato={value} key={key} />
       ))}
     </div>
   );

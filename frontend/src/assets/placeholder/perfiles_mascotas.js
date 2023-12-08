@@ -11,7 +11,8 @@ const perfiles = [
         followers: 6281,
         followed: 3457,
         date: '12/08/2012',
-        profile: perfilJacob
+        profile: perfilJacob,
+        type: 'Perro'
     },
     {
         id: 2,
@@ -20,8 +21,9 @@ const perfiles = [
         human: 'Sergio Musta',
         followers: 2467,
         followed: 1358,
-        date: '12/08/2012',
-        profile: perfilAlex
+        date: '13/08/2010',
+        profile: perfilAlex,
+        type: 'Perro'
     },
     {
         id: 3,
@@ -31,7 +33,8 @@ const perfiles = [
         followers: 378,
         followed: 101,
         date: '28/12/2016',
-        profile: perfilPugui
+        profile: perfilPugui,
+        type: 'Perro'
     }
 ]
 
