@@ -1,16 +1,17 @@
-import React from "react";
 import Register from "./components/registerComponent/register";
 import HomeComp from "./views/home/homeComp";
 import Login from './views/login/login'
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Profile from "./views/profile/profile";
+import Navbar from "./components/Navbar";
 
 function App() {
 
 
   return (
     <>
+      <Navbar/>
       <Routes>
         <Route path="/" element={<HomeComp />} />
         <Route path='/login' element={<Login />}/>
