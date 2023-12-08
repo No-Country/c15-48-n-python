@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_noop
 from django.contrib.auth.models import AbstractUser
-from imagekit.processors import ResizeToFill
-from imagekit.models import ImageSpecField
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
@@ -30,11 +28,7 @@ class Pet(models.Model):
     breed = models.CharField(verbose_name=_("Breed of pet"), blank=True, max_length=255)
     biography = models.TextField(verbose_name=_("Pet biography"))
     pet_picture = models.URLField()
-    pet_picture_comment = ImageSpecField(
-        processors=[ResizeToFill(100, 100)],
-        format="WEBM",
-        options={"quality": 80},
-    )
+    pet_picture_comment = models.URLField()
 
 
 class Follower(models.Model):
