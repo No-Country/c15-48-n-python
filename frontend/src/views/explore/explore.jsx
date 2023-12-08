@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "../../components/searchBar";
+import SearchBar from "../../components/SearchBar.jsx";
 import Publication from "../../components/publication";
 import animales from "../../assets/placeholder/gatos_info";
 

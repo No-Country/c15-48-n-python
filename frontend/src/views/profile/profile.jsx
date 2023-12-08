@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Publication from "../../components/publication.jsx";
-import perfiles_mascotas from "../../assets/placeholder/perfiles_mascotas.js";
-import arrowLeft from "../../assets/Arrow Left.png";
-import DotsVertical from "../../assets/Dots Vertical.svg";
-import FollowButton from "../../components/FollowButton.jsx";
 import { Link, useParams, NavLink } from "react-router-dom";
-import human_icon from "../../assets/placeholder/human_icon.svg";
+import Publication from "../../components/publication.jsx";
+import FollowButton from "../../components/FollowButton.jsx";
+import perfiles_mascotas from "../../assets/placeholder/perfiles_mascotas.js";
 import gatos from "../../assets/placeholder/gatos_info.js";
+import arrowLeftIcon from '../../assets/icons/Arrow Left.png';
+import DotsVertical from "../../assets/icons/dots_vertical.svg";
+import humanIcon from "../../assets/icons/human_icon.svg";
 
 export default function Profile() {
   let perfiles = perfiles_mascotas;
@@ -48,7 +48,7 @@ export default function Profile() {
       <div className="flex justify-between mx-8 pt-8">
         <img
           className="w-4 h-4"
-          src={arrowLeft}
+          src={arrowLeftIcon}
           alt="flecha hacia la izquierda para volver"
         />
         <img src={DotsVertical} alt="menú de tres puntos" />
@@ -77,7 +77,7 @@ export default function Profile() {
               >
                 {petProfile.human}
               </NavLink>
-              <img className='mb-' src={human_icon} alt="icono perfil de humano" />
+              <img className='mb-' src={humanIcon} alt="icono perfil de humano" />
             </div>
           </div>
         </header>
