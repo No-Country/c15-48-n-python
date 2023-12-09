@@ -3,7 +3,7 @@ import "./App.css";
 import Register from "./components/registerComponent/register";
 import HomeComp from "./views/home/homeComp";
 import Login from "./views/login/login";
-import Profile from "./views/profile/Profile";
+import Profile from "./views/profile/profile";
 import HumanData from "./views/humanData/HumanData";
 import Explore from "./views/explore/explore";
 import Navbar from "./components/Navbar";
