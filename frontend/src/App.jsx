@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Register from "./components/registerComponent/register";
-import HomeComp from "./views/home/homeComp.jsx";
+import HomeComp from "./views/home/homeComp";
 import Login from "./views/login/login";
 import Profile from "./views/profile/Profile";
 import HumanData from "./views/humanData/HumanData";
