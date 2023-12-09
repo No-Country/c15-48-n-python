@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import humanData from '../../assets/placeholder/humans_data.js';
 import perfiles_mascotas from "../../assets/placeholder/perfiles_mascotas.js";
 import arrowLeftIcon from '../../assets/icons/Arrow Left.png';
-import plusIcon from '../../assets/icons/Plus.svg';
+import plusIcon from '../../assets/icons/plus.svg';
 import deleteIcon from '../../assets/icons/delete_icon.svg';
 
 export default function HumanData() {
