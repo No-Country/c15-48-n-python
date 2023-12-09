@@ -3,3 +3,9 @@
   height: 100vh;
   background-color: #181A1C;
 }
+
+.App {
+  height: 89%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
