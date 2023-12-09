@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link, useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import Publication from "../../components/publication.jsx";
 import FollowButton from "../../components/FollowButton.jsx";
+import GoBackButton from '../../components/GoBackButton.jsx';
 import perfiles_mascotas from "../../assets/placeholder/perfiles_mascotas.js";
 import gatos from "../../assets/placeholder/gatos_info.js";
 import arrowLeftIcon from '../../assets/icons/Arrow Left.png';
@@ -46,15 +47,11 @@ export default function Profile() {
   return (
     <div>
       <div className="flex justify-between mx-8 pt-8">
-        <img
-          className="w-4 h-4"
-          src={arrowLeftIcon}
-          alt="flecha hacia la izquierda para volver"
-        />
+        <GoBackButton className='w-4 h-4' img={arrowLeftIcon} alt='flecha hacia la izquierda para volver'/>
         <img src={DotsVertical} alt="menú de tres puntos" />
       </div>
 
-      <Link key={petProfile.id} to={`${petProfile.id}`}>
+      
         <header className="font-custom">
           <div className="flex flex-col justify-center text-center text-white">
             <img
@@ -92,7 +89,7 @@ export default function Profile() {
           </div>
           <FollowButton />
         </div>
-      </Link>
+      {/* </Link> */}
 
       <div className="flex text-white font-custom font-semibold mt-8 mx-6 justify-center border-solid border-light-gray border-b">
         <button
@@ -124,3 +121,5 @@ export default function Profile() {
     </div>
   );
 }
+
+// <Link key={petProfile.id} to={`${petProfile.id}`}>
