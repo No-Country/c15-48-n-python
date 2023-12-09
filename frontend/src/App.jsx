@@ -6,7 +6,7 @@ import Login from "./views/login/login";
 import Profile from "./views/profile/Profile";
 import HumanData from "./views/humanData/HumanData";
 import Explore from "./views/explore/explore";
-import Navbar from "./components/Navbar;
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
