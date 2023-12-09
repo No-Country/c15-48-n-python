@@ -8,7 +8,7 @@ import arrowLeftIcon from '../../assets/icons/Arrow Left.png';
 import DotsVertical from "../../assets/icons/dots_vertical.svg";
 import humanIcon from "../../assets/icons/human_icon.svg";
 
-export default function Profile() {
+const Profile = () => {
   let perfiles = perfiles_mascotas;
 
   const params = useParams();
@@ -124,3 +124,5 @@ export default function Profile() {
     </div>
   );
 }
+
+export default Profile;
