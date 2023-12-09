@@ -5,8 +5,8 @@ import HomeComp from "./views/home/homeComp";
 import Login from "./views/login/login";
 import Profile from "./views/profile/Profile";
 import HumanData from "./views/humanData/HumanData";
-import Explore from "./views/explore/explore.jsx";
-import Navbar from "./components/Navbar.jsx";
+import Explore from "./views/explore/explore";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
