@@ -4,7 +4,7 @@ import Publication from "../../components/publication.jsx";
 import FollowButton from "../../components/FollowButton.jsx";
 import perfiles_mascotas from "../../assets/placeholder/perfiles_mascotas.js";
 import gatos from "../../assets/placeholder/gatos_info.js";
-import arrowLeftIcon from '../../assets/icons/Arrow Left.png';
+// import arrowLeftIcon from '../../assets/icons/Arrow Left.png';
 import DotsVertical from "../../assets/icons/dots_vertical.svg";
 import humanIcon from "../../assets/icons/human_icon.svg";
 
@@ -46,11 +46,11 @@ const Profile = () => {
   return (
     <div>
       <div className="flex justify-between mx-8 pt-8">
-        <img
+        {/* <img
           className="w-4 h-4"
           src={arrowLeftIcon}
           alt="flecha hacia la izquierda para volver"
-        />
+        /> */}
         <img src={DotsVertical} alt="menú de tres puntos" />
       </div>
 
