@@ -7,7 +7,7 @@ class PetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
         fields = ("birth_date", "name", "species", "breed", "biography", "pet_picture")
-        extra_kwargs = {"url": {"lookup_field": "name"}}
+        lookup_field = "name"
 
 
 class PetAbridgedSerializer(serializers.ModelSerializer):
@@ -22,18 +22,18 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = settings.AUTH_USER_MODEL
         fields = ("username", "email", "id", "pets")
-        extra_kwargs = {"url": {"lookup_field": "username"}}
+        lookup_field = "username"
 
 
 class FollowerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Follower
         fields = ("followed", "follower", "created_at")
-        extra_kwargs = {"url": {"lookup_field": "followed"}}
+        lookup_field = "followed"
 
 
 class BlockerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Blocker
         fields = ("blocked", "blocker")
-        extra_kwargs = {"url": {"lookup_field": "blocked"}}
+        lookup_field = "blocked"
