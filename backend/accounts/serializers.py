@@ -1,13 +1,16 @@
 from rest_framework import serializers
-from .models import Blocker, Follower, Pet
+from .models import Blocker, Follower, Pet, User
 from django.conf import settings
 
 
 class PetSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Pet
-        fields = ("birth_date", "name", "species", "breed", "biography", "pet_picture")
+        fields = ("user", "birth_date", "name", "species", "breed", "biography", "pet_picture")
+        read_only_field = ("user",)
         lookup_field = "name"
+
 
 
 class PetAbridgedSerializer(serializers.ModelSerializer):
@@ -20,8 +23,8 @@ class AccountSerializer(serializers.ModelSerializer):
     pets = PetAbridgedSerializer(many=True, read_only=True)
 
     class Meta:
-        model = settings.AUTH_USER_MODEL
-        fields = ("username", "email", "id", "pets")
+        model = User
+        fields = ("id", "username", "email", "pets")
         lookup_field = "username"
 
 

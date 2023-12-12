@@ -1,4 +1,4 @@
-from .permissions import IsOwner, IsOwnerOrReadOnly
+from .permissions import IsOwner, IsOwnerOrReadOnlyPet
 from rest_framework import viewsets, permissions
 from .models import User, Follower, Blocker, Pet
 from .serializers import (
@@ -13,7 +13,6 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
-        IsOwnerOrReadOnly,
     )
     serializer_class = AccountSerializer
     lookup_field = "username"
@@ -23,17 +22,19 @@ class PetViewSet(viewsets.ModelViewSet):
     queryset = Pet.objects.all()
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
-        IsOwnerOrReadOnly,
+        IsOwnerOrReadOnlyPet,
     )
     serializer_class = PetSerializer
     lookup_field = "name"
+
+
 
 
 class FollowerViewSet(viewsets.ModelViewSet):
     queryset = Follower.objects.all()
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
-        IsOwnerOrReadOnly,
+        IsOwnerOrReadOnlyPet,
     )
     serializer_class = FollowerSerializer
     lookup_field = "followed"
