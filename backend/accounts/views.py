@@ -15,6 +15,7 @@ class UserViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticatedOrReadOnly,
     )
     serializer_class = AccountSerializer
+    lookup_field = "username"
 
 
 class PetViewSet(viewsets.ModelViewSet):
@@ -24,6 +25,7 @@ class PetViewSet(viewsets.ModelViewSet):
         IsOwnerOrReadOnlyPet,
     )
     serializer_class = PetSerializer
+    lookup_field = "name"
 
 
 
@@ -35,9 +37,11 @@ class FollowerViewSet(viewsets.ModelViewSet):
         IsOwnerOrReadOnlyPet,
     )
     serializer_class = FollowerSerializer
+    lookup_field = "followed"
 
 
 class BlockerViewSet(viewsets.ModelViewSet):
     queryset = Blocker.objects.all()
     permission_classes = (IsOwner,)
     serializer_class = BlockerSerializer
+    lookup_field = "blocked"

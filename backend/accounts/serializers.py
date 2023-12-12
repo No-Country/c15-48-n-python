@@ -9,6 +9,8 @@ class PetSerializer(serializers.ModelSerializer):
         model = Pet
         fields = ("user", "birth_date", "name", "species", "breed", "biography", "pet_picture")
         read_only_field = ("user",)
+        lookup_field = "name"
+
 
 
 class PetAbridgedSerializer(serializers.ModelSerializer):
@@ -23,15 +25,18 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("id", "username", "email", "pets")
+        lookup_field = "username"
 
 
 class FollowerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Follower
         fields = ("followed", "follower", "created_at")
+        lookup_field = "followed"
 
 
 class BlockerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Blocker
         fields = ("blocked", "blocker")
+        lookup_field = "blocked"
