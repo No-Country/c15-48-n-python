@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "../../components/SearchBar.jsx";
-import Publication from "../../components/publication";
-import animales from "../../assets/placeholder/gatos_info";
+import Publication from "../../components/publication.jsx";
+import animales from "../../assets/placeholder/gatos_info.js";
 
 const Explore = () => {
     let animalesInfo = animales;

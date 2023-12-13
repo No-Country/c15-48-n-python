@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import InputComp from "../../components/InputComp";
-import ButtonInSe from "../../components/ButtonInSe";
-import validation from "./validation";
+import InputComp from "../../components/InputComp.jsx";
+import ButtonInSe from "../../components/ButtonInSe.jsx";
+import validation from "./validation.js";
 
 const Login = () => {
   const [userInfo, setUserInfo] = useState({
