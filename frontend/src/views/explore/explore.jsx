@@ -22,7 +22,7 @@ const Explore = () => {
         <p className="text-lg">Tipo de MaskotA</p>
         <div className="flex gap-2 w-full overflow-auto pb-4">
           {tipos.map((tipo) => (
-            <button className="border border-gray pl-2 pr-2 pt-1 pb-1 rounded-2xl text-sm">{tipo}</button>
+            <button key={tipo} className="border border-gray pl-2 pr-2 pt-1 pb-1 rounded-2xl text-sm">{tipo}</button>
           ))}
         </div>
       </div>
