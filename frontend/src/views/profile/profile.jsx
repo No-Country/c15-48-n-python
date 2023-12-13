@@ -9,7 +9,7 @@ import arrowLeftIcon from '../../assets/icons/arrow_left.svg';
 import DotsVertical from "../../assets/icons/dots_vertical.svg";
 import humanIcon from "../../assets/icons/human_icon.svg";
 
-export default function Profile() {
+const Profile = () => {
   let perfiles = perfiles_mascotas;
 
   const params = useParams();
@@ -123,3 +123,4 @@ export default function Profile() {
 }
 
 // <Link key={petProfile.id} to={`${petProfile.id}`}>
+export default Profile;
