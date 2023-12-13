@@ -8,7 +8,7 @@ import profileIcon from '../assets/icons/group_1.svg';
 
 export default function Navbar() {
   return (
-    <nav className="h-16 flex items-center justify-around px-4 border-t-2 border-gray-300">
+    <nav className="h-16 flex items-center justify-around px-4 border-gray-300">
       <ul>
         <li>
           <NavLink to="/home">
@@ -29,7 +29,7 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/publish" className="bg-social-pink rounded-xl">
+          <NavLink to="/publish" className="rounded-xl">
             <img
               className="hover:opacity-60"
               src={plusIcon}

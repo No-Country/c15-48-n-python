@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Publication from "../../components/publication.jsx";
 import FollowButton from "../../components/FollowButton.jsx";
 import GoBackButton from '../../components/GoBackButton.jsx';
 import perfiles_mascotas from "../../assets/placeholder/perfiles_mascotas.js";
 import gatos from "../../assets/placeholder/gatos_info.js";
-import arrowLeftIcon from '../../assets/icons/Arrow Left.png';
+import arrowLeftIcon from '../../assets/icons/arrow_left.svg';
 import DotsVertical from "../../assets/icons/dots_vertical.svg";
 import humanIcon from "../../assets/icons/human_icon.svg";
 
@@ -68,12 +68,12 @@ export default function Profile() {
             </p>
             <div className="text-sm mb-12 flex justify-center">
               <p className="pr-1">Mi dueño es:</p>
-              <NavLink
+              <Link
                 to={`${petProfile.human}`}
                 className="font-semibold pr-1"
               >
                 {petProfile.human}
-              </NavLink>
+              </Link>
               <img className='mb-' src={humanIcon} alt="icono perfil de humano" />
             </div>
           </div>
