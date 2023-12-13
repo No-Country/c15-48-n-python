@@ -10,16 +10,15 @@ from .serializers import (
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
     )
     serializer_class = AccountSerializer
     lookup_field = "username"
-
+    def get_queryset(self):
+        return User.objects.all()
 
 class PetViewSet(viewsets.ModelViewSet):
-    queryset = Pet.objects.all()
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
         IsOwnerOrReadOnlyPet,
@@ -27,6 +26,11 @@ class PetViewSet(viewsets.ModelViewSet):
     serializer_class = PetSerializer
     lookup_field = "name"
 
+    def get_queryset(self):
+        return Pet.objects.all()
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 
