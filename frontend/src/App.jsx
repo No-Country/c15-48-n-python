@@ -1,12 +1,12 @@
 import Register from "./components/registerComponent/register";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Navbar from "./components/Navbar";
-
+// import Navbar from "./components/Navbar";
+import Webnavbar from "./components/webnavbar";
 function App() {
   return (
     <>
-      <Navbar/>
+      <Webnavbar/>
       <Routes>
         <Route path="/" element={<h1>Home</h1>} />
         <Route path="/login" element={<h1>Login</h1>} />
