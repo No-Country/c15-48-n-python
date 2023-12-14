@@ -13,11 +13,13 @@ import Profile from "./views/profile/profile";
 function App() {
   const location = useLocation();
   const profileRoute = location.pathname === "/profile";
-  const homeRoute = location.pathname === "/";
+  const registerRoute = location.pathname === "/register";
+  const loginRoute = location.pathname === "/login";
+  const createMaskotaRoute = location.pathname === "/crearMaskota";
 
   return (
     <>
-    <div className="App">
+    <div className={ profileRoute || registerRoute || loginRoute || createMaskotaRoute ? "AppHiddenNav" : "App"}>
       <Routes>
         <Route path="/" element={<HomeComp />} />
         <Route path="/login" element={<Login />} />
@@ -30,7 +32,7 @@ function App() {
         <Route path="/crearMaskota" element={<Create />} />
       </Routes>
     </div>
-    <div>{profileRoute || homeRoute ? <Navbar /> : <div></div>}</div>
+    <div>{!profileRoute && !registerRoute && !loginRoute && !createMaskotaRoute ? <Navbar /> : <div></div>}</div>
     </>
   );
 }
