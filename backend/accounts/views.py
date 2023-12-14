@@ -1,6 +1,7 @@
-from .permissions import IsOwner, IsOwnerOrReadOnlyPet
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, permissions
 from .models import User, Follower, Blocker, Pet
+from .permissions import IsOwner, IsOwnerOrReadOnlyPet,IsOwnerOrReadOnlyUser
 from .serializers import (
     AccountSerializer,
     FollowerSerializer,
@@ -10,14 +11,16 @@ from .serializers import (
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
     serializer_class = AccountSerializer
+    permission_classes = (
+        IsOwnerOrReadOnlyUser,
+    )
     lookup_field = "username"
-    def get_queryset(self):
-        return User.objects.all()
-
 
 
 class PetViewSet(viewsets.ModelViewSet):
+    queryset = Pet.objects.all()
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
         IsOwnerOrReadOnlyPet,
@@ -25,15 +28,13 @@ class PetViewSet(viewsets.ModelViewSet):
     serializer_class = PetSerializer
     lookup_field = "name"
 
-    def get_queryset(self):
-        return Pet.objects.all()
-
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
 
 
 class FollowerViewSet(viewsets.ModelViewSet):
+    queryset = Follower.objects.all()
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
         IsOwnerOrReadOnlyPet,
@@ -41,20 +42,19 @@ class FollowerViewSet(viewsets.ModelViewSet):
     serializer_class = FollowerSerializer
     lookup_field = "followed"
 
-    def get_queryset(self):
-        return Follower.objects.all()
-
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        followed = self.kwargs.get('followed')
+        followed_pet = get_object_or_404(Pet, id=followed)
+        
+        serializer.save(pet=followed_pet)
 
 
 class BlockerViewSet(viewsets.ModelViewSet):
+    queryset = Blocker.objects.all()
     permission_classes = (IsOwner,)
     serializer_class = BlockerSerializer
     lookup_field = "blocked"
 
-    def get_queryset(self):
-        return Blocker.objects.all()
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
