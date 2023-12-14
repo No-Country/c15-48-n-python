@@ -17,7 +17,6 @@ const HomeComp = () => {
             <Publication gato={value} key={key} />
         ))}  
       </div>
-      
     </div>
   );
 };

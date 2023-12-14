@@ -20,10 +20,16 @@ export default {
     fontFamily: {
       custom: ['HK Grotesk', 'sans-serif']
     },
-    extend: {},
+    extend: {
+      zIndex: {
+        '1': '1',
+        '2': '2',
+      }
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),
   ],
 }
 
+// bg-gradient-to-r from-social-pink to-purple -- PARA EL DEGRADADO

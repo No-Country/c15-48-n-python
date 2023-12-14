@@ -1,8 +1,9 @@
 import React from 'react';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import GoBackButton from '../../components/GoBackButton.jsx';
 import humanData from '../../assets/placeholder/humans_data.js';
 import perfiles_mascotas from "../../assets/placeholder/perfiles_mascotas.js";
-// import arrowLeftIcon from '../../assets/icons/Arrow Left.png';
+import arrowLeftIcon from '../../assets/icons/arrow_left.svg';
 import plusIcon from '../../assets/icons/plus.svg';
 import deleteIcon from '../../assets/icons/delete_icon.svg';
 
@@ -20,7 +21,7 @@ pets.map((pet) => console.log(pet))
   return (
     <div>
         <header className='flex m-8 items-center mx-6'>
-            {/* <img className='rounded-3xl border border-dark-gray p-2 mr-14' src={arrowLeftIcon} alt="ícono volver para atrás" /> */}
+            <GoBackButton className='rounded-3xl border border-dark-gray p-2 mr-14' img={arrowLeftIcon} alt='ícono volver atrás'/>
             <h2 className='text-white font-custom text-sm mx-3 text-center'>Mis Maskotas</h2>
         </header>
         <div className='mx-6 text-white font-custom mb-12'>
@@ -30,7 +31,7 @@ pets.map((pet) => console.log(pet))
         </div>
         <div className='mx-5 my-8 text-white font-custom flex items-center justify-between'>
             <h3 className='text-lg font-bold'>Mis MaskotAs</h3>
-            <img className='h-10 bg-social-blue rounded-full p-1.5' src={plusIcon} alt="icono agregar mascota" />
+            <Link to='/crearMaskota'><img className='h-10 bg-social-blue rounded-full p-1.5' src={plusIcon} alt="icono agregar mascota" /></Link>
         </div>
         {humanProfile.pets.map((pet) => (
             <div className='mx-5 font-custom text-white flex items-center' key={`${humanProfile.id}-${pet.id}`}>

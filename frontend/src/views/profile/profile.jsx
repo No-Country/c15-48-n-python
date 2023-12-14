@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link, useParams, NavLink } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Publication from "../../components/publication.jsx";
 import FollowButton from "../../components/FollowButton.jsx";
+import GoBackButton from '../../components/GoBackButton.jsx';
 import perfiles_mascotas from "../../assets/placeholder/perfiles_mascotas.js";
 import gatos from "../../assets/placeholder/gatos_info.js";
-// import arrowLeftIcon from '../../assets/icons/Arrow Left.png';
+import arrowLeftIcon from '../../assets/icons/arrow_left.svg';
 import DotsVertical from "../../assets/icons/dots_vertical.svg";
 import humanIcon from "../../assets/icons/human_icon.svg";
 
@@ -46,15 +47,11 @@ const Profile = () => {
   return (
     <div>
       <div className="flex justify-between mx-8 pt-8">
-        {/* <img
-          className="w-4 h-4"
-          src={arrowLeftIcon}
-          alt="flecha hacia la izquierda para volver"
-        /> */}
+        <GoBackButton className='w-4 h-4' img={arrowLeftIcon} alt='flecha hacia la izquierda para volver'/>
         <img src={DotsVertical} alt="menú de tres puntos" />
       </div>
 
-      <Link key={petProfile.id} to={`${petProfile.id}`}>
+      
         <header className="font-custom">
           <div className="flex flex-col justify-center text-center text-white">
             <img
@@ -71,12 +68,12 @@ const Profile = () => {
             </p>
             <div className="text-sm mb-12 flex justify-center">
               <p className="pr-1">Mi dueño es:</p>
-              <NavLink
+              <Link
                 to={`${petProfile.human}`}
                 className="font-semibold pr-1"
               >
                 {petProfile.human}
-              </NavLink>
+              </Link>
               <img className='mb-' src={humanIcon} alt="icono perfil de humano" />
             </div>
           </div>
@@ -92,7 +89,7 @@ const Profile = () => {
           </div>
           <FollowButton />
         </div>
-      </Link>
+      {/* </Link> */}
 
       <div className="flex text-white font-custom font-semibold mt-8 mx-6 justify-center border-solid border-light-gray border-b">
         <button
@@ -118,9 +115,11 @@ const Profile = () => {
           Videos
         </button>
       </div>
-      {Object.entries(gatosInfo).map(([key, value]) => (
-        <Publication gato={value} key={key} />
-      ))}
+      <div className="flex flex-col gap-4 ml-4 mr-4 mt-4">
+        {Object.entries(gatosInfo).map(([key, value]) => (
+          <Publication gato={value} key={key} />
+        ))}
+      </div>
     </div>
   );
 }
