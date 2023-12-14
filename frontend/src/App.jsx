@@ -11,7 +11,6 @@ import Navbar from "./components/Navbar";
 function App() {
   const location = useLocation();
   const profileRoute = location.pathname === "/profile";
-  const homeRoute = location.pathname === "/";
 
   return (
     <>
@@ -27,7 +26,7 @@ function App() {
         <Route path="/profile/:id/:human" element={<HumanData />} />
       </Routes>
     </div>
-    <div>{profileRoute || homeRoute ? <Navbar /> : <div></div>}</div>
+    <div>{!profileRoute ? <Navbar /> : <div></div>}</div>
     </>
   );
 }

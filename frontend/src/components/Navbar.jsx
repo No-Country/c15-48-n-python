@@ -10,7 +10,7 @@ export default function Navbar() {
     <nav className="h-20 flex items-center justify-around px-4  w-full bottom-0 bg-black">
       <ul className="flex items-center w-full justify-around">
         <li>
-          <NavLink to="/home">
+          <NavLink to="/">
             <img
               className="active:opacity-100 hover:opacity-100 focus:opacity-100 "
               src={homeIcon}
