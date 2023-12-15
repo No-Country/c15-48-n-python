@@ -10,14 +10,17 @@ import Create from "./views/create/Create";
 import CreatePublish from "./views/Publish/CreatePublish";
 import Profile from "./views/profile/profile";
 import Notifications from "./views/notifications/notifications";
+import profiles from "./assets/placeholder/perfiles_mascotas.js";
+
 
 function App() {
+  const user = profiles[1];
   const location = useLocation();
   const profileRoute = location.pathname.startsWith("/profile");
   const registerRoute = location.pathname === "/register";
   const loginRoute = location.pathname === "/login";
   const createMaskotaRoute = location.pathname === "/crearMaskota";
-
+  
   return (
     <div className="h-screen flex flex-col justify-between">
       <div
