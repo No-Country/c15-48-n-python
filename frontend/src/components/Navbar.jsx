@@ -156,7 +156,7 @@ export default function Navbar() {
         <li>
           <NavLink to={`/profile/${user.id}`}>
             <img
-              className="active:opacity-100 hover:opacity-100 focus:opacity-100"
+              className="active:opacity-100 hover:opacity-100 focus:opacity-100 opacity-50"
               src={profileIcon}
               alt="logo de algo"
             />

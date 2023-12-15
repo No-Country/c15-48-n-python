@@ -8,17 +8,11 @@ import plus_icon from "../../assets/icons/plus.svg";
 import close_icon from "../../assets/icons/close_icon.svg";
 import img_icon from "../../assets/icons/image_icon.svg";
 import vid_icon from "../../assets/icons/video_icon.svg";
+import warning_icon from "../../assets/icons/warning_icon.svg";
 
 const CreatePublish = () => {
   const user = profiles[1];
   const petsPosts = gatos;
-  // const agregarPost = (newPost) => {
-  //   const nuevoId = Object.keys(petsPosts).length + 1;
-  //   petsPosts[nuevoId] = {
-  //     id: nuevoId,
-  //     ...newPost,
-  //   };
-  // };
 
   const [text, setText] = useState("");
   const [files, setFiles] = useState([]);
@@ -55,6 +49,17 @@ const CreatePublish = () => {
     setFiles((prevImg) => [...prevImg, ...selectedImg]);
   };
 
+  const imgUrl = (imgs) => {
+    let arrayUrl = [];
+    imgs.map((img) => {
+      const url = URL.createObjectURL(img);
+      arrayUrl.push(url);
+    });
+    return arrayUrl;
+  };
+
+  const urls = imgUrl(files);
+
   const handleVid = (e) => {
     const vid = e.target.files[0];
     setPostError((prevErrors) => ({
@@ -84,13 +89,12 @@ const CreatePublish = () => {
     perfil: user.profile,
     nombre: user.name,
     fecha: timeAgo,
-    imagen: files,
+    imagen: urls.toString(), // a falta de carrousel, por ahora solo lo muestra en home si es una img
     video: video,
     likes: 0,
     comments: 0,
     text: text,
   };
-
   console.log(newPost);
 
   const handlePublish = (e) => {
@@ -104,17 +108,9 @@ const CreatePublish = () => {
 
     if (Object.values(newErrors).some((error) => error)) {
       setPostError((prevErrors) => ({ ...prevErrors, ...newErrors }));
-      console.log(
-        "El formulario contiene errores. Por favor, corrige los campos."
-      ); // esto se saca
     } else {
       alert("Formulario publicado correctamente"); // esto tmb
-
-      // agregarPost(newPost);
       petsPosts.id = newPost;
-
-      console.log("petsposts" + petsPosts);
-      console.log("posterrors" + postErrors);
     }
   };
 
@@ -127,6 +123,7 @@ const CreatePublish = () => {
   const handleClick = () => {
     setIsActive(!isActive);
   };
+
   return (
     <div className="mx-6">
       <div className="flex justify-between mt-8  items-center font-sm">
@@ -137,19 +134,17 @@ const CreatePublish = () => {
           onClick={handlePublish}
           className="w-30 text-white font-semibold bg-gradient-to-r from-social-pink to-purple text-xs px-3 py-1 rounded-3xl disabled:opacity-50"
           type="submit"
-          disabled={Object.values(postErrors).some((error) => error)}
+          disabled={Object.values(postErrors).some((error) => error) ? true : false}
         >
           <Link to="/">Publicar</Link>
         </button>
       </div>
       <div className="flex mt-10">
-        <Link to={`/profile/${user.id}`}>
-          <img
-            className="rounded-full w-8 h-8 mr-3"
-            src={user.profile}
-            alt={`Foto de perfil del usuario ${user.name}`}
-          />
-        </Link>
+        <img
+          className="rounded-full w-8 h-8 mr-3"
+          src={user.profile}
+          alt={`Foto de perfil del usuario ${user.name}`}
+        />
         <form className="w-full">
           <textarea
             name="text"
@@ -200,40 +195,49 @@ const CreatePublish = () => {
             />
           </div>
         )}
-
       </div>
-        {files.length > 0 && (
-          <div className="flex flex-col mt-9">
-            {files.map((img, index) => (
-              <div key={index} className="relative mr-2">
-                <img
-                  src={URL.createObjectURL(img)}
-                  alt={`Imagen seleccionada ${index + 1}`}
-                  className="w-full h-full object-cover rounded-2xl mb-4"
-                />
-                <button
-                  className="absolute top-0 right-0 text-white p-1 bg-dark-gray rounded-full m-2"
-                  onClick={() => handleRemoveImage(index)}
-                >
-                  <img src={close_icon} alt="" />
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-        {video && (
-          <div className="relative mr-2">
-            <video>
-              <source src={URL.createObjectURL(video)} type="video/mp4"/>
-            </video>
-            <button
-                  className="absolute top-0 right-0 text-white p-1 bg-dark-gray rounded-full m-2"
-                  onClick={handleRemoveVideo}
-                >
-                  <img src={close_icon} alt="" />
-                </button>
-          </div>
-        )}
+
+      {Object.values(postErrors).some((error) => error) ? (
+        <div className="flex items-center justify-between mt-4">
+          <img src={warning_icon} alt="ícono de signo de exclamación" className="mr-2"/>
+          <p className="text-xs font-medium font-custom text-light-gray">
+            Un breve recordatorio: subir hasta tres imágenes y un video.
+          </p>
+        </div>
+      ) : null}
+
+      {files.length > 0 && (
+        <div className="flex flex-col mt-9">
+          {files.map((img, index) => (
+            <div key={index} className="relative mr-2">
+              <img
+                src={URL.createObjectURL(img)}
+                alt={`Imagen seleccionada ${index + 1}`}
+                className="w-full h-full object-cover rounded-2xl mb-4"
+              />
+              <button
+                className="absolute top-0 right-0 text-white p-1 bg-dark-gray rounded-full m-2"
+                onClick={() => handleRemoveImage(index)}
+              >
+                <img src={close_icon} alt="" />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+      {video && (
+        <div className="relative mr-2">
+          <video>
+            <source src={URL.createObjectURL(video)} type="video/mp4" />
+          </video>
+          <button
+            className="absolute top-0 right-0 text-white p-1 bg-dark-gray rounded-full m-2"
+            onClick={handleRemoveVideo}
+          >
+            <img src={close_icon} alt="" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
