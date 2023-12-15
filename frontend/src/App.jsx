@@ -14,28 +14,43 @@ import profiles from "./assets/placeholder/perfiles_mascotas.js";
 function App() {
   const user = profiles[1];
   const location = useLocation();
-  const profileRoute = location.pathname === "/profile/2";
-  const homeRoute = location.pathname === "/";
-  const exploreRoute = location.pathname === "/explore";
-  const notifRoute = location.pathname === "/notifications";
-
+  const profileRoute = location.pathname.startsWith("/profile");
+  const registerRoute = location.pathname === "/register";
+  const loginRoute = location.pathname === "/login";
+  const createMaskotaRoute = location.pathname === "/crearMaskota";
+  
   return (
-    <>
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<HomeComp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/publish" element={<CreatePublish />} />
-        <Route path="/notifications" element={<h1>Notifications</h1>} />
-        <Route path="/profile/:id" element={<Profile />} />
-        <Route path="/profile/:id/:human" element={<HumanData />} />
-        <Route path="/crearMaskota" element={<Create />} />
-      </Routes>
+    <div className="h-screen flex flex-col justify-between">
+      <div
+        className={
+          profileRoute || registerRoute || loginRoute || createMaskotaRoute
+            ? "AppHiddenNav"
+            : "App"
+        }
+      >
+        <Routes>
+          <Route path="/" element={<HomeComp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/publish" element={<CreatePublish />} />
+          <Route path="/notifications" element={<h1>Notifications</h1>} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/profile/:id/:human" element={<HumanData />} />
+          <Route path="/crearMaskota" element={<Create />} />
+        </Routes>
+      </div>
+      <div className="navContainer">
+        {!profileRoute &&
+        !registerRoute &&
+        !loginRoute &&
+        !createMaskotaRoute ? (
+          <Navbar />
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
-    <div>{profileRoute || homeRoute || exploreRoute || notifRoute ? <Navbar /> : <div></div>}</div>
-    </>
   );
 }
 

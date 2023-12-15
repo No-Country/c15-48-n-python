@@ -15,7 +15,7 @@ export default {
       'gray': '#323436',
       'light-gray': '#727477',
       'dark-gray': '#323436',
-      'purple': '#AC1AF0'
+      'purple': '#AC1AF0',
     },
     fontFamily: {
       custom: ['HK Grotesk', 'sans-serif']

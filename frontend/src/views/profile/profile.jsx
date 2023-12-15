@@ -115,12 +115,13 @@ const Profile = () => {
           Videos
         </button>
       </div>
-      {Object.entries(gatosInfo).map(([key, value]) => (
-        <Publication gato={value} key={key} />
-      ))}
+      <div className="flex flex-col gap-4 ml-4 mr-4 mt-4">
+        {Object.entries(gatosInfo).map(([key, value]) => (
+          <Publication gato={value} key={key} />
+        ))}
+      </div>
     </div>
   );
 }
 
-// <Link key={petProfile.id} to={`${petProfile.id}`}>
 export default Profile;
