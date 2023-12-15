@@ -9,7 +9,9 @@ import Navbar from "./components/Navbar";
 import Create from "./views/create/Create";
 import CreatePublish from "./views/Publish/CreatePublish";
 import Profile from "./views/profile/profile";
+import Notifications from "./views/notifications/notifications";
 import profiles from "./assets/placeholder/perfiles_mascotas.js";
+
 
 function App() {
   const user = profiles[1];
@@ -34,22 +36,26 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/publish" element={<CreatePublish />} />
-          <Route path="/notifications" element={<h1>Notifications</h1>} />
+          <Route path="/notifications" element={<Notifications />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/profile/:id/:human" element={<HumanData />} />
           <Route path="/crearMaskota" element={<Create />} />
         </Routes>
       </div>
-      <div className="navContainer">
-        {!profileRoute &&
-        !registerRoute &&
-        !loginRoute &&
-        !createMaskotaRoute ? (
-          <Navbar />
-        ) : (
-          <div></div>
-        )}
-      </div>
+      {profileRoute || registerRoute || loginRoute || createMaskotaRoute ? (
+        <div></div>
+      ) : (
+        <div className="navContainer">
+          {!profileRoute &&
+          !registerRoute &&
+          !loginRoute &&
+          !createMaskotaRoute ? (
+            <Navbar />
+          ) : (
+            <div></div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
