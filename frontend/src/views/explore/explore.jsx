@@ -1,7 +1,7 @@
 import React from "react";
-import SearchBar from "../../components/searchBar";
-import Publication from "../../components/publication";
-import animales from "../../assets/placeholder/gatos_info";
+import SearchBar from "../../components/SearchBar.jsx";
+import Publication from "../../components/publication.jsx";
+import animales from "../../assets/placeholder/gatos_info.js";
 
 const Explore = () => {
     let animalesInfo = animales;
@@ -22,7 +22,7 @@ const Explore = () => {
         <p className="text-lg">Tipo de MaskotA</p>
         <div className="flex gap-2 w-full overflow-auto pb-4">
           {tipos.map((tipo) => (
-            <button className="border border-gray pl-2 pr-2 pt-1 pb-1 rounded-2xl text-sm">{tipo}</button>
+            <button key={tipo} className="border border-gray pl-2 pr-2 pt-1 pb-1 rounded-2xl text-sm">{tipo}</button>
           ))}
         </div>
       </div>

@@ -1,8 +1,8 @@
 import React from "react";
-import DotsVertical from "../assets/placeholder/dots_vertical.svg";
-import BotonLike from "../assets/placeholder/boton_like.svg";
-import BotonComentarios from "../assets/placeholder/boton_comentarios.svg";
 import { NavLink } from 'react-router-dom';
+import DotsVertical from '../assets/icons/dots_vertical.svg';
+import BotonLike from '../assets/icons/boton_like.svg';
+import BotonComentarios from "../assets/icons/boton_comentarios.svg";
 
 const Publication = ({ gato }) => {
   let { perfil, nombre, fecha, imagen, likes, comments, text } = gato;

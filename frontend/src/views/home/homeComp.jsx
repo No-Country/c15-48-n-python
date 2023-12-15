@@ -1,7 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import MaskotApp from "../../assets/maskotapp.png";
-import Mensajes from "../../assets/placeholder/boton_mensajes.svg";
+import MaskotApp from "../../assets/Logo MaskotApp.png";
 import Publication from "../../components/publication.jsx";
 import gatos from "../../assets/placeholder/gatos_info.js";
 
@@ -19,7 +17,6 @@ const HomeComp = () => {
             <Publication gato={value} key={key} />
         ))}  
       </div>
-      
     </div>
   );
 };
