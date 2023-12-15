@@ -11,7 +11,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="h-20 flex items-center justify-around px-4  w-full bottom-0 bg-black">
+    <nav className="h-full flex items-center justify-around px-4  w-full bottom-0 bg-black">
       <ul className="flex items-center w-full justify-around">
         <li>
           <NavLink to="/">
@@ -156,7 +156,7 @@ export default function Navbar() {
         <li>
           <NavLink to={`/profile/${user.id}`}>
             <img
-              className="active:opacity-100 hover:opacity-100 focus:opacity-100"
+              className="active:opacity-100 hover:opacity-100 focus:opacity-100 opacity-50"
               src={profileIcon}
               alt="logo de algo"
             />
