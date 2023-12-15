@@ -25,6 +25,9 @@ class PostVideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = PostVideo
         fields = ['post', 'video', 'alt_text']
+        
+    video = serializers.FileField()  # Añadi esta línea para que me funcionara el DRF-SPECTACULAR
+    video.related_model = PostVideo  # Añadi esta línea para que me funcionara el DRF-SPECTACULAR
 
 
 class CommentSerializer(serializers.ModelSerializer):

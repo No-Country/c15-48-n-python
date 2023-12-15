@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "drf_spectacular",
     "rest_framework",
     "accounts",
     "posts",
@@ -118,3 +119,16 @@ cloudinary.config(
     api_secret=os.environ.get("API_SECRET"),
     secure=True,
 )
+
+# DRF-SPECTACULAR
+REST_FRAMEWORK = {
+
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+# DRF-SPECTACULAR
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'MascotApp-Documentation',
+    'DESCRIPTION': 'Welcome to the API of our Pet Network. This API provides access to resources related to user profiles, pets, followers, posts, images, videos, comments, likes, and user blocking.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
