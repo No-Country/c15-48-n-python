@@ -7,7 +7,7 @@ import profileIcon from "../assets/icons/group_1.svg";
 import profiles from "../assets/placeholder/perfiles_mascotas.js";
 
 export default function Navbar() {
-const user = profiles[1]
+  const user = profiles[1];
 
   return (
     <nav className="h-20 flex items-center justify-around px-4  w-full bottom-0 bg-black">
@@ -15,7 +15,7 @@ const user = profiles[1]
         <li>
           <NavLink to="/">
             <img
-              className="active:opacity-100 hover:opacity-100 focus:opacity-100 "
+              className="active:opacity-100 hover:opacity-100 focus:opacity-100 opacity-50"
               src={homeIcon}
               alt="logo de algo"
             />
@@ -24,7 +24,7 @@ const user = profiles[1]
         <li>
           <NavLink to="/explore">
             <img
-              className="active:opacity-100 hover:opacity-100 focus:opacity-100"
+              className="active:opacity-100 hover:opacity-100 focus:opacity-100 opacity-50"
               src={searchIcon}
               alt="logo de algo"
             />
@@ -42,7 +42,7 @@ const user = profiles[1]
         <li>
           <NavLink to="/notifications">
             <img
-              className="active:opacity-100 hover:opacity-100 focus:opacity-100"
+              className="active:opacity-100 hover:opacity-100 focus:opacity-100 opacity-50"
               src={alertIcon}
               alt="logo de algo"
             />
@@ -51,7 +51,7 @@ const user = profiles[1]
         <li>
           <NavLink to={`/profile/${user.id}`}>
             <img
-              className="active:opacity-100 hover:opacity-100 focus:opacity-100"
+              className="active:opacity-100 hover:opacity-100 focus:opacity-100 opacity-50"
               src={profileIcon}
               alt="logo de algo"
             />

@@ -9,11 +9,15 @@ import Navbar from "./components/Navbar";
 import Create from "./views/create/Create";
 import CreatePublish from "./views/Publish/CreatePublish";
 import Profile from "./views/profile/profile";
+import profiles from "./assets/placeholder/perfiles_mascotas.js";
 
 function App() {
+  const user = profiles[1];
   const location = useLocation();
-  const profileRoute = location.pathname === "/profile";
+  const profileRoute = location.pathname === "/profile/2";
   const homeRoute = location.pathname === "/";
+  const exploreRoute = location.pathname === "/explore";
+  const notifRoute = location.pathname === "/notifications";
 
   return (
     <>
@@ -30,7 +34,7 @@ function App() {
         <Route path="/crearMaskota" element={<Create />} />
       </Routes>
     </div>
-    <div>{profileRoute || homeRoute ? <Navbar /> : <div></div>}</div>
+    <div>{profileRoute || homeRoute || exploreRoute || notifRoute ? <Navbar /> : <div></div>}</div>
     </>
   );
 }

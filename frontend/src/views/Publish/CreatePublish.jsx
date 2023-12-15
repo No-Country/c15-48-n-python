@@ -12,14 +12,7 @@ import vid_icon from "../../assets/icons/video_icon.svg";
 const CreatePublish = () => {
   const user = profiles[1];
   const petsPosts = gatos;
-  // const agregarPost = (newPost) => {
-  //   const nuevoId = Object.keys(petsPosts).length + 1;
-  //   petsPosts[nuevoId] = {
-  //     id: nuevoId,
-  //     ...newPost,
-  //   };
-  // };
-
+ 
   const [text, setText] = useState("");
   const [files, setFiles] = useState([]);
   const [video, setVideo] = useState();
