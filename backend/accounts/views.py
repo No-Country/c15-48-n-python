@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, permissions
 from .models import User, Follower, Blocker, Pet
-from .permissions import IsOwner, IsOwnerOrReadOnlyPet,IsOwnerOrReadOnlyUser
+from .permissions import IsOwner, IsOwnerOrReadOnly
 from .serializers import (
     AccountSerializer,
     FollowerSerializer,
@@ -14,7 +14,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = AccountSerializer
     permission_classes = (
-        IsOwnerOrReadOnlyUser,
+        IsOwnerOrReadOnly,
     )
     lookup_field = "username"
 
@@ -23,7 +23,7 @@ class PetViewSet(viewsets.ModelViewSet):
     queryset = Pet.objects.all()
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
-        IsOwnerOrReadOnlyPet,
+        IsOwnerOrReadOnly,
     )
     serializer_class = PetSerializer
     lookup_field = "name"
@@ -37,16 +37,16 @@ class FollowerViewSet(viewsets.ModelViewSet):
     queryset = Follower.objects.all()
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
-        IsOwnerOrReadOnlyPet,
+        IsOwnerOrReadOnly,
     )
     serializer_class = FollowerSerializer
     lookup_field = "followed"
 
     def perform_create(self, serializer):
-        followed = self.kwargs.get('followed')
-        followed_pet = get_object_or_404(Pet, id=followed)
+        followed_id = self.kwargs.get('followed')
+        followed_pet = get_object_or_404(Pet, id=followed_id)
         
-        serializer.save(pet=followed_pet)
+        serializer.save(followed=followed_pet)
 
 
 class BlockerViewSet(viewsets.ModelViewSet):
