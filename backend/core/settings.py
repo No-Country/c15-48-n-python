@@ -1,9 +1,7 @@
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+
 
 load_dotenv()
 
@@ -30,7 +28,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "accounts",
     "posts",
-    "cloudinary",
+ 
 ]
 
 MIDDLEWARE = [
@@ -112,13 +110,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.User"
 
-#Cloudinary config
-cloudinary.config(
-    cloud_name=os.environ.get("CLOUD_NAME"),
-    api_key=os.environ.get("API_KEY"),
-    api_secret=os.environ.get("API_SECRET"),
-    secure=True,
-)
 
 # DRF-SPECTACULAR
 REST_FRAMEWORK = {
