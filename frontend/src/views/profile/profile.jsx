@@ -11,6 +11,7 @@ import humanIcon from "../../assets/icons/human_icon.svg";
 
 const Profile = () => {
   let perfiles = perfiles_mascotas;
+  const user = perfiles[1];
 
   const params = useParams();
   const petProfile = perfiles.find((pet) => pet.id === parseInt(params.id));
@@ -26,20 +27,6 @@ const Profile = () => {
       </h2>
     );
   }
-
-  // estados de pestañas Fotos y Videos
-  const [select, setSelect] = useState("fotos");
-
-  const handleClick = () => {
-    if (select === undefined) {
-      console.error("Estado indefinido");
-    } else if (select === "fotos") {
-      setSelect("videos");
-    } else if (select === "videos") {
-      setSelect("fotos");
-    }
-  };
-  console.log(select);
 
   // placeholder publis
   let gatosInfo = gatos;
@@ -78,7 +65,7 @@ const Profile = () => {
             </div>
           </div>
         </header>
-        <div className="flex justify-evenly">
+        <div className="flex justify-evenly mx-2">
           <div className="flex flex-col font-custom text-sm font-semibold">
             <span className="text-white">{petProfile.followers}</span>
             <span className="text-light-gray">Seguidores</span>
@@ -87,12 +74,25 @@ const Profile = () => {
             <span className="text-white">{petProfile.followed}</span>
             <span className="text-light-gray">Seguidos</span>
           </div>
-          <FollowButton />
+          <FollowButton user={user} paramsId={params.id} />
         </div>
-      {/* </Link> */}
 
-      <div className="flex text-white font-custom font-semibold mt-8 mx-6 justify-center border-solid border-light-gray border-b">
-        <button
+      <div className="flex flex-col items-center text-white font-custom text-sm my-8 mx-6 justify-center">
+        PUBLICACIONES()
+        <div className="bg-gradient-to-r from-social-pink to-purple h-1 w-full mt-1 rounded"></div>
+      </div>
+      <div className="flex flex-col gap-4 ml-4 mr-4 mt-4">
+        {Object.entries(gatosInfo).map(([key, value]) => (
+          <Publication gato={value} key={key} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Profile;
+
+{/* <button
           onClick={handleClick}
           className={`px-8 pb-1 text-sm text-center w-1/2
         ${
@@ -113,15 +113,4 @@ const Profile = () => {
         }`}
         >
           Videos
-        </button>
-      </div>
-      <div className="flex flex-col gap-4 ml-4 mr-4 mt-4">
-        {Object.entries(gatosInfo).map(([key, value]) => (
-          <Publication gato={value} key={key} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export default Profile;
+        </button> */}
