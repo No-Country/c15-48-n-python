@@ -10,8 +10,8 @@ function validate(id, value, files) {
 
   let vidAllowedExt = [".mp4", ".mov"];
   let imgAllowedExt = [".jpeg", ".jpg", ".png"];
-
-  if (!value && (!files || files.length === 0)) {
+  
+  if (!value) {
     postErrors.imagen = "Debes publicar al menos una imagen o un video";
     return postErrors;
   }
@@ -20,21 +20,19 @@ function validate(id, value, files) {
     if (value.length >= 150) {
       postErrors.text = "Excede el límite de caracteres";
     }
+    // if (!value || value.length === 0) {
+    //   postErrors.imagen = "Debes publicar al menos una imagen";
+    // } else {}
   } else if (id === "filesImg") {
-    if (!value || value.length === 0) {
-      postErrors.imagen = "Debes publicar al menos una imagen";
-    } else {
-      const imgToValidate = Array.isArray(value) ? value : [value];
-      imgToValidate.forEach((img) => {
-        const extension = img.name.split(".").pop().toLowerCase();
-        if (!imgAllowedExt.includes(`.${extension}`)) {
-          postErrors.imagen = "No se permite ese formato";
-        }
-      });
-
-      if (files && files.length + imgToValidate.length > 3) {
-        postErrors.imagen = "No se permiten más de tres imágenes";
+    const imgToValidate = Array.isArray(value) ? value : [value];
+    imgToValidate.forEach((img) => {
+      const extension = img.name.split(".").pop().toLowerCase();
+      if (!imgAllowedExt.includes(`.${extension}`)) {
+        postErrors.imagen = "No se permite ese formato";
       }
+    });
+    if (files && files.length + imgToValidate.length > 3) {
+      postErrors.imagen = "No se permiten más de tres imágenes";
     }
   } else if (id === "fileVid") {
     if (!files) {
