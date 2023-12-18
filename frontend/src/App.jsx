@@ -1,5 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
+import Webnavbar from "./components/webnavbar";
 import Register from "./components/registerComponent/register";
 import HomeComp from "./views/home/homeComp";
 import Login from "./views/login/login";
@@ -11,7 +12,6 @@ import CreatePublish from "./views/Publish/CreatePublish";
 import Profile from "./views/profile/profile";
 import Notifications from "./views/notifications/notifications";
 import profiles from "./assets/placeholder/perfiles_mascotas.js";
-
 
 function App() {
   const user = profiles[1];
