@@ -46,7 +46,18 @@ export default function Create() {
   const handleCreate = (e) => {
     e.preventDefault();
     const { id, value } = e.target;
-
+    // usar esta estructura para crear el perfil, hacer una validacion antes de crear
+    // la mascota y subir la foto de perfil a cloud. que cee un nuevo preset con el username
+    // id: 1,
+    // name: 'Jacob',
+    // username: 'jacob.thewin',
+    // human: 'Tamara Sandi',
+    // followers: 6281,
+    // followed: 3457,
+    // date: '12/08/2012',
+    // profile: perfilJacob,
+    // type: 'Perro'
+        
     setPetProfile((prevPetProfile) => ({
       ...prevPetProfile,
       [id]: value,

@@ -16,11 +16,11 @@ import profiles from "./assets/placeholder/perfiles_mascotas.js";
 function App() {
   const user = profiles[1];
   const location = useLocation();
-  const profileRoute = location.pathname.startsWith("/profile");
+  const profileRoute = location.pathname.startsWith("/profile/:id");
   const registerRoute = location.pathname === "/register";
   const loginRoute = location.pathname === "/login";
   const createMaskotaRoute = location.pathname === "/crearMaskota";
-  
+
   return (
     <div className="h-screen flex flex-col justify-between">
       <div
@@ -40,6 +40,8 @@ function App() {
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/profile/:id/:human" element={<HumanData />} />
           <Route path="/crearMaskota" element={<Create />} />
+          {/* tendria que ser una ruta dinamica, dependiendo del boton que toque el componente 
+          se ve de una forma u otra (edit and create) */}
         </Routes>
       </div>
       {profileRoute || registerRoute || loginRoute || createMaskotaRoute ? (
