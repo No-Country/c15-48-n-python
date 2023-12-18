@@ -1,7 +1,21 @@
 #root {
-  max-width: 1280px;
-  padding: 50px;
-  margin: 0 auto;
-  text-align: center;
+  width: 100vw;
   height: 100vh;
+  background-color: #181A1C;
+}
+
+.App {
+  height: 90%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.AppHiddenNav {
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.navContainer {
+  height: 10%;
 }

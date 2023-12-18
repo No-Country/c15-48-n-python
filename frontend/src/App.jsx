@@ -1,22 +1,62 @@
-import Register from "./components/registerComponent/register";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
-// import Navbar from "./components/Navbar";
 import Webnavbar from "./components/webnavbar";
+import Register from "./components/registerComponent/register";
+import HomeComp from "./views/home/homeComp";
+import Login from "./views/login/login";
+import HumanData from "./views/humanData/HumanData";
+import Explore from "./views/explore/explore";
+import Navbar from "./components/Navbar";
+import Create from "./views/create/Create";
+import CreatePublish from "./views/Publish/CreatePublish";
+import Profile from "./views/profile/profile";
+import Notifications from "./views/notifications/notifications";
+import profiles from "./assets/placeholder/perfiles_mascotas.js";
+
 function App() {
+  const user = profiles[1];
+  const location = useLocation();
+  const profileRoute = location.pathname.startsWith("/profile");
+  const registerRoute = location.pathname === "/register";
+  const loginRoute = location.pathname === "/login";
+  const createMaskotaRoute = location.pathname === "/crearMaskota";
+  
   return (
-    <>
-      <Webnavbar/>
-      <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
-        <Route path="/login" element={<h1>Login</h1>} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/explore" element={<h1>Explore</h1>} />
-        <Route path="/publish" element={<h1>Publish</h1>} />
-        <Route path="/notifications" element={<h1>Notifications</h1>} />
-        <Route path="/profile" element={<h1>Profile</h1>} />
-      </Routes>
-    </>
+    <div className="h-screen flex flex-col justify-between">
+      <div
+        className={
+          profileRoute || registerRoute || loginRoute || createMaskotaRoute
+            ? "AppHiddenNav"
+            : "App"
+        }
+      >
+        <Routes>
+          <Route path="/" element={<HomeComp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/publish" element={<CreatePublish />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/profile/:id/:human" element={<HumanData />} />
+          <Route path="/crearMaskota" element={<Create />} />
+        </Routes>
+      </div>
+      {profileRoute || registerRoute || loginRoute || createMaskotaRoute ? (
+        <div></div>
+      ) : (
+        <div className="navContainer">
+          {!profileRoute &&
+          !registerRoute &&
+          !loginRoute &&
+          !createMaskotaRoute ? (
+            <Navbar />
+          ) : (
+            <div></div>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
 
