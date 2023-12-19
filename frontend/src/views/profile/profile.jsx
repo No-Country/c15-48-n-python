@@ -50,7 +50,6 @@ const Profile = () => {
         <GoBackButton className='w-4 h-4' img={arrowLeftIcon} alt='flecha hacia la izquierda para volver'/>
         <img src={DotsVertical} alt="menú de tres puntos" />
       </div>
-
       
         <header className="font-custom">
           <div className="flex flex-col justify-center text-center text-white">

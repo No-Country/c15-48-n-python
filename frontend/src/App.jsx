@@ -20,9 +20,9 @@ function App() {
   const registerRoute = location.pathname === "/register";
   const loginRoute = location.pathname === "/login";
   const createMaskotaRoute = location.pathname === "/crearMaskota";
-  
+
   return (
-    <div className="h-screen flex flex-col justify-between">
+    <div className="h-screen flex flex-col md:flex-row-reverse justify-center">
       <div
         className={
           profileRoute || registerRoute || loginRoute || createMaskotaRoute
@@ -43,16 +43,23 @@ function App() {
         </Routes>
       </div>
       {profileRoute || registerRoute || loginRoute || createMaskotaRoute ? (
-        <div></div>
+        <div className="navContainer">
+          <Webnavbar />
+        </div>
       ) : (
         <div className="navContainer">
           {!profileRoute &&
           !registerRoute &&
           !loginRoute &&
           !createMaskotaRoute ? (
-            <Navbar />
+            <>
+              <Navbar />
+              <Webnavbar />
+            </>
           ) : (
-            <div></div>
+            <div>
+              
+            </div>
           )}
         </div>
       )}

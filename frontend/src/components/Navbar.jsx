@@ -11,7 +11,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="h-full flex items-center justify-around px-4  w-full bottom-0 bg-black">
+    <nav className="h-full flex items-center justify-around px-4 w-full bottom-0 bg-black md:hidden">
       <ul className="flex items-center w-full justify-around">
         <li>
           <NavLink to="/">
