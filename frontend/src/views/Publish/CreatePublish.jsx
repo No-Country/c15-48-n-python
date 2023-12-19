@@ -249,6 +249,7 @@ const CreatePublish = () => {
         </div>
       ) : null}
 
+        {/* cambiarlo para arrayurl */}
       {files.length > 0 && (
         <div className="flex flex-col mt-9">
           {files.map((img, index) => (

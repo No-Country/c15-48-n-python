@@ -17,6 +17,7 @@ console.log(params)
 const pets = perfiles_mascotas
 pets.map((pet) => console.log(pet))
 
+    const handleDelete = () => {};
 
   return (
     <div>
@@ -31,17 +32,17 @@ pets.map((pet) => console.log(pet))
         </div>
         <div className='mx-5 my-8 text-white font-custom flex items-center justify-between'>
             <h3 className='text-lg font-bold'>Mis MaskotAs</h3>
-            <Link to='/crearMaskota'><img className='h-10 bg-social-blue rounded-full p-1.5' src={plusIcon} alt="icono agregar mascota" /></Link>
+            <Link to='/crearMaskota'><img className='h-10 bg-gradient-to-r from-social-pink to-purple rounded-full p-1.5' src={plusIcon} alt="icono agregar mascota" /></Link>
         </div>
         {humanProfile.pets.map((pet) => (
             <div className='mx-5 font-custom text-white flex items-center' key={`${humanProfile.id}-${pet.id}`}>
                 <img className='rounded-full w-10 h-10' src={pet.profile} alt="foto de perfil de mascota" />
-                <div className='flex justify-between items-center'>
-                    <div className='mx-2.5 w-52'>
+                <div className='flex justify-between w-full items-center'>
+                    <div className='mx-2.5 w-50'>
                         <p className='font-medium '>{pet.name} <span className='text-sm font-normal'>({pet.type})</span></p>
                         <p className='font-sm text-light-gray font-medium'>@{pet.username}</p>
                     </div>
-                    <img className='h-10 bg-dark-gray rounded-full p-3' src={deleteIcon} alt="icono borrar mascota" />
+                    <button className="bg-dark-gray rounded-full" onClick={handleDelete}><img className='h-10 w-10 p-3' src={deleteIcon} alt="icono borrar mascota" /></button>
                 </div>    
             </div>
         ))}         
