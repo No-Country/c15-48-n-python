@@ -41,10 +41,7 @@ const CreatePublish = () => {
       validate("filesImg", img, selectedImg.length)
     );
     console.log(errors);
-
-    if (!errors) {
-    }
-
+    
     setPostError((prevErrors) => ({
       ...prevErrors,
       imagen: errors.some((error) => error.imagen),
@@ -52,17 +49,6 @@ const CreatePublish = () => {
 
     setFiles((prevImg) => [...prevImg, ...selectedImg]);
   };
-
-  // const imgUrl = (imgs) => {
-  //   let arrayUrl = [];
-  //   imgs.map((img) => {
-  //     const url = URL.createObjectURL(img);
-  //     arrayUrl.push(url);
-  //   });
-  //   return arrayUrl;
-  // };
-
-  // const urls = imgUrl(files);
 
   const imgUrl = async (imgs) => {
     try {
