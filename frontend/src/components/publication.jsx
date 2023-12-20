@@ -122,11 +122,11 @@ const Publication = ({ gato, ids }) => {
         <div className="flex items-center text-light-white text-xs mx-6">
           <div className="pb-1 text-center flex flex-col whitespace-nowrap w-full" onClick={handleSelect}>
             <span className="">ME GUSTA ({like})</span>
-            <div className={`${select === "likes" ? "h-1 bg-social-blue " : "h-0.5 bg-dark-gray"} rounded mt-3.5 w-full`}></div>
+            <div className={`${select === "likes" ? "h-1 bg-social-blue " : "h-0.5 bg-dark-gray"} rounded mt-3.5 w-full transition-all`}></div>
           </div>
           <div className="pb-1 text-center flex flex-col whitespace-nowrap w-full" onClick={handleSelect}>
             <span>COMENTARIOS ({comment})</span>
-            <div className={`${select === "comments" ? "h-1 bg-social-pink" : "h-0.5 bg-dark-gray"} rounded mt-3.5 w-full`}></div>
+            <div className={`${select === "comments" ? "h-1 bg-social-pink" : "h-0.5 bg-dark-gray"} rounded mt-3.5 w-full transition-all`}></div>
           </div>
         </div>
       )}
@@ -136,8 +136,8 @@ const Publication = ({ gato, ids }) => {
         ))
       )}
       {comment != 0 && select === "comments" && paramsId && (
-        comments.map((comment) => (
-          <Comment comment={comment}/>
+        comments.map((comment, key) => (
+          <Comment comment={comment} key={key} />
         ))
       )}
     </>
