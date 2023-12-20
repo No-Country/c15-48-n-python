@@ -11,7 +11,7 @@ const SearchBar = () => {
           className="w-full bg-gray text-sm"
         />
         <button className="flex items-center justify-center w-12 h-full rounded-full">
-          <img src={SearchIcon} />
+          <img src={searchIcon} />
         </button>
       </div>
     </>
