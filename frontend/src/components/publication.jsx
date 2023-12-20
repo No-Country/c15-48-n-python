@@ -8,7 +8,7 @@ const Publication = ({ gato }) => {
   let { perfil, nombre, fecha, imagen, likes, comments, text } = gato;
 
   return (
-    <div className=" pb-4 border-b-2 border-gray">
+    <div className=" pb-4 border-b-2 border-gray mt-4 max-w-4xl">
       <div className="flex h-10 w-full">
         <div className="h-full w-16 ">
           <div className="w-11 h-10 rounded-full overflow-hidden">
