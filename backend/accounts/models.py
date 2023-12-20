@@ -17,6 +17,7 @@ class Pet(models.Model):
         User,
         on_delete=models.CASCADE,
     )
+    nick = models.CharField(verbose_name=_("User of pet"), max_length=255, unique=True)
     birth_date = models.DateField(
         verbose_name=_("Pet Birth Date"), auto_now=False, auto_now_add=False
     )
@@ -24,10 +25,8 @@ class Pet(models.Model):
     species = models.IntegerField(
         verbose_name=_("Species of pet"), choices=PetSpecies.choices
     )
-    breed = models.CharField(verbose_name=_("Breed of pet"), blank=True, max_length=255)
-    biography = models.TextField(verbose_name=_("Pet biography"))
-    pet_picture = models.URLField()
-    pet_picture_comment = models.URLField()
+    pet_picture = models.URLField(null = True)
+    pet_picture_comment = models.URLField(null = True)
 
 
 class Follower(models.Model):
