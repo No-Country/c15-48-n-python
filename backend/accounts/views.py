@@ -17,6 +17,10 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = AccountSerializer
     lookup_field = "username"
 
+    def get_permissions(self):
+        if self.action == "create":
+            return (permissions.AllowAny(),)
+        return super().get_permissions()
 
 class PetViewSet(viewsets.ModelViewSet):
     queryset = Pet.objects.all()
