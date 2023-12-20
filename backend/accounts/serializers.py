@@ -22,7 +22,7 @@ class PetSerializer(serializers.ModelSerializer):
         return {
             "username": instance.user.username,
             "name": instance.name,
-            "sprecies": instance.species,
+            "species": instance.species,
             "breed": instance.breed,
             "biography": instance.biography,
             "pet_picture": instance.pet_picture if instance.pet_picture != "" else "",
