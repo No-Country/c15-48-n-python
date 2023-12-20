@@ -32,13 +32,13 @@ const Profile = () => {
   let gatosInfo = gatos;
 
   return (
-    <div>
-      <div className="flex justify-between mx-8 pt-8">
+    <div className="w-full flex flex-col items-center">
+      <div className="flex justify-between px-8 pt-8 md:max-w-4xl w-full">
         <GoBackButton className='w-4 h-4' img={arrowLeftIcon} alt='flecha hacia la izquierda para volver'/>
         <img src={DotsVertical} alt="menú de tres puntos" />
       </div>
       
-        <header className="font-custom">
+        <header className="font-custom md:max-w-4xl">
           <div className="flex flex-col justify-center text-center text-white">
             <img
               className="rounded-full w-36 h-36 border-solid border-2 p-1 m-auto my-4 border-white"
@@ -64,7 +64,7 @@ const Profile = () => {
             </div>
           </div>
         </header>
-        <div className="flex justify-evenly mx-2">
+        <div className="flex justify-evenly mx-2 md:max-w-4xl w-full">
           <div className="flex flex-col font-custom text-sm font-semibold">
             <span className="text-white">{petProfile.followers}</span>
             <span className="text-light-gray">Seguidores</span>
@@ -76,11 +76,11 @@ const Profile = () => {
           <FollowButton user={user} paramsId={params.id} />
         </div>
 
-      <div className="flex flex-col items-center text-white font-custom text-sm my-8 mx-6 justify-center">
-        PUBLICACIONES()
+      <div className="flex flex-col items-center text-white font-custom text-sm mt-8 mx-6 justify-center md:max-w-4xl w-full">
+        PUBLICACIONES
         <div className="bg-gradient-to-r from-social-pink to-purple h-1 w-full mt-1 rounded"></div>
       </div>
-      <div className="flex flex-col gap-4 ml-4 mr-4 mt-4">
+      <div className="flex flex-col gap-4 ml-4 mr-4 md:max-w-4xl">
         {Object.entries(gatosInfo).map(([key, value]) => (
           <Publication gato={value} key={key} />
         ))}
