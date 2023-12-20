@@ -16,8 +16,6 @@ const Profile = () => {
   const params = useParams();
   const petProfile = perfiles.find((pet) => pet.id === parseInt(params.id));
 
-  console.log(perfiles);
-  console.log(params);
   console.log(petProfile);
 
   if (!petProfile) {
@@ -91,25 +89,3 @@ const Profile = () => {
 
 export default Profile;
 
-{/* <button
-          onClick={handleClick}
-          className={`px-8 pb-1 text-sm text-center w-1/2
-        ${
-          select === "fotos"
-            ? "border-b-4 border-solid border-social-blue rounded-sm w-36 "
-            : ""
-        }`}
-        >
-          Fotos
-        </button>
-        <button
-          onClick={handleClick}
-          className={`px-8 pb-1 text-sm text-center w-1/2
-        ${
-          select === "videos"
-            ? "border-b-4 border-solid border-social-blue rounded-sm w-36"
-            : ""
-        }`}
-        >
-          Videos
-        </button> */}
