@@ -55,7 +55,7 @@ class Blocker(models.Model):
         User,
         verbose_name=_("User being blocked"),
         on_delete=models.CASCADE,
-        related_name="blocked_pet",
+        related_name="blocked_user",
     )
     blocker = models.ForeignKey(
         User, verbose_name=_("User blocking another user"), on_delete=models.CASCADE

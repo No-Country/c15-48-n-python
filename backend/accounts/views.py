@@ -11,11 +11,14 @@ from .serializers import (
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
-    )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = AccountSerializer
     lookup_field = "username"
+
+    def get_permissions(self):
+        if self.action == "create":
+            return (permissions.AllowAny(),)
+        return super().get_permissions()
 
 
 class PetViewSet(viewsets.ModelViewSet):
@@ -27,7 +30,8 @@ class PetViewSet(viewsets.ModelViewSet):
     serializer_class = PetSerializer
     lookup_field = "name"
 
-
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class FollowerViewSet(viewsets.ModelViewSet):
