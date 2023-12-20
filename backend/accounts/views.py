@@ -11,9 +11,7 @@ from .serializers import (
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
-    )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = AccountSerializer
     lookup_field = "username"
 
@@ -21,6 +19,7 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.action == "create":
             return (permissions.AllowAny(),)
         return super().get_permissions()
+
 
 class PetViewSet(viewsets.ModelViewSet):
     queryset = Pet.objects.all()
