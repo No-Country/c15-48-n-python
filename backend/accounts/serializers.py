@@ -12,7 +12,7 @@ class PetSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         return {
-            'user_name':instance.user.first_name,
+            "username": instance.user.username,
             'name':instance.name,
             'sprecies':instance.species,
             'breed':instance.breed,
