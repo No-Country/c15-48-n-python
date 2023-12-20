@@ -27,12 +27,19 @@ function validate(id, value) {
       errors.username = "Ingresá un nick válido";
     }
   } else if (id === "type") {
-    if (!value || value === 'default') {
-        errors.type = "Debes elegir el tipo de tu maskota";
+    if (!value || value === "default") {
+      errors.type = "Debes elegir el tipo de tu maskota";
     }
   } else if (id === "petDate") {
     if (!value) {
-        errors.date = "Se necesita la fecha de nacimiento de tu maskota";
+      errors.date = "Se necesita la fecha de nacimiento de tu maskota";
+    }
+  } else if (id === "petImg") {
+    if (value) {
+      const extension = value.name.split(".").pop().toLowerCase();
+      if (!value.name.includes(`.${extension}`)) {
+        errors.profile = "No se permite ese formato";
+      }
     }
   }
 

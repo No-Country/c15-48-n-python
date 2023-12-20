@@ -18,6 +18,7 @@ const fileUpload = async (file, preset, resourceType) => {
     const data = await res.json();
     console.log(data);
     console.log(data.secure_url);
+    console.log("Imagen subida con éxito")
     return data.secure_url;
   } catch (error) {
     return console.error(error);
