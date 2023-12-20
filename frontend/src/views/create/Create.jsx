@@ -186,7 +186,8 @@ export default function Create() {
   };
   return (
     <div>
-      <header className="flex m-8 items-center mx-6">
+      {/* esto podria ser un componente header  */}
+      <header className="flex my-8 items-center mx-6">
         <GoBackButton
           className="rounded-3xl border border-dark-gray p-2 mr-8"
           img={arrowLeftIcon}

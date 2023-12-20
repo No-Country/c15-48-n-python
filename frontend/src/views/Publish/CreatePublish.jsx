@@ -127,7 +127,7 @@ const CreatePublish = () => {
           likes: 0,
           comments: 0,
           text: text,
-        };
+        }; 
         console.log("Nuevo Post: ", newPost);
         petsPosts.id = newPost;
         alert("Formulario publicado correctamente"); // esto tmb

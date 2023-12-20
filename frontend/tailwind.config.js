@@ -30,6 +30,9 @@ export default {
       },
       width: {
         '1/10': '10%'
+      },
+      lineHeight: {
+        '4.5': '18px'
       }
     },
   },

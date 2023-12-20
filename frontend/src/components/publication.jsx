@@ -1,53 +1,146 @@
-import React from "react";
-import { NavLink } from 'react-router-dom';
-import DotsVertical from '../assets/icons/dots_vertical.svg';
-import BotonLike from '../assets/icons/boton_like.svg';
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import Notification from "./notification.jsx";
+import Comment from "./comment.jsx";
+import GoBackButton from "./GoBackButton.jsx";
+
+import comments from "../assets/placeholder/comments.js";
+import gatos_info from "../assets/placeholder/gatos_info.js";
+
+import DotsVertical from "../assets/icons/dots_vertical.svg";
+import BotonLike from "../assets/icons/boton_like.svg";
 import BotonComentarios from "../assets/icons/boton_comentarios.svg";
+import arrowLeftIcon from "../assets/icons/arrow_left.svg";
 
-const Publication = ({ gato }) => {
-  let { perfil, nombre, fecha, imagen, likes, comments, text } = gato;
+const Publication = ({ gato, ids }) => {
+  const params = useParams();
+  const paramsId = params.id;
 
+  const [post, setPost] = useState({
+    id: null,
+    perfil: "",
+    nombre: "",
+    fecha: "",
+    imagen: "",
+    text: "",
+  });
+  const [like, setLike] = useState(0);
+  const [comment, setComment] = useState(0);
+
+  useEffect(() => {
+    if (gato != undefined) {
+      let { perfil, nombre, fecha, imagen, likes, comments, text, id } = gato;
+      setLike(likes);
+      setComment(comments);
+      setPost({
+        perfil,
+        nombre,
+        fecha,
+        imagen,
+        text,
+        id,
+      });
+      // console.log(gato);
+    } else if (paramsId != undefined) {
+      const postId = ids.find((id) => id == paramsId);
+      if (postId) {
+        let gatos = gatos_info;
+        const post = gatos[postId];
+        setLike(post.likes);
+        setComment(post.comments);
+        setPost(post);
+      }
+    }
+  }, [gato, ids, paramsId]);
+  const { perfil, nombre, fecha, imagen, text, id } = post;
+  const handleLike = () => setLike(like + 1);
+
+  const [select, setSelect] = useState("likes");
+  const handleSelect = () => {
+    select === "likes" ? setSelect("comments") : setSelect("likes")
+  };
   return (
-    <div className=" pb-4 border-b-2 border-gray mt-4 max-w-4xl">
-      <div className="flex h-10 w-full">
-        <div className="h-full w-16 ">
-          <div className="w-11 h-10 rounded-full overflow-hidden">
-            <NavLink to="/perfil">
-              <img src={perfil} className="object-cover w-full h-full" />  
-            </NavLink>
+    <>
+      <div
+        className={`pb-4 ${
+          paramsId ? "" : "border-b-2 border-gray"
+        }  mt-4 max-w-4xl mx-6`}
+      >
+        {paramsId && (
+          <header className="flex items-center my-8">
+            <GoBackButton
+              className="rounded-3xl border border-dark-gray p-2 mr-16"
+              img={arrowLeftIcon}
+              alt="ícono volver atrás"
+            />
+            <h1 className="text-light-white font-custom text-sm font-semibold">
+              PUBLICACIÓN
+            </h1>
+          </header>
+        )}
+        <div className="flex h-10 w-full">
+          <div className="h-full w-16 ">
+            <div className="w-11 h-10 rounded-full overflow-hidden">
+              <Link to="/profile">
+                <img src={perfil} className="object-cover w-full h-full" />
+              </Link>
+            </div>
+          </div>
+          <div className="w-full text-black flex flex-col items-start justify-center ml-2">
+            <Link to="/profile">
+              <p className="text-base text-white">{nombre}</p>
+              <p className="text-sm text-light-gray">{fecha}</p>
+            </Link>
+          </div>
+          <div className="h-full w-10 flex items-center justify-end">
+            <img src={DotsVertical} className="p-2" />
           </div>
         </div>
-        <div className="w-full text-black flex flex-col items-start justify-center ml-2">
-          <NavLink to="/perfil">
-            <p className="text-base text-white">{nombre}</p>
-            <p className="text-sm text-light-gray">{fecha}</p>
-          </NavLink>
-          
+        {text && (
+          <div className="text-sm text-left mt-2">
+            <p className="text-white">{text}</p>
+          </div>
+        )}
+        <div className="py-3">
+          <img src={imagen} className="object-cover w-full rounded-2xl" />
         </div>
-        <div className="h-full w-10 flex items-center justify-end">
-          <img src={DotsVertical} className="p-2" />
+        <div className="flex text-white justify-between items-center">
+          <div className="flex justify-between items-center gap-4">
+            <button className="flex gap-2 items-center" onClick={handleLike}>
+              <img src={BotonLike} /> {like}
+            </button>
+            <button className="flex gap-2 items-center">
+              <img src={BotonComentarios} /> {comment}
+            </button>
+          </div>
+          {!paramsId && <Link to={`/posts/${id}`}>
+            <li className="text-light-gray font-custom">Ver actividad</li>
+          </Link>}
         </div>
       </div>
-
-      {text && (
-        <div className="text-sm text-left mt-2">
-          <p className="text-white">{text}</p>
+      {paramsId && (
+        <div className="flex items-center text-light-white text-xs mx-6">
+          <div className="pb-1 text-center flex flex-col whitespace-nowrap w-full" onClick={handleSelect}>
+            <span className="">ME GUSTA ({like})</span>
+            <div className={`${select === "likes" ? "h-1 bg-social-blue " : "h-0.5 bg-dark-gray"} rounded mt-3.5 w-full`}></div>
+          </div>
+          <div className="pb-1 text-center flex flex-col whitespace-nowrap w-full" onClick={handleSelect}>
+            <span>COMENTARIOS ({comment})</span>
+            <div className={`${select === "comments" ? "h-1 bg-social-pink" : "h-0.5 bg-dark-gray"} rounded mt-3.5 w-full`}></div>
+          </div>
         </div>
       )}
-
-      <div className="pt-3 pb-3">
-        <img src={imagen} className="object-cover w-full rounded-2xl" />
-      </div>
-
-      <div className="flex gap-4 text-white">
-        <NavLink to="/likes" className="flex gap-2">
-          <img src={BotonLike} /> {likes}
-        </NavLink>
-        <NavLink to="/comments" className="flex gap-2">
-          <img src={BotonComentarios} /> {comments}
-        </NavLink>
-      </div>
-    </div>
+      {like != 0 && select === "likes" && paramsId && (
+        comments.map((comment) => (
+          <Notification key={comment.id} notification={comment}/>
+        ))
+      )}
+      {comment != 0 && select === "comments" && paramsId && (
+        comments.map((comment) => (
+          <Comment comment={comment}/>
+        ))
+      )}
+    </>
   );
 };
 
