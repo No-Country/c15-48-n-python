@@ -1,5 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
+import Webnavbar from "./components/webnavbar";
 import Register from "./components/registerComponent/register";
 import HomeComp from "./views/home/homeComp";
 import Login from "./views/login/login";
@@ -11,25 +12,27 @@ import CreatePublish from "./views/Publish/CreatePublish";
 import Profile from "./views/profile/profile";
 import Notifications from "./views/notifications/notifications";
 import profiles from "./assets/placeholder/perfiles_mascotas.js";
-
+import Publication from "./components/publication.jsx";
+import gatos_info from "./assets/placeholder/gatos_info.js";
 
 function App() {
   const user = profiles[1];
   const location = useLocation();
-  const profileRoute = location.pathname.startsWith("/profile");
+  const profileRoute = location.pathname.startsWith("/profile/:id");
   const registerRoute = location.pathname === "/register";
   const loginRoute = location.pathname === "/login";
   const createMaskotaRoute = location.pathname === "/crearMaskota";
-  
+
+  let gatos = gatos_info;
+  const idGatosArray = Object.keys(gatos).map(Number);
+
   return (
-    <div className="h-screen flex flex-col justify-between">
+    <div className="h-screen flex flex-col md:flex-row-reverse justify-center">
       <div
-        className={
-          profileRoute || registerRoute || loginRoute || createMaskotaRoute
+        className={ profileRoute || registerRoute || loginRoute || createMaskotaRoute
             ? "AppHiddenNav"
             : "App"
-        }
-      >
+        }>
         <Routes>
           <Route path="/" element={<HomeComp />} />
           <Route path="/login" element={<Login />} />
@@ -40,19 +43,29 @@ function App() {
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/profile/:id/:human" element={<HumanData />} />
           <Route path="/crearMaskota" element={<Create />} />
+          {/* tendria que ser una ruta dinamica, dependiendo del boton que toque el componente 
+          se ve de una forma u otra (edit and create) */}
+          <Route path="/posts/:id" element={<Publication ids={idGatosArray} />} />
         </Routes>
       </div>
       {profileRoute || registerRoute || loginRoute || createMaskotaRoute ? (
-        <div></div>
+        <div className="navContainer">
+          <Webnavbar />
+        </div>
       ) : (
         <div className="navContainer">
           {!profileRoute &&
           !registerRoute &&
           !loginRoute &&
           !createMaskotaRoute ? (
-            <Navbar />
+            <>
+              <Navbar />
+              <Webnavbar />
+            </>
           ) : (
-            <div></div>
+            <div>
+              
+            </div>
           )}
         </div>
       )}

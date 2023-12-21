@@ -4,6 +4,7 @@ import calculateTime from "./calculateTime.js";
 import gatos from "../../assets/placeholder/gatos_info.js";
 import profiles from "../../assets/placeholder/perfiles_mascotas.js";
 import validate from "./validate.js";
+import fileUpload from "./fileUpload.js";
 import plus_icon from "../../assets/icons/plus.svg";
 import close_icon from "../../assets/icons/close_icon.svg";
 import img_icon from "../../assets/icons/image_icon.svg";
@@ -40,7 +41,7 @@ const CreatePublish = () => {
       validate("filesImg", img, selectedImg.length)
     );
     console.log(errors);
-
+    
     setPostError((prevErrors) => ({
       ...prevErrors,
       imagen: errors.some((error) => error.imagen),
@@ -49,16 +50,32 @@ const CreatePublish = () => {
     setFiles((prevImg) => [...prevImg, ...selectedImg]);
   };
 
-  const imgUrl = (imgs) => {
-    let arrayUrl = [];
-    imgs.map((img) => {
-      const url = URL.createObjectURL(img);
-      arrayUrl.push(url);
-    });
-    return arrayUrl;
+  const imgUrl = async (imgs) => {
+    try {
+      const arrayUrl = await Promise.all(
+        imgs.map(async (img) => {
+          const url = await fileUpload(img, user.username, "image");
+          return url;
+        })
+      );
+
+      return arrayUrl;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
   };
 
-  const urls = imgUrl(files);
+  const vidUrl = async (vid) => {
+    try {
+      const url = await fileUpload(vid, user.username, "video");
+      console.log(url);
+      return url;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
 
   const handleVid = (e) => {
     const vid = e.target.files[0];
@@ -84,20 +101,7 @@ const CreatePublish = () => {
   const createdDate = new Date();
   const timeAgo = calculateTime(createdDate);
 
-  const newPost = {
-    id: newPostId,
-    perfil: user.profile,
-    nombre: user.name,
-    fecha: timeAgo,
-    imagen: urls.toString(), // a falta de carrousel, por ahora solo lo muestra en home si es una img
-    video: video,
-    likes: 0,
-    comments: 0,
-    text: text,
-  };
-  console.log(newPost);
-
-  const handlePublish = (e) => {
+  const handlePublish = async (e) => {
     e.preventDefault();
     let newErrors = {};
     newErrors.text = validate("text", text).text;
@@ -109,8 +113,27 @@ const CreatePublish = () => {
     if (Object.values(newErrors).some((error) => error)) {
       setPostError((prevErrors) => ({ ...prevErrors, ...newErrors }));
     } else {
-      alert("Formulario publicado correctamente"); // esto tmb
-      petsPosts.id = newPost;
+      try {
+        const imgUrls = await imgUrl(files); // lee la url pero al recargar la pág muestra la foto en home ---> redux
+        const vUrl = await vidUrl(video);
+        console.log(vUrl);
+        const newPost = {
+          id: newPostId,
+          perfil: user.profile,
+          nombre: user.name,
+          fecha: timeAgo,
+          imagen: imgUrls.toString(), // a falta de carrousel, por ahora solo lo muestra en home si es una img
+          video: vUrl,
+          likes: 0,
+          comments: 0,
+          text: text,
+        }; 
+        console.log("Nuevo Post: ", newPost);
+        petsPosts.id = newPost;
+        alert("Formulario publicado correctamente"); // esto tmb
+      } catch (error) {
+        console.error("Error al crear el nuevo post:", error);
+      }
     }
   };
 
@@ -134,7 +157,9 @@ const CreatePublish = () => {
           onClick={handlePublish}
           className="w-30 text-white font-semibold bg-gradient-to-r from-social-pink to-purple text-xs px-3 py-1 rounded-3xl disabled:opacity-50"
           type="submit"
-          disabled={Object.values(postErrors).some((error) => error) ? true : false}
+          disabled={
+            Object.values(postErrors).some((error) => error) ? true : false
+          }
         >
           <Link to="/">Publicar</Link>
         </button>
@@ -199,13 +224,18 @@ const CreatePublish = () => {
 
       {Object.values(postErrors).some((error) => error) ? (
         <div className="flex items-center justify-between mt-4">
-          <img src={warning_icon} alt="ícono de signo de exclamación" className="mr-2"/>
+          <img
+            src={warning_icon}
+            alt="ícono de signo de exclamación"
+            className="mr-2"
+          />
           <p className="text-xs font-medium font-custom text-light-gray">
             Un breve recordatorio: subir hasta tres imágenes y un video.
           </p>
         </div>
       ) : null}
 
+        {/* cambiarlo para arrayurl */}
       {files.length > 0 && (
         <div className="flex flex-col mt-9">
           {files.map((img, index) => (

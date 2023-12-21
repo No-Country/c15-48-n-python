@@ -6,7 +6,7 @@ const Notification = ({ notification }) => {
   const { type, user, time } = notification;
 
   return (
-    <div className="w-full h-20 flex items-center border-b border-dark-gray">
+    <div className="w-full h-20 flex items-center border-b border-dark-gray text-white font-custom font-sm">
       <div className="w-16 h-16 flex items-center justify-center">
         <img src={type === "comment" ? commentIcon : likeIcon} alt="" />
       </div>

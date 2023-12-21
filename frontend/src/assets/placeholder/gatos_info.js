@@ -4,15 +4,15 @@ import Imagen from "./gato.jpg";
 //* Los textos de las mascotas deberían tener un límite de caracteres. Con Abril pensamos en poder tocar la publicación para que se pueda
 //* abrir la publicacion en toda la pantalla como en twitter.
 
-const gatos = {
+let gatos = {
   1: {
     id: 1,
     perfil: Perfil,
     nombre: "Misato",
     fecha: "Hace 2 horas",
     imagen: Imagen,
-    likes: 234,
-    comments: 17,
+    likes: 15,
+    comments: 5,
     text: "¡No hay nada más adorable que un gatito curioso! 🐱💕 Esta pequeña bola de pelusa ha iluminado mi día con su ternura y travesuras. ¿Quién más es un amante de los gatos? ¡Deja un comentario con tu emoji de gato favorito! 😻😺 #AmoALosGatos #GatitosAdorables",
   },
   2: {

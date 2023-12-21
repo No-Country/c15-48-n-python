@@ -6,107 +6,188 @@ import arrowLeftIcon from "../../assets/icons/arrow_left.svg";
 import profilePlaceholder from "../../assets/profile_placeholder.png";
 import SubmitGradientBtn from "../../components/SubmitGradientBtn";
 import validate from "../create/validate.js";
+import fileUpload from "../Publish/fileUpload.js";
+import humans from "../../assets/placeholder/humans_data.js";
+import petsProfiles from "../../assets/placeholder/perfiles_mascotas.js";
+import { useParams } from "react-router-dom";
+import addPetToUser from "./addPetToUser.js";
 
 export default function Create() {
   const tipos = ["Ave", "Gato", "Perro", "Conejo", "Caballo", "Otro"];
+  const users = humans;
+  const owner = users[1];
+  const params = useParams();
+  let petsProf = petsProfiles;
 
-  const [selectedImage, setSelectedImage] = useState(null);
+  // init states
+  const [selectedImage, setSelectedImage] = useState();
+  const [prevImg, setPrevImg] = useState(null);
+  const [petName, setPetName] = useState("");
+  const [petType, setType] = useState("");
+  const [nick, setNick] = useState("");
+  const [petDate, setDate] = useState();
 
   const [petProfile, setPetProfile] = useState({
     petName: "",
     type: "",
     petNick: "",
     date: null,
-    petProfile: null,
+    petImg: null,
+    human: "",
+    id: null,
+    followers: 0,
+    followed: 0,
   });
 
-  const [error, setError] = useState({});
+  const ultId = petsProf.length;
+  const newPetId = ultId + 1;
 
-  console.log(error)
-  // pedir ayuda !!
+  const [error, setError] = useState({
+    petName: "",
+    petType: "",
+    petNick: "",
+    petDate: "",
+    petImg: "",
+  });
+
+  // handlers
+  const handleName = (e) => {
+    setError((prevErrors) => ({
+      ...prevErrors,
+      ...validate("petName", e.target.value),
+    }));
+    error.petName ? console.log(error.petName) : setPetName(e.target.value);
+  };
+
+  const handleType = (e) => {
+    console.log(e.target.value);
+    setError((prevErrors) => ({
+      ...prevErrors,
+      ...validate("type", e.target.value),
+    }));
+    error.petType ? console.log(error.petType) : setType(e.target.value);
+  };
+
+  const handleNick = (e) => {
+    setError((prevErrors) => ({
+      ...prevErrors,
+      ...validate("petNick", e.target.value),
+    }));
+    error.petNick ? console.log(error.petNick) : setNick(e.target.value);
+  };
+
+  const handleDate = (e) => {
+    console.log(e.target.value);
+    setError((prevErrors) => ({
+      ...prevErrors,
+      ...validate("petDate", e.target.value),
+    }));
+    error.petDate ? console.log(error.petDate) : setDate(e.target.value);
+  };
 
   const handleImage = (event) => {
     const file = event.target.files[0];
+    console.log(file);
+    const errors = validate("petImg", file);
 
+    setError((prevErrors) => ({
+      ...prevErrors,
+      petImg: Array.isArray(errors) && errors.some((error) => error.petImg),
+    }));
+    setSelectedImage(file);
+    console.log(selectedImage);
+    
     if (file) {
       const reader = new FileReader();
-
       reader.onload = (e) => {
-        setPetProfile((prevProfile) => ({
-          ...prevProfile,
-          profile: file,
-        }));
-        setSelectedImage(e.target.result);
+        setPrevImg(e.target.result);
       };
-
       reader.readAsDataURL(file);
+    } else {
+      setSelectedImage(null);
     }
   };
 
-  const handleCreate = (e) => {
+  const imgUrl = async (img) => {
+    try {
+      if (img) {
+        const uploadPreset = nick;
+        const url = await fileUpload(img, uploadPreset, "image");
+        console.log(url);
+
+        if (url) {
+          console.log('Imagen subida con éxito:', url);
+          return url;
+        } else {
+          console.error('fileUpload no proporcionó una URL válida');
+          return null;
+        }
+      } else {
+        console.error("Se esperaba una única imagen, pero se proporcionaron o ninguna o más de una.");
+        return null;
+      }
+    } catch (err) {
+      console.error('Error en imgUrl:', err);
+      setError((prevErrors) => ({
+        ...prevErrors,
+        petImg: "Error al subir la imagen a Cloudinary",
+      }));
+      return null;
+    }
+  };
+      
+  const handleCreate = async (e) => {
     e.preventDefault();
-    const { id, value } = e.target;
+    let newErrors = {};
+    newErrors.petName = validate("petName", petName).petName;
+    newErrors.petType = validate("type", petType).petType;
+    newErrors.nick = validate("petNick", nick).nick;
+    newErrors.petDate = validate("petDate", petDate).petDate;
+    newErrors.petImg = validate("image", selectedImage).petImg;
 
-    setPetProfile((prevPetProfile) => ({
-      ...prevPetProfile,
-      [id]: value,
-    }));
-    setError(validate(petProfile));
+    console.log(newErrors);
+
+    if (Object.values(newErrors).some((error) => error)) {
+      setError((prevErrors) => ({ ...prevErrors, ...newErrors }));
+    } else {
+      try {
+        console.log(selectedImage);
+        let imageUrl = null;
+        if (selectedImage) {
+          imageUrl = await imgUrl(selectedImage);
+          console.log(imageUrl);
+        }
+
+        const newPet = {
+          id: newPetId,
+          name: petName,
+          username: nick,
+          followed: 0,
+          followers: 0,
+          date: petDate,
+          profile: imageUrl,
+          type: petType,
+        };
+        console.log(newPet);
+        setPetProfile((prevPetProfile) => ({
+          ...prevPetProfile,
+          ...newPet,
+        }));
+        petsProf = petProfile;
+        addPetToUser(params.id, newPet, users);
+        console.log("Nueva mascota creada con éxito");
+        alert("Formulario publicado correctamente");
+        return imageUrl;
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    }
   };
-
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setError((prevErrors) => ({
-      ...prevErrors,
-      ...validate(id, value),
-    }));
-  };
-
-  console.log(petProfile);
-  // const handleName = (e) => {
-  //   const { value } = e.target;
-  //   // setPetProfile((prevProfile) => ({
-  //   //   ...prevProfile,
-  //   //   name: value,
-  //   // }));
-  //   setError((prevErrors) => ({
-  //     ...prevErrors,
-  //     ...validate(value),
-  //   }));
-  // };
-
-  // const handleSelect = (e) => {
-  //   const { value } = e.target;
-  //   setPetProfile((prevProfile) => ({
-  //     ...prevProfile,
-  //     type: value,
-  //   }));
-  // };
-
-  // const handleNick = (e) => {
-  //   const { value } = e.target;
-  //   setPetProfile((prevProfile) => ({
-  //     ...prevProfile,
-  //     username: value,
-  //   }));
-  //   setError((prevErrors) => ({
-  //     ...prevErrors,
-  //     ...validate(value),
-  //   }));
-  // };
-
-  // const handleDate = (e) => {
-  //   const { value } = e.target;
-  //   setPetProfile((prevProfile) => ({
-  //     ...prevProfile,
-  //     date: value,
-  //   }));
-
-  // };
-
   return (
     <div>
-      <header className="flex m-8 items-center mx-6">
+      {/* esto podria ser un componente header  */}
+      <header className="flex my-8 items-center mx-6">
         <GoBackButton
           className="rounded-3xl border border-dark-gray p-2 mr-8"
           img={arrowLeftIcon}
@@ -123,12 +204,11 @@ export default function Create() {
           id="petName"
           placeholder="Ingresá el nombre de tu maskota..."
           required={true}
-          onChange={handleChange}
-          // value={petProfile.name}
+          onChange={handleName}
         />
-        {error.name && (
+        {error.petName && (
           <p className="text-xs font-medium text-white pt-2 font-custom">
-            {error.name}
+            {error.petName}
           </p>
         )}
 
@@ -140,8 +220,7 @@ export default function Create() {
             name="type"
             id="type"
             className="w-40 mt-1.5 rounded-3xl h-9 p-2 text-white bg-dark-gray"
-            onChange={handleChange}
-            // value={petProfile.type}
+            onChange={handleType}
           >
             <option key="default" value="default">
               Seleccionar
@@ -152,9 +231,9 @@ export default function Create() {
               </option>
             ))}
           </select>
-          {error.type && (
+          {error.petType && (
             <p className="text-xs font-medium text-white pt-2 font-custom">
-              {error.type}
+              {error.petType}
             </p>
           )}
         </div>
@@ -164,12 +243,11 @@ export default function Create() {
           id="petNick"
           placeholder="Elegí un nick único para tu maskota..."
           required={true}
-          // value={petProfile.username}
-          onChange={handleChange}
+          onChange={handleNick}
         />
-        {error.username && (
+        {error.petNick && (
           <p className="text-xs font-medium text-white pt-2 font-custom">
-            {error.username}
+            {error.petNick}
           </p>
         )}
         <div className="dateContainer my-3.5 flex flex-col">
@@ -184,12 +262,11 @@ export default function Create() {
             id="petDate"
             required={true}
             className="w-40 mt-1.5 bg-dark-black text-white font-thin"
-            // value={petProfile.date}
-            onChange={handleChange}
+            onChange={handleDate}
           />
-          {error.date && (
+          {error.petDate && (
             <p className="text-xs font-medium text-white pt-2 font-custom">
-              {error.date}
+              {error.petDate}
             </p>
           )}
         </div>
@@ -203,14 +280,15 @@ export default function Create() {
           <div className="relative overflow-hidden rounded-full w-36 h-36 border-solid border-2 p-1 m-auto mt-2 border-white">
             <input
               type="file"
-              id="petProfile"
+              id="petImg"
+              accept="image/*"
               required={false}
               className="w-full h-full mt-1.5 absolute top-0 left-0 opacity-0 cursor-pointer z-1"
               onChange={handleImage}
             />
-            {selectedImage ? (
+            {(prevImg !== null || petProfile.petImg) ? (
               <img
-                src={selectedImage}
+                src={prevImg || petProfile.petImg}
                 alt="Perfil"
                 className="object-cover w-full h-full rounded-full"
               />
@@ -222,18 +300,19 @@ export default function Create() {
               />
             )}
           </div>
-          {error.profile && (
+          {error.petImg && (
             <p className="text-xs font-medium text-white pt-2 font-custom">
-              {error.profile}
+              {error.petImg}
             </p>
           )}
         </div>
         <SubmitGradientBtn
           disabled={
-            error.name || error.type || error.username || error.date
+            error.petName || error.petType || error.petNick || error.petDate
           }
           BtnText="Crear Perfil"
           onClick={handleCreate}
+          link={`/profile/${owner.id}/${owner.name}`}
         />
       </form>
     </div>

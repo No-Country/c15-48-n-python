@@ -24,6 +24,16 @@ export default {
       zIndex: {
         '1': '1',
         '2': '2',
+      },
+      borderWidth: {
+        '1': '1px'
+      },
+      width: {
+        '1/10': '10%',
+        '5/8' : '85%',
+      },
+      lineHeight: {
+        '4.5': '18px'
       }
     },
   },
