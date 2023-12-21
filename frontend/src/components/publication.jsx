@@ -13,6 +13,7 @@ import BotonComentarios from "../assets/icons/boton_comentarios.svg";
 import arrowLeftIcon from "../assets/icons/arrow_left.svg";
 import deleteIcon from "../assets/icons/delete_icon.svg";
 import reportIcon from "../assets/icons/megafone_icon.svg";
+import likeIconBlue from "../assets/icons/boton_like_azul.svg";
 
 const Publication = ({ gato, ids }) => {
   const location = useLocation();
@@ -30,6 +31,7 @@ const Publication = ({ gato, ids }) => {
     text: "",
   });
   const [like, setLike] = useState(0);
+  const [liked, setLiked] = useState(false);
   const [comment, setComment] = useState(0);
 
   useEffect(() => {
@@ -58,7 +60,20 @@ const Publication = ({ gato, ids }) => {
     }
   }, [gato, ids, paramsId]);
   const { perfil, nombre, fecha, imagen, text, id } = post;
-  const handleLike = () => setLike(like + 1);
+
+  useEffect(() => {
+    if (liked) {
+      const timeoutId = setTimeout(() => {
+        setLiked(false);
+      }, 450);
+      return () => clearTimeout(timeoutId);
+    } 
+  }, [liked])
+
+  const handleLike = () => {
+    setLike(like + 1)
+    setLiked(true);
+  };
 
   const [select, setSelect] = useState("likes");
   const handleSelect = () => {
@@ -111,21 +126,11 @@ const Publication = ({ gato, ids }) => {
             <div className="font-custom text-white bg-dark-gray absolute px-4 py-2 rounded-xl right-0 top-9 w-28 text-xs text-center">
               {userRegistered ? (
                 <button className="flex items-center mt-2">
-                  <img
-                    className="mr-2 w-4"
-                    src={deleteIcon}
-                    alt="Ícono de borrar post"
-                  />
-                  Eliminar
+                  <img className="mr-2 w-4" src={deleteIcon} alt="Ícono de borrar post"/>Eliminar
                 </button>
               ) : (
                 <button className="flex items-center">
-                  <img
-                    className="mr-2 w-4"
-                    src={reportIcon}
-                    alt="Ícono de reportar"
-                  />
-                  Reportar
+                  <img className="mr-2 w-4" src={reportIcon} alt="Ícono de reportar" />Reportar
                 </button>
               )}
             </div>
@@ -141,10 +146,10 @@ const Publication = ({ gato, ids }) => {
         </div>
         <div className="flex text-white justify-between items-center">
           <div className="flex justify-between items-center gap-4">
-            <button className="flex gap-2 items-center" onClick={handleLike}>
-              <img src={BotonLike} /> {like}
+            <button className={`flex gap-2 items-center ${liked ? "text-social-blue" : "text-white" }`} onClick={handleLike}>
+              <img className="h-3" src={liked ? likeIconBlue : BotonLike} alt="botón de dar like" /> {like}
             </button>
-            <button className="flex gap-2 items-center">
+            <button className={`flex gap-2 items-center`}>
               <img src={BotonComentarios} /> {comment}
             </button>
           </div>
