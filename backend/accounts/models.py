@@ -26,7 +26,6 @@ class Pet(models.Model):
         verbose_name=_("Species of pet"), choices=PetSpecies.choices
     )
     pet_picture = models.URLField(null = True)
-    pet_picture_comment = models.URLField(null = True)
 
 
 class Follower(models.Model):

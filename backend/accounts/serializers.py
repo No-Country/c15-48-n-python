@@ -30,12 +30,12 @@ class PetSerializer(serializers.ModelSerializer):
 class PetAbridgedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
-        fields = ("nick", "pet_picture_comment")
+        fields = ("nick", "pet_picture")
     
     def to_representation(self, instance):
         return {
             "nick": instance.nick,
-            "pet_picture_comment": instance.pet_picture_comment if instance.pet_picture_comment != "" else "",
+            "pet_picture": instance.pet_picture if instance.pet_picture != "" else "",
         }
 
 
