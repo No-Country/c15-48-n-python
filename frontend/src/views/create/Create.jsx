@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputComp from "../../components/InputComp";
 import "../../App.css";
 import GoBackButton from "../../components/GoBackButton";
@@ -11,11 +11,37 @@ import humans from "../../assets/placeholder/humans_data.js";
 import petsProfiles from "../../assets/placeholder/perfiles_mascotas.js";
 import { useParams } from "react-router-dom";
 import addPetToUser from "./addPetToUser.js";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 export default function Create() {
   const tipos = ["Ave", "Gato", "Perro", "Conejo", "Caballo", "Otro"];
-  const users = humans;
-  const owner = users[1];
+  // const users = humans;
+  const token = useSelector((state) => state.user.tokenUser);
+  console.log("Token link:", token.access);
+  // const owner = users[1];
+  const [humans, setHumans] = useState();
+  const humansList = `http://127.0.0.1:8000/api/user/`;
+
+  const [owner, setOwner] = useState();
+  const humanUrl = `http://127.0.0.1:8000/api/user/sergiom/`; //
+
+  useEffect(() => {
+    axios
+      .get(humanUrl)
+      .then((response) => {
+        setOwner(response.data);
+        console.log(owner.first_name, owner.email);
+      })
+      .catch((error) => {
+        console.error("Error al obtener datos del dueño:", error);
+      });
+
+    axios.get(humansList).then((res) => {
+      setHumans(res.data);
+    });
+  }, []);
+
   const params = useParams();
   let petsProf = petsProfiles;
 
@@ -96,7 +122,7 @@ export default function Create() {
     }));
     setSelectedImage(file);
     console.log(selectedImage);
-    
+
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -116,18 +142,20 @@ export default function Create() {
         console.log(url);
 
         if (url) {
-          console.log('Imagen subida con éxito:', url);
+          console.log("Imagen subida con éxito:", url);
           return url;
         } else {
-          console.error('fileUpload no proporcionó una URL válida');
+          console.error("fileUpload no proporcionó una URL válida");
           return null;
         }
       } else {
-        console.error("Se esperaba una única imagen, pero se proporcionaron o ninguna o más de una.");
+        console.error(
+          "Se esperaba una única imagen, pero se proporcionaron o ninguna o más de una."
+        );
         return null;
       }
     } catch (err) {
-      console.error('Error en imgUrl:', err);
+      console.error("Error en imgUrl:", err);
       setError((prevErrors) => ({
         ...prevErrors,
         petImg: "Error al subir la imagen a Cloudinary",
@@ -135,7 +163,7 @@ export default function Create() {
       return null;
     }
   };
-      
+
   const handleCreate = async (e) => {
     e.preventDefault();
     let newErrors = {};
@@ -159,22 +187,39 @@ export default function Create() {
         }
 
         const newPet = {
-          id: newPetId,
+          // id: newPetId,
           name: petName,
           username: nick,
-          followed: 0,
-          followers: 0,
+          // followed: 0,
+          // followers: 0,
           date: petDate,
           profile: imageUrl,
           type: petType,
         };
-        console.log(newPet);
+
+        console.log("Nueva pet:", newPet); //
         setPetProfile((prevPetProfile) => ({
           ...prevPetProfile,
           ...newPet,
         }));
-        petsProf = petProfile;
-        addPetToUser(params.id, newPet, users);
+
+        try {
+          const res = await axios.post("http://127.0.0.1:8000/api/pet/", {
+            name: petName,
+            username: nick,
+            date: petDate,
+            pet_picture: imageUrl,
+            species: petType,
+            biography: "blabla",
+          });
+          console.log(res);
+          addPetToUser(res.data.name, res.data, humans);
+        } catch (err) {
+          console.error("Error en request", error);
+          return null;
+        }
+        // petsProf = petProfile; //
+
         console.log("Nueva mascota creada con éxito");
         alert("Formulario publicado correctamente");
         return imageUrl;
@@ -286,7 +331,7 @@ export default function Create() {
               className="w-full h-full mt-1.5 absolute top-0 left-0 opacity-0 cursor-pointer z-1"
               onChange={handleImage}
             />
-            {(prevImg !== null || petProfile.petImg) ? (
+            {prevImg !== null || petProfile.petImg ? (
               <img
                 src={prevImg || petProfile.petImg}
                 alt="Perfil"
@@ -312,7 +357,7 @@ export default function Create() {
           }
           BtnText="Crear Perfil"
           onClick={handleCreate}
-          link={`/profile/${owner.id}/${owner.name}`}
+          // link={`/profile/${owner.id}/${owner.name}`}
         />
       </form>
     </div>
