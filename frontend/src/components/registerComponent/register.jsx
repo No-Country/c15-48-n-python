@@ -1,8 +1,11 @@
 import { useState } from "react";
+import axios from "axios";
 import { NavLink } from "react-router-dom";
 import validate from "./validation";
 
 const Register = () => {
+  const userUrl = "http://127.0.0.1:8000/user/";
+
   const [userData, setUserData] = useState({
     email: "",
     name: "",
@@ -10,6 +13,7 @@ const Register = () => {
     password2: "",
   });
   const [errors, setErrors] = useState({});
+
 
   const handleChange = (event) => {
     setUserData({
@@ -23,11 +27,25 @@ const Register = () => {
       })
     );
   };
+  console.log("Data Usuario:", userData);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrors(validate(userData));
-    console.log(userData);
+    console.log("Errores:", errors);
+    const data = {
+      username: userData.name,
+      first_name: userData.name,
+      email: userData.email,
+      password: userData.password2,
+    }
+    console.log("Data a enviar:", data);
+    if (Object.keys(errors).length === 0) {
+      axios 
+        .post(userUrl, data)
+        .then((res) => {console.log(res);})
+    }
   }
 
   return (
