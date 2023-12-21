@@ -1,4 +1,7 @@
-from .models import Post, PostImage, PostVideo, Comment, Like
+from django.shortcuts import get_object_or_404
+from rest_framework import status
+from rest_framework.response import Response
+from .models import Post, Comment, Like, Pet
 from .permissions import IsOwnerOrReadOnly
 from rest_framework import viewsets, permissions
 from .serializers import (
@@ -18,15 +21,22 @@ class PostViewSet(viewsets.ModelViewSet):
     )
     serializer_class = PostSerializer
 
+    def perform_create(self, serializer):
+        nick = self.request.data.get("nick")
+        pet_queryset = Pet.objects.filter(user=self.request.user)
+        pet = get_object_or_404(pet_queryset, nick=nick)
+
+        serializer.save(pet=pet)
+
 
 class PostImageViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = PostImage.objects.all()
-    serializer_class = PostImageSerializer
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
 
 class PostVideoViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = PostVideo.objects.all()
-    serializer_class = PostVideoSerializer
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
 
 class CommentViewSet(viewsets.ModelViewSet):

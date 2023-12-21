@@ -4,6 +4,8 @@ from .models import Blocker, Follower, Pet, User
 
 
 class PetSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
+
     class Meta:
         model = Pet
         fields = (
@@ -17,26 +19,14 @@ class PetSerializer(serializers.ModelSerializer):
         read_only_fields = ("user",)
         lookup_field = "nick"
 
-    def to_representation(self, instance):
-        return {
-            "username": instance.user.username,
-            "nick": instance.nick,
-            "name": instance.name,
-            "species": instance.species,
-            "pet_picture": instance.pet_picture if instance.pet_picture != "" else "",
-        }
+
 
 
 class PetAbridgedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
         fields = ("nick", "pet_picture")
-    
-    def to_representation(self, instance):
-        return {
-            "nick": instance.nick,
-            "pet_picture": instance.pet_picture if instance.pet_picture != "" else "",
-        }
+        read_only_fields = ("pet_picture",)
 
 
 class AccountSerializer(serializers.ModelSerializer):

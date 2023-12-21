@@ -25,7 +25,7 @@ class Pet(models.Model):
     species = models.IntegerField(
         verbose_name=_("Species of pet"), choices=PetSpecies.choices
     )
-    pet_picture = models.URLField(null = True)
+    pet_picture = models.URLField(null=True)
 
 
 class Follower(models.Model):
@@ -56,7 +56,10 @@ class Blocker(models.Model):
         related_name="blocked_user",
     )
     blocker = models.ForeignKey(
-        User, verbose_name=_("User blocking another user"), on_delete=models.CASCADE
+        User,
+        verbose_name=_("User blocking another user"),
+        related_name="blocker_user",
+        on_delete=models.CASCADE,
     )
 
     class Meta:
