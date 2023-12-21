@@ -12,7 +12,6 @@ import BotonLike from "../assets/icons/boton_like.svg";
 import BotonComentarios from "../assets/icons/boton_comentarios.svg";
 import arrowLeftIcon from "../assets/icons/arrow_left.svg";
 import deleteIcon from "../assets/icons/delete_icon.svg";
-import reportIcon from "../assets/icons/megafone_icon.svg";
 import likeIconBlue from "../assets/icons/boton_like_azul.svg";
 
 const Publication = ({ gato, ids }) => {
@@ -20,7 +19,8 @@ const Publication = ({ gato, ids }) => {
   const route = location.pathname
   const params = useParams();
   const paramsId = params.id;
-  let userRegistered = null;
+  let userRegistered = gatos_info[2];
+  console.log(userRegistered.id)
 
   const [post, setPost] = useState({
     id: null,
@@ -116,23 +116,20 @@ const Publication = ({ gato, ids }) => {
               <p className="text-sm text-light-gray">{fecha}</p>
             </Link>
           </div>
-          <button
+          {(route.includes(`profile/${userRegistered.id}`)) && (<button
             onClick={handleMenu}
             className="h-full w-10 flex items-center justify-end"
           >
             <img src={DotsVertical} className="p-2" />
           </button>
+          )}
           {active && (
             <div className="font-custom text-white bg-dark-gray absolute px-4 py-2 rounded-xl right-0 top-9 w-28 text-xs text-center">
               {userRegistered ? (
-                <button className="flex items-center mt-2">
+                <button className="flex items-center ">
                   <img className="mr-2 w-4" src={deleteIcon} alt="Ícono de borrar post"/>Eliminar
                 </button>
-              ) : (
-                <button className="flex items-center">
-                  <img className="mr-2 w-4" src={reportIcon} alt="Ícono de reportar" />Reportar
-                </button>
-              )}
+              ) : "" }
             </div>
           )}
         </div>
@@ -153,7 +150,7 @@ const Publication = ({ gato, ids }) => {
               <img src={BotonComentarios} /> {comment}
             </button>
           </div>
-          {!paramsId && (
+          {((route === "/") || (route.includes(`profile/${paramsId}`))) && (
             <Link to={`/posts/${id}`}>
               <li className="text-light-gray font-custom">Ver actividad</li>
             </Link>
