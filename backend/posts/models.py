@@ -7,22 +7,10 @@ class Post(models.Model):
     pet = models.ForeignKey(
         Pet, verbose_name=_("Author of post"), on_delete=models.CASCADE
     )
+    image = models.URLField()
+    video = models.URLField(null = True, blank = True)
     caption = models.CharField(verbose_name=_("Post description"), max_length=255)
     created_at = models.DateField(auto_now_add=True)
-
-
-# TODO check more info
-class PostImage(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    image = models.URLField()
-    alt_text = models.CharField(verbose_name=_("Alternative text"), max_length=2000)
-
-
-# TODO check more info
-class PostVideo(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    video = models.URLField()
-    alt_text = models.CharField(verbose_name=_("Alternative text"), max_length=2000)
 
 
 class Comment(models.Model):
