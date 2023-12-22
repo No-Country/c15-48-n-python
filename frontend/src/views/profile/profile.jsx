@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import Publication from "../../components/publication.jsx";
 import FollowButton from "../../components/FollowButton.jsx";
 import GoBackButton from "../../components/GoBackButton.jsx";
@@ -54,41 +54,46 @@ const Profile = () => {
           </div>
         )}
       </div>
-
-      <header className="font-custom md:max-w-4xl">
-        <div className="flex flex-col justify-center text-center text-white">
-          <img
-            className="rounded-full w-36 h-36 border-solid border-2 p-1 m-auto my-4 border-white"
-            src={petProfile.profile}
-            alt="foto de perfil"
-          />
-          <h2 className="font-bold text-lg">{petProfile.name}</h2>
-          <p className="text-xs font-semibold text-light-gray mb-1.5">
-            @{petProfile.username}
-          </p>
-          <p className="text-sm font-semibold mb-1.5">
-            Nací el: {petProfile.date}
-          </p>
-          <div className="text-sm mb-12 flex justify-center">
-            <p className="pr-1">Mi dueño es:</p>
-            <Link to={`${petProfile.human}`} className="font-semibold pr-1">
-              {petProfile.human}
-            </Link>
-            <img className="mb-" src={humanIcon} alt="icono perfil de humano" />
+      
+        <header className="font-custom md:max-w-4xl">
+          <div className="flex flex-col justify-center text-center text-white">
+            <img
+              className="rounded-full w-36 h-36 border-solid border-2 p-1 m-auto my-4 border-white"
+              src={petProfile.profile}
+              alt="foto de perfil"
+            />
+            <h2 className="font-bold text-lg">{petProfile.name}</h2>
+            <p className="text-xs font-semibold text-light-gray mb-1.5">
+              @{petProfile.username}
+            </p>
+            <p className="text-sm font-semibold mb-1.5">
+              Nací el: {petProfile.date}
+            </p>
+            <div className="text-sm mb-12 flex justify-center">
+              <p className="pr-1">Mi dueño es:</p>
+              <NavLink
+                to={`${petProfile.human}`}
+                className="font-semibold pr-1"
+              >
+                {petProfile.human}
+              </NavLink>
+              <img className='mb-' src={humanIcon} alt="icono perfil de humano" />
+            </div>
           </div>
+        </header>
+        <div className="flex justify-evenly mx-2 md:max-w-4xl w-full">
+          <div className="flex flex-col font-custom text-sm font-semibold">
+            <NavLink to="/followers/1" className="flex flex-col">
+              <span className="text-white">{petProfile.followers}</span>
+              <span className="text-light-gray">Seguidores</span>  
+            </NavLink>
+          </div>
+          <div className="flex flex-col font-custom text-sm font-semibold">
+            <span className="text-white">{petProfile.followed}</span>
+            <span className="text-light-gray">Seguidos</span>
+          </div>
+          <FollowButton user={user} paramsId={params.id} />
         </div>
-      </header>
-      <div className="flex justify-evenly mx-2 md:max-w-4xl w-full">
-        <div className="flex flex-col font-custom text-sm font-semibold">
-          <span className="text-white">{petProfile.followers}</span>
-          <span className="text-light-gray">Seguidores</span>
-        </div>
-        <div className="flex flex-col font-custom text-sm font-semibold">
-          <span className="text-white">{petProfile.followed}</span>
-          <span className="text-light-gray">Seguidos</span>
-        </div>
-        <FollowButton user={user} paramsId={params.id} />
-      </div>
 
       <div className="flex flex-col items-center text-white font-custom text-sm mt-8 mx-6 justify-center md:max-w-4xl w-full">
         PUBLICACIONES
