@@ -3,9 +3,9 @@ import perfiles_mascotas from "../../assets/placeholder/perfiles_mascotas.js";
 import arrowLeftIcon from "../../assets/icons/arrow_left.svg";
 import Follower from "../../components/Follower.jsx";
 
-const Followers = (buttonId) => {
+const Followers = () => {
   const userData = perfiles_mascotas[0];
-  const [activeButton, setActiveButton] = useState(buttonId);
+  const [activeButton, setActiveButton] = useState("seguidores");
 
   const handleButtonClick = (buttonId) => {
     setActiveButton(buttonId);
