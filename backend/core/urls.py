@@ -16,9 +16,41 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework import routers
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
+from accounts.urls import router as router_accounts
+from posts.urls import router as router_post
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
+
+
+class DefaultRouter(routers.DefaultRouter):
+    def extend(self, router):
+        self.registry.extend(router.registry)
+
+
+router = DefaultRouter()
+router.extend(router_accounts)
+router.extend(router_post)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/posts/", (include("posts.urls"))),
-    path("api/accounts/", (include("accounts.urls"))),
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path("redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
+    path("api/", include(router.urls)),
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/token/verify/", TokenVerifyView.as_view(), name="token_verify"),
 ]

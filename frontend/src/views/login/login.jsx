@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import InputComp from "../../components/InputComp";
-import ButtonInSe from "../../components/ButtonInSe";
-import { NavLink } from "react-router-dom";
-import validation from "./validation";
+import { Link } from "react-router-dom";
+import InputComp from "../../components/InputComp.jsx";
+import ButtonInSe from "../../components/ButtonInSe.jsx";
+import validation from "./validation.js";
 
 const Login = () => {
   const [userInfo, setUserInfo] = useState({
@@ -37,7 +37,7 @@ const Login = () => {
 
 
   return (
-    <div className="bg-gray flex flex-col justify-between h-screen px-6 m-0">
+    <div className="bg-dark-black flex flex-col justify-between h-screen px-6 m-0">
       <div className="justify-center pt-32">
         <h2 className="font-custom font-semibold text-left text-white text-3xl">
           Iniciar Sesión en
@@ -74,21 +74,21 @@ const Login = () => {
             </p>
           )}
           <ButtonInSe
-          type='submit'
-          onClick={handleSubmit}
-          disabled={error.email || error.password}
-          className={`text-white font-semibold w-80 bg-social-pink rounded-3xl py-1.5 px-8 mt-6 
-          ${error.email || error.password 
-            ? 'bg-light-gray' 
-            : 'active:bg-social-pink'}`}
+            type='submit'
+            onClick={handleSubmit}
+            disabled={error.email || error.password}
+            className={`text-white font-semibold w-80 bg-social-pink rounded-3xl py-1.5 px-8 mt-6 
+            ${error.email || error.password 
+              ? 'bg-light-gray' 
+              : 'active:bg-social-pink'}`}
           ></ButtonInSe>
         </form>
       </div>
       <div className="flex pb-14">
         <span className="text-white px-2">¿No tenés una cuenta?</span>
-        <NavLink to="/register" className="text-white font-semibold">
+        <Link to="/register" className="text-white font-semibold">
           Regístrate
-        </NavLink>
+        </Link>
       </div>
     </div>
   );
