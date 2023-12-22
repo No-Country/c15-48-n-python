@@ -158,7 +158,7 @@ export default function Webnavbar() {
               </li>
             </NavLink>
 
-            <NavLink to="/profile/1" className="w-full flex pl-5">
+            <NavLink to="/profile/2" className="w-full flex pl-5">
               <li className={location.pathname.startsWith("/profile") ? "flex items-center gap-3 p-2 w-40 text-social-pink" : "flex items-center gap-3 p-2 w-40 opacity-20"}>
                 <svg
                   width="36"
