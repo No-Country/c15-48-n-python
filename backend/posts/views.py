@@ -73,6 +73,15 @@ class LikeViewSet(viewsets.ModelViewSet):
     http_method_names = ("get", "post", "delete")
     serializer_class = LikeSerializer
 
+    def list(self, request, *args, **kwargs):
+        post_param = request.GET.get("post")
+
+        if post_param:
+            like_queryset = Like.objects.filter(post=post_param)
+            return Response(self.get_serializer(like_queryset, many=True).data)
+
+        return super().list(request, *args, **kwargs)
+
     @action(detail=False, methods=["post"])
     def remove_like(self, request):
         post_id = self.request.data.get("post")
