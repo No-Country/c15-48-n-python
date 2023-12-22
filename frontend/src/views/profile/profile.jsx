@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import Publication from "../../components/publication.jsx";
 import FollowButton from "../../components/FollowButton.jsx";
 import GoBackButton from '../../components/GoBackButton.jsx';
@@ -16,9 +16,9 @@ const Profile = () => {
   const params = useParams();
   const petProfile = perfiles.find((pet) => pet.id === parseInt(params.id));
 
-  console.log(perfiles);
-  console.log(params);
-  console.log(petProfile);
+  // console.log(perfiles);
+  // console.log(params);
+  // console.log(petProfile);
 
   if (!petProfile) {
     return (
@@ -54,20 +54,22 @@ const Profile = () => {
             </p>
             <div className="text-sm mb-12 flex justify-center">
               <p className="pr-1">Mi dueño es:</p>
-              <Link
+              <NavLink
                 to={`${petProfile.human}`}
                 className="font-semibold pr-1"
               >
                 {petProfile.human}
-              </Link>
+              </NavLink>
               <img className='mb-' src={humanIcon} alt="icono perfil de humano" />
             </div>
           </div>
         </header>
         <div className="flex justify-evenly mx-2 md:max-w-4xl w-full">
           <div className="flex flex-col font-custom text-sm font-semibold">
-            <span className="text-white">{petProfile.followers}</span>
-            <span className="text-light-gray">Seguidores</span>
+            <NavLink to="/followers/1" className="flex flex-col">
+              <span className="text-white">{petProfile.followers}</span>
+              <span className="text-light-gray">Seguidores</span>  
+            </NavLink>
           </div>
           <div className="flex flex-col font-custom text-sm font-semibold">
             <span className="text-white">{petProfile.followed}</span>
