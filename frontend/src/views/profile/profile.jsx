@@ -92,19 +92,6 @@ const Profile = () => {
             </NavLink>
             <img className="mb-" src={humanIcon} alt="icono perfil de humano" />
           </div>
-        </header>
-        <div className="flex justify-evenly mx-2 md:max-w-4xl w-full">
-          <div className="flex flex-col font-custom text-sm font-semibold">
-            <NavLink to="/followers/1" className="flex flex-col">
-              <span className="text-white">{petProfile.followers}</span>
-              <span className="text-light-gray">Seguidores</span>  
-            </NavLink>
-          </div>
-          <div className="flex flex-col font-custom text-sm font-semibold">
-            <span className="text-white">{petProfile.followed}</span>
-            <span className="text-light-gray">Seguidos</span>
-          </div>
-          <FollowButton user={user} paramsId={params.id} />
         </div>
       </header>
       <div className="flex justify-evenly mx-2 md:max-w-4xl w-full">
