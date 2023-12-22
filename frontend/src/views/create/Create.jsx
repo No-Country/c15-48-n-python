@@ -17,14 +17,15 @@ import { useSelector } from "react-redux";
 export default function Create() {
   const tipos = ["Ave", "Gato", "Perro", "Conejo", "Caballo", "Otro"];
   // const users = humans;
-  const token = useSelector((state) => state.user.tokenUser);
-  console.log("Token link:", token.access);
+  // const token = useSelector((state) => state.user.tokenUser);
+  // console.log("Token link:", token.access);
   // const owner = users[1];
   const [humans, setHumans] = useState();
   const humansList = `http://127.0.0.1:8000/api/user/`;
 
   const [owner, setOwner] = useState();
   const humanUrl = `http://127.0.0.1:8000/api/user/sergiom/`; //
+  // const userData = useSelector((state) => state.user.userData);
 
   useEffect(() => {
     axios
@@ -204,21 +205,27 @@ export default function Create() {
         }));
 
         try {
-          const res = await axios.post("http://127.0.0.1:8000/api/pet/", {
-            name: petName,
-            username: nick,
-            date: petDate,
-            pet_picture: imageUrl,
-            species: petType,
-            biography: "blabla",
-          });
+          const res = await axios.post(
+            "http://127.0.0.1:8000/api/pet/",
+            {
+              nick: nick,
+              name: petName,
+              birth_date: petDate,
+              pet_picture: imageUrl,
+              species: petType,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
           console.log(res);
-          addPetToUser(res.data.name, res.data, humans);
+          addPetToUser(res.data.nick, res.data, humans);
         } catch (err) {
           console.error("Error en request", error);
           return null;
         }
-        // petsProf = petProfile; //
 
         console.log("Nueva mascota creada con éxito");
         alert("Formulario publicado correctamente");

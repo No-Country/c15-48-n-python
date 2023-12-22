@@ -42,25 +42,38 @@ const Register = () => {
     if (Object.keys(errors).length === 0) {
       try {
         const data = {
-          username: "sergiomusta1",
+          username: "cualquierpet",
           first_name: userData.name,
           email: userData.email,
           password: userData.password2,
-          pets: []
+
         };
-  
+
         console.log("Data a enviar:", data);
-  
+
         const userResponse = await axios.post(userUrl, data);
         console.log(userResponse);
+
+        // almmacena user en el estado
         dispatch(setUser(userResponse.data));
-  
+
         const tokenResponse = await axios.post(tokenUrl, {
-          username: userData.username,
+          username: userResponse.data.username,
           password: userData.password2,
         });
+
+        if (tokenResponse.data.access && tokenResponse.data.refresh) {
+          setToken({
+            access: tokenResponse.data.access,
+            refresh: tokenResponse.data.refresh,
+          });
+          // almmacena user en el estado
+          dispatch(setTokenUser(tokenUser));
+        }
+        
         console.log(tokenResponse.data);
-        dispatch(setTokenUser(tokenResponse.data));
+
+        alert("axios requests ready");
       } catch (error) {
         console.error("Error en la solicitud:", error.message);
       }
