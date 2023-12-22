@@ -11,6 +11,7 @@ import Create from "./views/create/Create";
 import CreatePublish from "./views/Publish/CreatePublish";
 import Profile from "./views/profile/profile";
 import Notifications from "./views/notifications/notifications";
+import Followers from "./views/followers/followers.jsx";
 import profiles from "./assets/placeholder/perfiles_mascotas.js";
 import Publication from "./components/publication.jsx";
 import gatos_info from "./assets/placeholder/gatos_info.js";
@@ -43,8 +44,7 @@ function App() {
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/profile/:id/:human" element={<HumanData />} />
           <Route path="/crearMaskota" element={<Create />} />
-          {/* tendria que ser una ruta dinamica, dependiendo del boton que toque el componente 
-          se ve de una forma u otra (edit and create) */}
+          <Route path="/followers/:id" element={<Followers />} />
           <Route path="/posts/:id" element={<Publication ids={idGatosArray} />} />
         </Routes>
       </div>
