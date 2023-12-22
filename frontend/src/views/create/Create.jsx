@@ -12,20 +12,22 @@ import petsProfiles from "../../assets/placeholder/perfiles_mascotas.js";
 import { useParams } from "react-router-dom";
 import addPetToUser from "./addPetToUser.js";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import createToken from "./createToken.js";
 
 export default function Create() {
-  const tipos = ["Ave", "Gato", "Perro", "Conejo", "Caballo", "Otro"];
+  const tipos = ["Perro", "Gato", "Ave", "Conejo", "Caballo", "Hamster", "Tortuga", "Oveja", "Gallina", "Cerdo", "Otro"];
   // const users = humans;
-  // const token = useSelector((state) => state.user.tokenUser);
+  
   // console.log("Token link:", token.access);
   // const owner = users[1];
   const [humans, setHumans] = useState();
   const humansList = `http://127.0.0.1:8000/api/user/`;
 
   const [owner, setOwner] = useState();
-  const humanUrl = `http://127.0.0.1:8000/api/user/sergiom/`; //
+  const humanUrl = `http://127.0.0.1:8000/api/user/sergiomusta2/`; //
   // const userData = useSelector((state) => state.user.userData);
+
+  const [token, setToken] = useState();
 
   useEffect(() => {
     axios
@@ -33,11 +35,13 @@ export default function Create() {
       .then((response) => {
         setOwner(response.data);
         console.log(owner.first_name, owner.email);
+        setToken(createToken("sergiomusta2", "sergioMusta123!"))
+        console.log(token)
       })
       .catch((error) => {
         console.error("Error al obtener datos del dueño:", error);
       });
-
+      
     axios.get(humansList).then((res) => {
       setHumans(res.data);
     });
@@ -50,7 +54,7 @@ export default function Create() {
   const [selectedImage, setSelectedImage] = useState();
   const [prevImg, setPrevImg] = useState(null);
   const [petName, setPetName] = useState("");
-  const [petType, setType] = useState("");
+  const [petType, setType] = useState();
   const [nick, setNick] = useState("");
   const [petDate, setDate] = useState();
 
@@ -86,13 +90,19 @@ export default function Create() {
     error.petName ? console.log(error.petName) : setPetName(e.target.value);
   };
 
+  const getIndex = (array, value) => {
+    let index = array.indexOf(value)
+    return index
+  }
+
   const handleType = (e) => {
     console.log(e.target.value);
     setError((prevErrors) => ({
       ...prevErrors,
       ...validate("type", e.target.value),
     }));
-    error.petType ? console.log(error.petType) : setType(e.target.value);
+    let typeNumber = getIndex(tipos, e.target.value) + 1
+    error.petType ? console.log(error.petType) : setType(typeNumber);
   };
 
   const handleNick = (e) => {
@@ -203,7 +213,7 @@ export default function Create() {
           ...prevPetProfile,
           ...newPet,
         }));
-
+        console.log(imageUrl);
         try {
           const res = await axios.post(
             "http://127.0.0.1:8000/api/pet/",
@@ -216,19 +226,19 @@ export default function Create() {
             },
             {
               headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${token.access}`,
               },
             }
           );
           console.log(res);
           addPetToUser(res.data.nick, res.data, humans);
         } catch (err) {
-          console.error("Error en request", error);
+          console.error("Error en request", err);
           return null;
         }
 
         console.log("Nueva mascota creada con éxito");
-        alert("Formulario publicado correctamente");
+        alert("Nueva mascota creada con éxito");
         return imageUrl;
       } catch (error) {
         console.error(error);
@@ -364,7 +374,7 @@ export default function Create() {
           }
           BtnText="Crear Perfil"
           onClick={handleCreate}
-          // link={`/profile/${owner.id}/${owner.name}`}
+          link={`/profile/2/${owner ? owner.first_name : ""}`}
         />
       </form>
     </div>

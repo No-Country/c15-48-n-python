@@ -10,7 +10,6 @@ import DotsVertical from "../../assets/icons/dots_vertical.svg";
 import humanIcon from "../../assets/icons/human_icon.svg";
 import banIcon from "../../assets/icons/ban_icon.svg";
 import reportIcon from "../../assets/icons/megafone_icon.svg";
-import { isMobile } from "react-device-detect";
 import FollowersModal from "../../components/followersModal.jsx";
 
 const Profile = () => {

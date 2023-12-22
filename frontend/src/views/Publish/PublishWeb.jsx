@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import calculateTime from "./calculateTime.js";
 import gatos from "../../assets/placeholder/gatos_info.js";
 import profiles from "../../assets/placeholder/perfiles_mascotas.js";
@@ -11,7 +11,7 @@ import img_icon from "../../assets/icons/image_icon.svg";
 import vid_icon from "../../assets/icons/video_icon.svg";
 import warning_icon from "../../assets/icons/warning_icon.svg";
 
-const CreatePublish = () => {
+const CreatePublish = ({ onClose }) => {
   const user = profiles[1];
   const petsPosts = gatos;
 
@@ -36,12 +36,10 @@ const CreatePublish = () => {
 
   const handleImg = (e) => {
     const selectedImg = Array.from(e.target.files);
-    console.log(selectedImg);
     const errors = selectedImg.map((img) =>
       validate("filesImg", img, selectedImg.length)
     );
-    console.log(errors);
-    
+
     setPostError((prevErrors) => ({
       ...prevErrors,
       imagen: errors.some((error) => error.imagen),
@@ -127,30 +125,25 @@ const CreatePublish = () => {
           likes: 0,
           comments: 0,
           text: text,
-        }; 
+        };
         console.log("Nuevo Post: ", newPost);
         petsPosts.id = newPost;
-        alert("Posteo creado"); // esto tmb
+        alert("Formulario publicado correctamente"); // esto tmb
       } catch (error) {
         console.error("Error al crear el nuevo post:", error);
       }
     }
   };
 
-  const navigate = useNavigate();
-  const handleBack = () => {
-    navigate(-1);
-  };
-
   const [isActive, setIsActive] = useState(false);
   const handleClick = () => {
     setIsActive(!isActive);
   };
-
+  // https://www.youtube.com/watch?v=kcpe4kqZaKg
   return (
-    <div className="mx-6">
-      <div className="flex justify-between mt-8  items-center font-sm">
-        <button onClick={handleBack} className="font-semibold text-social-blue">
+    <div className="z-50 fixed inset-0 h-auto flex  my-8 inset-x-1/3 bg-dark-black lg:w-300 md:h-auto md:py-6 md:px-8 md:border md:border-light-gray md:rounded-3xl md:flex md:flex-col">
+      <div className="flex justify-between mt-8 items-center font-sm md:mt-6">
+        <button onClick={onClose} className="font-semibold text-social-blue">
           Deshacer
         </button>
         <button
@@ -222,28 +215,16 @@ const CreatePublish = () => {
         )}
       </div>
 
-      {Object.values(postErrors).some((error) => error) ? (
-        <div className="flex items-center justify-between mt-4">
-          <img
-            src={warning_icon}
-            alt="ícono de signo de exclamación"
-            className="mr-2"
-          />
-          <p className="text-xs font-medium font-custom text-light-gray">
-            Un breve recordatorio: subir hasta tres imágenes y un video.
-          </p>
-        </div>
-      ) : null}
 
-        {/* cambiarlo para arrayurl */}
+      {/* cambiarlo para arrayurl */}
       {files.length > 0 && (
-        <div className="flex flex-col mt-9">
+        <div className="flex flex-col mt-9 relative overflow-auto items-center max-h-96 scrollbar">
           {files.map((img, index) => (
             <div key={index} className="relative mr-2">
               <img
                 src={URL.createObjectURL(img)}
                 alt={`Imagen seleccionada ${index + 1}`}
-                className="w-full h-full object-cover rounded-2xl mb-4"
+                className="object-cover rounded-2xl mb-4"
               />
               <button
                 className="absolute top-0 right-0 text-white p-1 bg-dark-gray rounded-full m-2"
@@ -268,6 +249,17 @@ const CreatePublish = () => {
           </button>
         </div>
       )}
+
+      <div className="flex items-center mt-8">
+        <img
+          src={warning_icon}
+          alt="ícono de signo de exclamación"
+          className="mr-2"
+        />
+        <p className="text-xs font-medium font-custom text-light-gray">
+          Un breve recordatorio: subir hasta tres imágenes y un video.
+        </p>
+      </div>
     </div>
   );
 };
