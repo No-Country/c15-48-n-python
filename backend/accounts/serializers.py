@@ -1,38 +1,31 @@
 from django.contrib.auth.password_validation import validate_password
+from rest_framework.validators import UniqueTogetherValidator
 from rest_framework import serializers
 from .models import Blocker, Follower, Pet, User
 
 
 class PetSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
+
     class Meta:
         model = Pet
         fields = (
             "user",
+            "nick",
             "birth_date",
             "name",
             "species",
-            "breed",
-            "biography",
             "pet_picture",
         )
         read_only_fields = ("user",)
-        lookup_field = "name"
-
-    def to_representation(self, instance):
-        return {
-            "username": instance.user.username,
-            "name": instance.name,
-            "species": instance.species,
-            "breed": instance.breed,
-            "biography": instance.biography,
-            "pet_picture": instance.pet_picture if instance.pet_picture != "" else "",
-        }
+        lookup_field = "nick"
 
 
 class PetAbridgedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
-        fields = ("name", "pet_picture_comment")
+        fields = ("nick", "pet_picture")
+        read_only_fields = ("pet_picture",)
 
 
 class AccountSerializer(serializers.ModelSerializer):
@@ -55,14 +48,27 @@ class AccountSerializer(serializers.ModelSerializer):
         return user
 
 
-class FollowerSerializer(serializers.HyperlinkedModelSerializer):
+class FollowerSerializer(serializers.ModelSerializer):
+    followed = serializers.SlugRelatedField(
+        queryset=Pet.objects.all(), slug_field="nick"
+    )
+    follower = serializers.SlugRelatedField(
+        queryset=Pet.objects.all(), slug_field="nick"
+    )
+
     class Meta:
         model = Follower
         fields = ("followed", "follower", "created_at")
-        lookup_field = "followed"
+        lookup_field = "follower"
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Follower.objects.all(),
+                fields=("followed", "follower"),
+            )
+        ]
 
 
-class BlockerSerializer(serializers.HyperlinkedModelSerializer):
+class BlockerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blocker
         fields = ("blocked", "blocker")
