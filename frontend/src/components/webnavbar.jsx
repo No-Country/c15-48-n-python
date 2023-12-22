@@ -194,7 +194,7 @@ export default function Webnavbar() {
                 </li>
               </NavLink>
 
-              <NavLink to="/profile/1" className="w-full flex pl-5">
+              <NavLink to="/profile/2" className="w-full flex pl-5">
                 <li
                   className={
                     location.pathname.startsWith("/profile") && !postModal
