@@ -107,13 +107,13 @@ const Publication = ({ gato, ids }) => {
         <div className="flex h-10 w-full">
           <div className="h-full">
             <div className="w-11 h-11 rounded-full overflow-hidden">
-              <Link to={`/profile/${gato.id}`}>
+              <Link to={paramsId ? `/profile/${paramsId}` : `/profile/${gato.id}`}>
                 <img src={perfil} className="object-cover w-full h-full" />
               </Link>
             </div>
           </div>
           <div className="w-full text-black flex flex-col items-start justify-center ml-2">
-            <Link to={`/profile/${gato.id}`}>
+          <Link to={paramsId ? `/profile/${paramsId}` : `/profile/${gato.id}`}>
               <p className="text-base text-white">{nombre}</p>
               <p className="text-sm text-light-gray">{fecha}</p>
             </Link>
