@@ -119,7 +119,7 @@ const Profile = () => {
         <div className="bg-gradient-to-r from-social-pink to-purple h-1 w-5/8 mt-1 rounded mx-6"></div>
       </div>
       <div className="flex flex-col gap-4 md:max-w-4xl">
-        {Object.entries(gatosInfo).map(([key, value]) => (
+        {Object.entries(gatosInfo).filter(([key, value]) => key.includes(params.id)).map(([key, value]) => (
           <Publication gato={value} key={key} />
         ))}
       </div>
