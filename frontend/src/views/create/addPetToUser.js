@@ -1,5 +1,5 @@
-const agregarMascotaAUsuario = (usuarioId, newPet, humans) => {
-    const usuarioEncontrado = humans.find((usuario) => usuario.id === usuarioId);
+const agregarMascotaAUsuario = (userName, newPet, humans) => {
+    const usuarioEncontrado = humans.find((usuario) => usuario.name === userName);
   
     if (usuarioEncontrado) {
       usuarioEncontrado.pets.push(newPet);
