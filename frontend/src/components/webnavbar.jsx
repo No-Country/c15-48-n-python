@@ -225,8 +225,7 @@ export default function Webnavbar() {
 
           <div className="w-full flex pl-5 text-xl mb-5">
             <li className="flex items-center gap-3 p-2 w-40 opacity-20">
-              <img src="./src/assets/navegaweb/equis.svg" alt="salir" />
-              SALIR
+              X SALIR
             </li>
           </div>
         </ul>
