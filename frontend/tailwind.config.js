@@ -31,6 +31,7 @@ export default {
       width: {
         '1/10': '10%',
         '5/8' : '85%',
+        '300': '650px'
       },
       lineHeight: {
         '4.5': '18px'

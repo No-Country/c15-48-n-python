@@ -20,7 +20,6 @@ const Publication = ({ gato, ids }) => {
   const params = useParams();
   const paramsId = params.id;
   let userRegistered = gatos_info[2];
-  console.log(userRegistered.id)
 
   const [post, setPost] = useState({
     id: null,
