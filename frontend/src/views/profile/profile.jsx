@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, NavLink, useNavigate } from "react-router-dom";
 import Publication from "../../components/publication.jsx";
 import FollowButton from "../../components/FollowButton.jsx";
 import GoBackButton from "../../components/GoBackButton.jsx";
@@ -10,17 +10,34 @@ import DotsVertical from "../../assets/icons/dots_vertical.svg";
 import humanIcon from "../../assets/icons/human_icon.svg";
 import banIcon from "../../assets/icons/ban_icon.svg";
 import reportIcon from "../../assets/icons/megafone_icon.svg";
+import { isMobile } from "react-device-detect";
+import FollowersModal from "../../components/followersModal.jsx";
 
 const Profile = () => {
   let perfiles = perfiles_mascotas;
   const user = perfiles[1];
   const params = useParams();
+  const navigate = useNavigate();
   const petProfile = perfiles.find((pet) => pet.id === parseInt(params.id));
-
+  const [openModal, setOpenModal] = useState(false);
   const [active, setActive] = useState(false);
+
   const handleMenu = () => {
     active ? setActive(false) : setActive(true);
   };
+
+  const handleOpenFollowers = () => {
+    if(isMobile){
+      navigate(`/followers/${params.id}`);
+    } else {
+      console.log("desktop");
+      setOpenModal(true);
+    }
+  };
+
+  const handleCloseFollowers = () => {
+    setOpenModal(false);
+  }
 
   if (!petProfile) {
     return (
@@ -33,7 +50,7 @@ const Profile = () => {
   let gatosInfo = gatos;
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center overflow-hidden">
       <div className="flex justify-between px-8 pt-8 md:max-w-4xl w-full">
         <GoBackButton
           className="w-4 h-4"
@@ -71,22 +88,29 @@ const Profile = () => {
           </p>
           <div className="text-sm mb-12 flex justify-center">
             <p className="pr-1">Mi dueño es:</p>
-            <Link to={`${petProfile.human}`} className="font-semibold pr-1">
+            <NavLink to={`${petProfile.human}`} className="font-semibold pr-1">
               {petProfile.human}
-            </Link>
+            </NavLink>
             <img className="mb-" src={humanIcon} alt="icono perfil de humano" />
           </div>
         </div>
       </header>
       <div className="flex justify-evenly mx-2 md:max-w-4xl w-full">
         <div className="flex flex-col font-custom text-sm font-semibold">
-          <span className="text-white">{petProfile.followers}</span>
-          <span className="text-light-gray">Seguidores</span>
+          <button onClick={handleOpenFollowers} className="flex flex-col">
+            <span className="text-white">{petProfile.followers}</span>
+            <span className="text-light-gray">Seguidores</span>
+          </button>
         </div>
         <div className="flex flex-col font-custom text-sm font-semibold">
-          <span className="text-white">{petProfile.followed}</span>
-          <span className="text-light-gray">Seguidos</span>
+          <button onClick={handleOpenFollowers} className="flex flex-col">
+            <span className="text-white">{petProfile.followed}</span>
+            <span className="text-light-gray">Seguidos</span>
+          </button>
         </div>
+        {openModal === true && (
+          <FollowersModal userData={petProfile} handleClose={handleCloseFollowers} />
+        )}
         <FollowButton user={user} paramsId={params.id} />
       </div>
 

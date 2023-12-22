@@ -12,7 +12,9 @@ const perfiles = [
         followed: 3457,
         date: '12/08/2012',
         profile: perfilJacob,
-        type: 'Perro'
+        type: 'Perro',
+        FollowsMe: true,
+        FollowedByMe: true
     },
     {
         id: 2,
@@ -23,7 +25,9 @@ const perfiles = [
         followed: 1358,
         date: '13/08/2010',
         profile: perfilAlex,
-        type: 'Perro'
+        type: 'Perro',
+        FollowsMe: true,
+        FollowedByMe: false
     },
     {
         id: 3,
@@ -34,7 +38,9 @@ const perfiles = [
         followed: 101,
         date: '28/12/2016',
         profile: perfilPugui,
-        type: 'Perro'
+        type: 'Perro',
+        FollowsMe: false,
+        FollowedByMe: true
     }
 ]
 
