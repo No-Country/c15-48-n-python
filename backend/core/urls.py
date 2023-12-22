@@ -16,9 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework import routers
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from accounts.urls import router as router_accounts
+from posts.urls import router as router_post
+
+class DefaultRouter(routers.DefaultRouter):
+    def extend(self, router):
+        self.registry.extend(router.registry)
+
+router = DefaultRouter()
+router.extend(router_accounts)
+router.extend(router_post)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/posts/", (include("posts.urls"))),
-    path("api/accounts/", (include("accounts.urls"))),
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path('', include(router.urls)),
 ]
