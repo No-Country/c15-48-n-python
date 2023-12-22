@@ -11,7 +11,6 @@ class Post(models.Model):
     created_at = models.DateField(auto_now_add=True)
 
 
-# TODO check more info
 class PostImage(models.Model):
     post = models.ForeignKey(Post, related_name="post_image", on_delete=models.CASCADE)
     image = models.URLField()
@@ -20,7 +19,6 @@ class PostImage(models.Model):
     )
 
 
-# TODO check more info
 class PostVideo(models.Model):
     post = models.ForeignKey(Post, related_name="post_video", on_delete=models.CASCADE)
     video = models.URLField()
