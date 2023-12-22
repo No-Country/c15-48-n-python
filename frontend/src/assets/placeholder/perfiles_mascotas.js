@@ -1,6 +1,9 @@
 import perfilJacob from './Profile Jacob.png';
 import perfilAlex from './Profile Alex.png';
 import perfilPugui from './Profile Pugui.png';
+import perfilTony from "./PerfilesFigma/6.jpg";
+import perfilMisato from "./PerfilesFigma/gatogris.jpeg";
+import perfilNevada from "./PerfilesFigma/Conejo.jpeg";
 
 const perfiles = [
     {
@@ -40,6 +43,45 @@ const perfiles = [
         profile: perfilPugui,
         type: 'Perro',
         FollowsMe: false,
+        FollowedByMe: true
+    },
+    {
+        id: 4,
+        name: 'Tony',
+        username: 'tony.stark',
+        human: 'Tony Stark',
+        followers: 0,
+        followed: 0,
+        date: '01/01/2010',
+        profile: perfilTony,
+        type: 'Perro',
+        FollowsMe: false,
+        FollowedByMe: false
+    },
+    {
+        id: 5,
+        name: 'Misato',
+        username: 'misato.cat',
+        human: 'Romina Rodriguez',
+        followers: 13,
+        followed: 5,
+        date: '22/05/2013',
+        profile: perfilMisato,
+        type: 'Gato',
+        FollowsMe: true,
+        FollowedByMe: true
+    },
+    {
+        id: 6,
+        name: 'Nevada',
+        username: 'nevada_fer',
+        human: 'Fernanda Gonzalez',
+        followers: 32,
+        followed: 53,
+        date: '22/05/2013',
+        profile: perfilNevada,
+        type: 'Conejo',
+        FollowsMe: true,
         FollowedByMe: true
     }
 ]
