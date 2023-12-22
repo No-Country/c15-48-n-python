@@ -12,6 +12,14 @@ class Pet(models.Model):
     class PetSpecies(models.IntegerChoices):
         DOG = 1, gettext_noop("DOG")
         CAT = 2, gettext_noop("CAT")
+        BIRD = 3, gettext_noop("BIRD")
+        RABBIT = 4, gettext_noop("RABBIT")
+        HORSE = 5, gettext_noop("HORSE")
+        HAMSTER = 6, gettext_noop("HAMSTER")
+        TURTLE = 7, gettext_noop("TURTLE")
+        SHEEP = 8, gettext_noop("SHEEP")
+        CHICKEN = 9, gettext_noop("CHICKEN")
+        PIG = 10, gettext_noop("PIG")
 
     user = models.ForeignKey(
         User,
@@ -26,6 +34,11 @@ class Pet(models.Model):
         verbose_name=_("Species of pet"), choices=PetSpecies.choices
     )
     pet_picture = models.URLField(null=True)
+    followed = models.PositiveIntegerField(default=0)
+    followers = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.nick
 
 
 class Follower(models.Model):
@@ -46,6 +59,24 @@ class Follower(models.Model):
                 name="not_same_follower", check=~models.Q(followed=models.F("follower"))
             )
         ]
+
+    def save(self, *args, **kwargs):
+        if self.followed is not None:
+            self.followed.followers += 1
+            self.follower.followed += 1
+
+            self.followed.save()
+            self.follower.save()
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.followed is not None:
+            self.followed.followers -= 1
+            self.follower.followed -= 1
+
+            self.followed.save()
+            self.follower.save()
+        super().delete(*args, **kwargs)
 
 
 class Blocker(models.Model):

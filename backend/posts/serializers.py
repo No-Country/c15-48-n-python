@@ -1,4 +1,3 @@
-from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 from .models import Post, Like, Comment, PostImage, PostVideo
 from accounts.serializers import PetAbridgedSerializer
