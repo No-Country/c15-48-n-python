@@ -19,7 +19,7 @@ const FollowersModal = ({ userData, handleClose }) => {
 
   return (
     <div className="h-full w-full fixed top-0 z-50 flex justify-center items-center">
-      <div className="w-1/3 h-1/2 bg-dark-black border border-light-gray text-white rounded-2xl p-4">
+      <div className="w-1/3 h-1/2 bg-dark-black border border-light-gray text-white rounded-2xl p-4 overflow-hidden">
         <div className="flex justify-center items-center h-20 relative">
           <button
             onClick={() => handleClose()}
@@ -47,7 +47,7 @@ const FollowersModal = ({ userData, handleClose }) => {
           </button>
         </div>
 
-        <div className="w-full max-w-4xl h-full gap-4 flex flex-col overflow-auto px-4 pt-4">
+        <div className="w-full max-w-4xl h-full gap-4 flex flex-col overflow-auto overflow-x-hidden px-4 pt-4">
           {activeButton === "seguidores" &&
             perfiles_mascotas
               .filter((perfil) => perfil.FollowsMe === true)
