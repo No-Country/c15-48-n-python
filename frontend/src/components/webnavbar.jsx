@@ -275,6 +275,7 @@ export default function Webnavbar() {
         </nav>
       </div>
       {postModal && <PublishWeb onClose={handleClose}/>}
+            </NavLink>
     </div>
   );
 }

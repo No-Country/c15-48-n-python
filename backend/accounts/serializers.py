@@ -1,4 +1,5 @@
 from django.contrib.auth.password_validation import validate_password
+from rest_framework.validators import UniqueTogetherValidator
 from rest_framework import serializers
 from .models import Blocker, Follower, Pet, User
 
@@ -18,9 +19,6 @@ class PetSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ("user",)
         lookup_field = "nick"
-
-
-
 
 class PetAbridgedSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,14 +47,27 @@ class AccountSerializer(serializers.ModelSerializer):
         return user
 
 
-class FollowerSerializer(serializers.HyperlinkedModelSerializer):
+class FollowerSerializer(serializers.ModelSerializer):
+    followed = serializers.SlugRelatedField(
+        queryset=Pet.objects.all(), slug_field="nick"
+    )
+    follower = serializers.SlugRelatedField(
+        queryset=Pet.objects.all(), slug_field="nick"
+    )
+
     class Meta:
         model = Follower
         fields = ("followed", "follower", "created_at")
-        lookup_field = "followed"
+        lookup_field = "follower"
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Follower.objects.all(),
+                fields=("followed", "follower"),
+            )
+        ]
 
 
-class BlockerSerializer(serializers.HyperlinkedModelSerializer):
+class BlockerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blocker
         fields = ("blocked", "blocker")

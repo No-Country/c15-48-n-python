@@ -1,4 +1,6 @@
 from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
+from rest_framework import status
 from .permissions import IsOwner, IsOwnerOrReadOnlyPet
 from rest_framework import viewsets, permissions
 from .models import User, Follower, Blocker, Pet
@@ -41,8 +43,21 @@ class FollowerViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticatedOrReadOnly,
         IsOwnerOrReadOnlyPet,
     )
+    http_method_names = ("get", "post", "delete")
     serializer_class = FollowerSerializer
-    lookup_field = "followed"
+    lookup_field = "follower"
+
+    def destroy(self, request, *args, **kwargs):
+        nick = request.data.get("follower")
+        pet_queryset = Pet.objects.filter(user=self.request.user)
+        follower = get_object_or_404(pet_queryset, nick=nick)
+        instace = self.get_object()
+        follower_object = get_object_or_404(
+            Follower.objects.all(), follower=follower, followed=instace
+        )
+        follower_object.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def perform_create(self, serializer):
         followed_id = self.kwargs.get('followed')

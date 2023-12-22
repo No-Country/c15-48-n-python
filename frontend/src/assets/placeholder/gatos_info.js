@@ -1,4 +1,11 @@
-import Perfil from "./gato_perfil.jpg";
+import Jacob from "./PerfilesFigma/Profile Jacob.png";
+import JacobPubli from "./PerfilesFigma/publis/1-2.jpg";
+import Tony from "./PerfilesFigma/6.jpg";
+import TonyPubli from "./PerfilesFigma/publis/5.jpg"
+import Pugui from "./PerfilesFigma/Profile Pugui.png";
+import PuguiPubli from "./PerfilesFigma/publis/7.jpg";
+import Alex from "../placeholder/alex.jpg";
+import AlexPubli from "./PerfilesFigma/publis/3.jpg"
 import Imagen from "./gato.jpg";
 
 //* Los textos de las mascotas deberían tener un límite de caracteres. Con Abril pensamos en poder tocar la publicación para que se pueda
@@ -7,39 +14,34 @@ import Imagen from "./gato.jpg";
 let gatos = {
   1: {
     id: 1,
-    perfil: Perfil,
-    nombre: "Misato",
+    perfil: Jacob,
+    nombre: "Jacob",
     fecha: "Hace 2 horas",
-    imagen: Imagen,
+    imagen: JacobPubli,
     likes: 15,
     comments: 5,
-    text: "¡No hay nada más adorable que un gatito curioso! 🐱💕 Esta pequeña bola de pelusa ha iluminado mi día con su ternura y travesuras. ¿Quién más es un amante de los gatos? ¡Deja un comentario con tu emoji de gato favorito! 😻😺 #AmoALosGatos #GatitosAdorables",
+    text: '"El que trova un amico trova un tesoro", "El que encuentra un amigo encuentra un tesoro" Lo escuchamos por ahí...'
   },
   2: {
     id: 2,
-    perfil:
-      "https://fielpet.com.ar/blog/content/images/size/w2000/2021/02/Hisotoria-de-los-gatos.jpg",
-    nombre: "Manchita",
+    perfil: Alex,
+    nombre: "Alex",
     fecha: "Hace 20 minutos",
-    imagen:
-      "https://walac.pe/wp-content/uploads/2021/02/gato-marron_0-1068x801.jpg",
+    imagen: AlexPubli,
     likes: 120,
     comments: 12,
-    text: "¡La mejor peluquería de Argentina! 🐾🐱🐶",
+    text: "¡Nada mejor que una sonrisa! 🐶",
   },
   3: {
     id: 3,
-    perfil:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Zuri.jpg/260px-Zuri.jpg",
-    nombre: "Pulga",
+    perfil:Pugui,
+    nombre: "Pugui",
     fecha: "Hace 2 horas",
-    imagen:
-      "https://www.cuerpomente.com/medio/2023/07/11/gatos-gordos_3f14078c_230711093058_1280x720.jpg",
+    imagen: PuguiPubli,
     likes: 172,
     comments: 25,
-    text: "¡Conoce a nuestro adorable compañero felino! 🐱🐱🐱",
+    text: "",
   },
 };
-
 
 export default gatos;
