@@ -43,6 +43,7 @@ class FollowerViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticatedOrReadOnly,
         IsOwnerOrReadOnlyPet,
     )
+    http_method_names = ("get", "post", "delete")
     serializer_class = FollowerSerializer
     lookup_field = "follower"
 

@@ -1,5 +1,6 @@
+from rest_framework.validators import UniqueTogetherValidator
 from rest_framework import serializers
-from .models import Post, Like, Comment, PostImage, PostVideo
+from .models import Post, Like, Comment, PostImage, PostVideo, Pet
 from accounts.serializers import PetAbridgedSerializer
 
 
@@ -52,9 +53,17 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class LikeSerializer(serializers.ModelSerializer):
-    pet = PetAbridgedSerializer(read_only=True)
-    post = serializers.PrimaryKeyRelatedField(read_only=True)
+    post = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all())
+    pet = serializers.SlugRelatedField(queryset=Pet.objects.all(), slug_field="nick")
 
     class Meta:
         model = Like
-        fields = ["pet", "post"]
+        fields = ("pet", "post")
+        lookup_field = "post"
+
+    validators = [
+        UniqueTogetherValidator(
+            queryset=Like.objects.all(),
+            fields=("pet", "post"),
+        )
+    ]
