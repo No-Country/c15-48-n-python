@@ -19,8 +19,10 @@ const Publication = ({ gato, ids }) => {
   const route = location.pathname
   const params = useParams();
   const paramsId = params.id;
-  let userRegistered = gatos_info[2];
+  
+  let userRegistered = gatos_info[1];
   console.log(userRegistered.id)
+
 
   const [post, setPost] = useState({
     id: null,
@@ -103,15 +105,15 @@ const Publication = ({ gato, ids }) => {
           </header>
         )}
         <div className="flex h-10 w-full">
-          <div className="h-full w-16 ">
-            <div className="w-11 h-10 rounded-full overflow-hidden">
-              <Link to="/profile">
+          <div className="h-full">
+            <div className="w-11 h-11 rounded-full overflow-hidden">
+              <Link to={paramsId ? `/profile/${paramsId}` : `/profile/${gato.id}`}>
                 <img src={perfil} className="object-cover w-full h-full" />
               </Link>
             </div>
           </div>
           <div className="w-full text-black flex flex-col items-start justify-center ml-2">
-            <Link to="/profile">
+          <Link to={paramsId ? `/profile/${paramsId}` : `/profile/${gato.id}`}>
               <p className="text-base text-white">{nombre}</p>
               <p className="text-sm text-light-gray">{fecha}</p>
             </Link>
@@ -134,7 +136,7 @@ const Publication = ({ gato, ids }) => {
           )}
         </div>
         {text && (
-          <div className="text-sm text-left mt-2">
+          <div className="text-sm text-left mt-2 md:text-base">
             <p className="text-white">{text}</p>
           </div>
         )}

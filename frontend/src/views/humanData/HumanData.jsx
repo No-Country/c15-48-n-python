@@ -26,13 +26,13 @@ export default function HumanData() {
 
   const token = useSelector((state) => state.user.tokenUser);
 //   console.log("Token link:", token.access);
-  
   useEffect(() => {
     axios
       .get(humanUrl)
       .then((response) => {
         setOwnerUser(response.data);
         console.log(ownerUser);
+
       })
       .catch((error) => {
         console.error("Error al obtener datos del dueño:", error);
@@ -56,7 +56,6 @@ export default function HumanData() {
   }, []);
 
 //   console.log(ownerUser.pets);
-
   const handleDelete = () => {};
 
   return (

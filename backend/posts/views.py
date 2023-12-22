@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
+
 from .models import Post, Comment, Like, Pet
 from .permissions import IsOwnerOrReadOnly
 from rest_framework import viewsets, permissions
@@ -72,6 +73,15 @@ class LikeViewSet(viewsets.ModelViewSet):
     lookup_field = "post"
     http_method_names = ("get", "post", "delete")
     serializer_class = LikeSerializer
+
+    def list(self, request, *args, **kwargs):
+        post_param = request.GET.get("post")
+
+        if post_param:
+            like_queryset = Like.objects.filter(post=post_param)
+            return Response(self.get_serializer(like_queryset, many=True).data)
+
+        return super().list(request, *args, **kwargs)
 
     @action(detail=False, methods=["post"])
     def remove_like(self, request):

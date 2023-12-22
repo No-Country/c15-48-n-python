@@ -19,6 +19,7 @@ export default function Create() {
   // const users = humans;
   
   // console.log("Token link:", token.access);
+
   // const owner = users[1];
   const [humans, setHumans] = useState();
   const humansList = `http://127.0.0.1:8000/api/user/`;
@@ -28,7 +29,6 @@ export default function Create() {
   // const userData = useSelector((state) => state.user.userData);
 
   const [token, setToken] = useState();
-
   useEffect(() => {
     axios
       .get(humanUrl)
@@ -41,7 +41,6 @@ export default function Create() {
       .catch((error) => {
         console.error("Error al obtener datos del dueño:", error);
       });
-      
     axios.get(humansList).then((res) => {
       setHumans(res.data);
     });
@@ -374,7 +373,7 @@ export default function Create() {
           }
           BtnText="Crear Perfil"
           onClick={handleCreate}
-          link={`/profile/2/${owner ? owner.first_name : ""}`}
+          link={`/profile/2/${humanProfile ? humanProfile.name : ""}`}
         />
       </form>
     </div>

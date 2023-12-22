@@ -20,7 +20,6 @@ class PetSerializer(serializers.ModelSerializer):
         read_only_fields = ("user",)
         lookup_field = "nick"
 
-
 class PetAbridgedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
@@ -73,3 +72,10 @@ class BlockerSerializer(serializers.ModelSerializer):
         model = Blocker
         fields = ("blocked", "blocker")
         lookup_field = "blocked"
+
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Blocker.objects.all(),
+                fields=("blocked", "blocker"),
+            )
+        ]

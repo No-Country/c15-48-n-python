@@ -1,4 +1,4 @@
-const agregarMascotaAUsuario = (username, newPet, humans) => {
+const addPetToUser = (username, newPet, humans) => {
     const usuarioEncontrado = humans.find((usuario) => usuario.nick === username);
   
     if (usuarioEncontrado) {
@@ -9,4 +9,4 @@ const agregarMascotaAUsuario = (username, newPet, humans) => {
     console.log(usuarioEncontrado.pets);
   };
 
-export default agregarMascotaAUsuario;
+export default addPetToUser;
