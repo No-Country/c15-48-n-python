@@ -19,8 +19,10 @@ const Publication = ({ gato, ids }) => {
   const route = location.pathname
   const params = useParams();
   const paramsId = params.id;
+  
   let userRegistered = gatos_info[1];
   console.log(userRegistered.id)
+
 
   const [post, setPost] = useState({
     id: null,

@@ -59,6 +59,12 @@ class FollowerViewSet(viewsets.ModelViewSet):
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    def perform_create(self, serializer):
+        followed_id = self.kwargs.get('followed')
+        followed_pet = get_object_or_404(Pet, id=followed_id)
+        
+        serializer.save(followed=followed_pet)
+
 
 class BlockerViewSet(viewsets.ModelViewSet):
     queryset = Blocker.objects.all()

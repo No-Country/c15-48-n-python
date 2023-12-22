@@ -20,7 +20,6 @@ class PetSerializer(serializers.ModelSerializer):
         read_only_fields = ("user",)
         lookup_field = "nick"
 
-
 class PetAbridgedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet

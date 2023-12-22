@@ -5,3 +5,4 @@ from .models import Pet, User, Follower
 admin.site.register(Pet)
 admin.site.register(User)
 admin.site.register(Follower)
+

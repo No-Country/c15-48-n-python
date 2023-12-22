@@ -34,10 +34,11 @@ const Explore = () => {
             </div>
           </div>  
         </div>
-        
+        <div className="flex flex-col gap-4 max-w-4xl">
         {Object.entries(animalesInfo).map(([key, value]) => (
           <Publication gato={value} key={key} />
         ))}
+        </div>
       </div>
     </div>
   );

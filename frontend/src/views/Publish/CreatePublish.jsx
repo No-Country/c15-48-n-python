@@ -148,8 +148,8 @@ const CreatePublish = () => {
   };
 
   return (
-    <div className="mx-6">
-      <div className="flex justify-between mt-8  items-center font-sm">
+    <div className="mx-6 lg:w-300 md:h-auto md:py-6 md:px-8 md:border md:border-light-gray md:rounded-3xl md:mt-16 md:flex md:flex-col">
+      <div className="flex justify-between mt-8 items-center font-sm md:mt-6">
         <button onClick={handleBack} className="font-semibold text-social-blue">
           Deshacer
         </button>

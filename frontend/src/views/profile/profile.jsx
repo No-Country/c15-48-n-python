@@ -71,7 +71,6 @@ const Profile = () => {
           </div>
         )}
       </div>
-
       <header className="font-custom md:max-w-4xl">
         <div className="flex flex-col justify-center text-center text-white">
           <img

@@ -34,12 +34,12 @@ class Pet(models.Model):
         verbose_name=_("Species of pet"), choices=PetSpecies.choices
     )
     pet_picture = models.URLField(null=True)
+
     followed = models.PositiveIntegerField(default=0)
     followers = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.nick
-
 
 class Follower(models.Model):
     followed = models.ForeignKey(
