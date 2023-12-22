@@ -62,8 +62,8 @@ class Follower(models.Model):
 
     def save(self, *args, **kwargs):
         if self.followed is not None:
-            self.followed.followers += 1
-            self.follower.followed += 1
+            self.followed.followed += 1
+            self.follower.followers += 1
 
             self.followed.save()
             self.follower.save()

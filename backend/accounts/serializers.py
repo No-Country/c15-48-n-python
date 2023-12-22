@@ -73,3 +73,10 @@ class BlockerSerializer(serializers.ModelSerializer):
         model = Blocker
         fields = ("blocked", "blocker")
         lookup_field = "blocked"
+
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Blocker.objects.all(),
+                fields=("blocked", "blocker"),
+            )
+        ]
