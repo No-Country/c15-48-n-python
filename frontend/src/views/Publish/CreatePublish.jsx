@@ -130,7 +130,7 @@ const CreatePublish = () => {
         }; 
         console.log("Nuevo Post: ", newPost);
         petsPosts.id = newPost;
-        alert("Formulario publicado correctamente"); // esto tmb
+        alert("Posteo creado"); // esto tmb
       } catch (error) {
         console.error("Error al crear el nuevo post:", error);
       }

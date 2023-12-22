@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import calculateTime from "./calculateTime.js";
 import gatos from "../../assets/placeholder/gatos_info.js";
 import profiles from "../../assets/placeholder/perfiles_mascotas.js";
