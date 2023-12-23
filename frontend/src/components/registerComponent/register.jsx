@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser, setTokenUser } from "../../redux/userSlice.js";
+import { setUser, setTokenUser } from "../../features/users/userSlice.js";
 import axios from "axios";
 import validate from "./validation";
 
@@ -46,7 +46,6 @@ const Register = () => {
           first_name: userData.name,
           email: userData.email,
           password: userData.password2,
-
         };
 
         console.log("Data a enviar:", data);
@@ -70,7 +69,7 @@ const Register = () => {
           // almmacena user en el estado
           dispatch(setTokenUser(tokenUser));
         }
-        
+
         console.log(tokenResponse.data);
 
         alert("axios requests ready");
@@ -81,89 +80,88 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col h-full items-center justify-center text-white">
-      <div className="flex flex-col items-center justify-center h-2/5 w-72 text-left">
-        <h1 className="text-3xl font-bold font-HK-Grotesk">
+    <div className='flex flex-col h-full items-center justify-center text-white'>
+      <div className='flex flex-col items-center justify-center h-2/5 w-72 text-left'>
+        <h1 className='text-3xl font-bold font-HK-Grotesk'>
           Bienvenido{" "}
-          <span className="text-4xl text-social-blue">Maskotero</span>
+          <span className='text-4xl text-social-blue'>Maskotero</span>
         </h1>
       </div>
 
-      <div className="flex flex-col items-center justify-between h-4/5 w-full">
-        <form className="flex flex-col text-left gap-2 justify-between">
-          <div className="flex flex-col">
-            <label htmlFor="email" className="text-sm font-bold">
+      <div className='flex flex-col items-center justify-between h-4/5 w-full'>
+        <form className='flex flex-col text-left gap-2 justify-between'>
+          <div className='flex flex-col'>
+            <label htmlFor='email' className='text-sm font-bold'>
               Email
             </label>
             <input
-              type="email"
-              id="email"
-              placeholder="Escribí tu email..."
-              className="w-72 h-10 border-b  bg-dark-black border-light-gray"
+              type='email'
+              id='email'
+              placeholder='Escribí tu email...'
+              className='w-72 h-10 border-b  bg-dark-black border-light-gray'
               onChange={handleChange}
             />
-            {errors.email && <span className="text-xs">{errors.email}</span>}
+            {errors.email && <span className='text-xs'>{errors.email}</span>}
           </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="name" className="text-sm font-bold">
+          <div className='flex flex-col'>
+            <label htmlFor='name' className='text-sm font-bold'>
               Nombre
             </label>
             <input
-              type="text"
-              id="name"
-              placeholder="Escribí tu nombre..."
-              className="w-72 h-10 border-b bg-dark-black border-light-gray"
+              type='text'
+              id='name'
+              placeholder='Escribí tu nombre...'
+              className='w-72 h-10 border-b bg-dark-black border-light-gray'
               onChange={handleChange}
             />
-            {errors.name && <span className="text-xs">{errors.name}</span>}
+            {errors.name && <span className='text-xs'>{errors.name}</span>}
           </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="password" className="text-sm font-bold">
+          <div className='flex flex-col'>
+            <label htmlFor='password' className='text-sm font-bold'>
               Contraseña
             </label>
             <input
-              type="password"
-              id="password"
-              placeholder="Escribí tu contraseña..."
-              className="w-72 h-10 border-b bg-dark-black border-light-gray"
+              type='password'
+              id='password'
+              placeholder='Escribí tu contraseña...'
+              className='w-72 h-10 border-b bg-dark-black border-light-gray'
               onChange={handleChange}
             />
             {errors.password && (
-              <span className="text-xs">{errors.password}</span>
+              <span className='text-xs'>{errors.password}</span>
             )}
           </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="password" className="text-sm font-bold">
+          <div className='flex flex-col'>
+            <label htmlFor='password' className='text-sm font-bold'>
               Confirmar contraseña
             </label>
             <input
-              type="password"
-              id="password2"
-              placeholder="Confirmá tu contraseña..."
-              className="w-72 h-10 border-b border-light-gray bg-dark-black"
+              type='password'
+              id='password2'
+              placeholder='Confirmá tu contraseña...'
+              className='w-72 h-10 border-b border-light-gray bg-dark-black'
               onChange={handleChange}
             />
             {errors.password2 && (
-              <span className="text-xs">{errors.password2}</span>
+              <span className='text-xs'>{errors.password2}</span>
             )}
           </div>
 
           <button
-            type="submit"
-            className="bg-social-blue text-white h-10 rounded-2xl font-bold mt-4 disabled:opacity-50"
+            type='submit'
+            className='bg-social-blue text-white h-10 rounded-2xl font-bold mt-4 disabled:opacity-50'
             onClick={handleSubmit}
-            disabled={Object.keys(errors).length !== 0}
-          >
-            <Link to="/">Registrarse</Link>
+            disabled={Object.keys(errors).length !== 0}>
+            <Link to='/'>Registrarse</Link>
           </button>
         </form>
 
-        <p className="mb-8">
+        <p className='mb-8'>
           ¿Ya tenés cuenta?{" "}
-          <Link to="/login" className="font-bold">
+          <Link to='/login' className='font-bold'>
             Iniciar sesión
           </Link>
         </p>
