@@ -8,4 +8,4 @@ const extendedBlockerApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetBlockersQuery } = extendedUserApiSlice;
+export const { useGetBlockersQuery } = extendedBlockerApiSlice;
