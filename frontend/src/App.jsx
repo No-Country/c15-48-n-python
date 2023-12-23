@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
-import Webnavbar from "./components/webnavbar";
+import Webnavbar from "./components/Webnavbar.jsx";
 import Register from "./components/registerComponent/register";
 import HomeComp from "./views/home/homeComp";
 import Login from "./views/login/login";
@@ -30,32 +30,36 @@ function App() {
   const idGatosArray = Object.keys(gatos).map(Number);
 
   return (
-    <div className="h-screen flex flex-col md:flex-row-reverse justify-center">
+    <div className='h-screen flex flex-col md:flex-row-reverse justify-center'>
       <div
-        className={ profileRoute || registerRoute || loginRoute || createMaskotaRoute
+        className={
+          profileRoute || registerRoute || loginRoute || createMaskotaRoute
             ? "AppHiddenNav"
             : "App"
         }>
         <Routes>
-          <Route path="/" element={<HomeComp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/publish" element={<CreatePublish />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/profile/:id/:human" element={<HumanData />} />
-          <Route path="/crearMaskota" element={<Create />} />
-          <Route path="/followers/:id" element={<Followers />} />
-          <Route path="/posts/:id" element={<Publication ids={idGatosArray} />} />
+          <Route path='/' element={<HomeComp />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/explore' element={<Explore />} />
+          <Route path='/publish' element={<CreatePublish />} />
+          <Route path='/notifications' element={<Notifications />} />
+          <Route path='/profile/:id' element={<Profile />} />
+          <Route path='/profile/:id/:human' element={<HumanData />} />
+          <Route path='/crearMaskota' element={<Create />} />
+          <Route path='/followers/:id' element={<Followers />} />
+          <Route
+            path='/posts/:id'
+            element={<Publication ids={idGatosArray} />}
+          />
         </Routes>
       </div>
       {profileRoute || registerRoute || loginRoute || createMaskotaRoute ? (
-        <div className="navContainer">
+        <div className='navContainer'>
           <Webnavbar />
         </div>
       ) : (
-        <div className="navContainer">
+        <div className='navContainer'>
           {!profileRoute &&
           !registerRoute &&
           !loginRoute &&
@@ -65,9 +69,7 @@ function App() {
               <Webnavbar />
             </>
           ) : (
-            <div>
-              
-            </div>
+            <div></div>
           )}
         </div>
       )}
