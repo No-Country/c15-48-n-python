@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser, setTokenUser } from "../../features/users/userSlice.js";
+import { setUser, setTokenUser } from "../../features/user/userSlice.js";
 import axios from "axios";
 import validate from "./validation";
 
