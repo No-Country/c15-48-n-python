@@ -12,10 +12,8 @@ import CreatePublish from "./views/Publish/CreatePublish";
 import Profile from "./views/profile/profile";
 import Notifications from "./views/notifications/notifications";
 import Followers from "./views/followers/followers.jsx";
-import profiles from "./assets/placeholder/perfiles_mascotas.js";
 import Publication from "./components/publication.jsx";
 import gatos_info from "./assets/placeholder/gatos_info.js";
-import { useDispatch } from "react-redux";
 
 function App() {
   const location = useLocation();
