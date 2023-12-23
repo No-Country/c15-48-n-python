@@ -18,8 +18,6 @@ import gatos_info from "./assets/placeholder/gatos_info.js";
 import { useDispatch } from "react-redux";
 
 function App() {
-  const user = profiles[1];
-  const dispatch = useDispatch();
   const location = useLocation();
   const profileRoute = location.pathname.startsWith("/profile/:id");
   const registerRoute = location.pathname === "/register";
