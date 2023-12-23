@@ -17,5 +17,3 @@ export const apiSlice = createApi({
   },
   endpoints: () => ({}),
 });
-
-export const { useGetPostsQuery } = apiSlice;
