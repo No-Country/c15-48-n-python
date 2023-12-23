@@ -42,6 +42,7 @@ const extendedUserApiSlice = apiSlice.injectEndpoints({
     deleteUser: builder.mutation({
       query: (username) => ({
         url: `user/${username}`,
+        method: "DELETE",
       }),
       invalidatesTags: (_result, _error, arg) => [
         {
