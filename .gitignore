@@ -9,3 +9,4 @@
 /backend/accounts/migrations
 /backend/core/.env
 /frontend/src/components/searchBar.jsx
+/node_modules
