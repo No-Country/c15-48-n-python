@@ -9,4 +9,4 @@ const extendedTokenApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetTokenQuery } = extendedUserApiSlice;
+export const { useGetTokenQuery } = extendedTokenApiSlice;
