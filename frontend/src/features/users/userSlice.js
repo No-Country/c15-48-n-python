@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 // let usersUrl = "http://127.0.0.1:8000/api/user/";
 
@@ -14,7 +14,7 @@ const initialState = {
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     setUser: (state, action) => {
@@ -22,8 +22,8 @@ const userSlice = createSlice({
     },
     setTokenUser: (state, action) => {
       state.tokenUser = action.payload;
-    }
-  }
+    },
+  },
 });
 
 export const { setUser, setTokenUser } = userSlice.actions;
@@ -43,7 +43,7 @@ export default userSlice.reducer;
 // },
 // });
 
-// card slice 
+// card slice
 // import { createSlice } from '@reduxjs/toolkit';
 // import { calculateTotals, getCartStorage } from '../../utils/helpers';
 
@@ -138,4 +138,3 @@ export default userSlice.reducer;
 // cartSlice.actions;
 
 // export default cartSlice.reducer;
-
