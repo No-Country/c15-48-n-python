@@ -1,5 +1,6 @@
 import { apiSlice } from "../api/apiSlice.js";
 
+// For what should go inside userData check the documentation
 const extendedUserApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query({
