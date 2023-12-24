@@ -38,9 +38,9 @@ const extendedPetApiSlice = apiSlice.injectEndpoints({
         },
       ],
     }),
-    deleteUser: builder.mutation({
-      query: (username) => ({
-        url: `user/${username}`,
+    deletePet: builder.mutation({
+      query: (nick) => ({
+        url: `pet/${nick}`,
         method: "DELETE",
       }),
       invalidatesTags: (_result, _error, arg) => [
@@ -54,7 +54,7 @@ const extendedPetApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetPetssQuery,
+  useGetPetsQuery,
   useGetPetQuery,
   useCreateNewPetMutation,
   useUpdatePetMutation,
