@@ -11,22 +11,22 @@ const SharedLayout = () => {
   if (
     location.pathname === "/crearMaskota" ||
     location.pathname === "/login" ||
-    location.pathname === "/register" ||
-    location.pathname.startsWith("/profile/:id")
+    location.pathname === "/register"
+    // || location.pathname.startsWith("/profile/:id")
   ) {
     haveNavbar = false;
   }
   return (
-    <div className='h-screen flex flex-col md:flex-row-reverse justify-center'>
-      <div className={haveNavbar ? "AppHiddenNav" : "App"}>
+    <div className="h-screen flex flex-col md:flex-row-reverse justify-center">
+      <div className={haveNavbar ? "App" : "AppHiddenNav"}>
         <Outlet />
       </div>
-      {haveNavbar ? (
-        <div className='navContainer'>
+      {!haveNavbar ? (
+        <div className="navContainer">
           <Webnavbar />
         </div>
       ) : (
-        <div className='navContainer'>
+        <div className="navContainer">
           {haveNavbar && (
             <>
               <Navbar />
