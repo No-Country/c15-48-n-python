@@ -6,35 +6,33 @@ import Webnavbar from "../../components/Webnavbar";
 
 const SharedLayout = () => {
   const location = useLocation();
-  const profileRoute = location.pathname.startsWith("/profile/:id");
-  const registerRoute = location.pathname === "/register";
-  const loginRoute = location.pathname === "/login";
-  const createMaskotaRoute = location.pathname === "/crearMaskota";
+
+  const haveNavbar = false;
+  if (
+    location.pathname === "/crearMaskota" ||
+    location.pathname === "/login" ||
+    location.pathname === "/register" ||
+    location.pathname.startsWith("/profile/:id")
+  ) {
+    haveNavbar = true;
+  }
   return (
     <div className='h-screen flex flex-col md:flex-row-reverse justify-center'>
-      <div
-        className={
-          profileRoute || registerRoute || loginRoute || createMaskotaRoute
-            ? "AppHiddenNav"
-            : "App"
-        }>
+      <div className={haveNavbar ? "AppHiddenNav" : "App"}>
         <Outlet />
       </div>
-      {profileRoute || registerRoute || loginRoute || createMaskotaRoute ? (
+      {haveNavbar ? (
         <div className='navContainer'>
           <Webnavbar />
         </div>
       ) : (
         <div className='navContainer'>
-          {!profileRoute &&
-            !registerRoute &&
-            !loginRoute &&
-            !createMaskotaRoute && (
-              <>
-                <Navbar />
-                <Webnavbar />
-              </>
-            )}
+          {haveNavbar && (
+            <>
+              <Navbar />
+              <Webnavbar />
+            </>
+          )}
         </div>
       )}
     </div>
