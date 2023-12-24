@@ -7,14 +7,14 @@ import Webnavbar from "../../components/Webnavbar";
 const SharedLayout = () => {
   const location = useLocation();
 
-  const haveNavbar = false;
+  let haveNavbar = true;
   if (
     location.pathname === "/crearMaskota" ||
     location.pathname === "/login" ||
     location.pathname === "/register" ||
     location.pathname.startsWith("/profile/:id")
   ) {
-    haveNavbar = true;
+    haveNavbar = false;
   }
   return (
     <div className='h-screen flex flex-col md:flex-row-reverse justify-center'>
