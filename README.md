@@ -14,17 +14,17 @@
   
 ## Tabla de contenido
 
- - [Sobre el proyecto](#sobre el proyecto)
+ Sobre el proyecto
 
-- [Stack/Tecnologías](#Stack/Tecnologías)
+- Stack/Tecnologías
 
-- [Integrantes y roles](#Integrantes y roles)
+- Integrantes y roles
 
-- [Link deploy](#Link deploy)
+- Link deploy
 
 :cat: :hamster: :dog: :pig: :horse: :rabbit2: :rooster:  :goat: :ram: :snake: :bird: :hatching_chick: :cow2:
-## Sobre el proyecto
 
+## Sobre el proyecto
   
 La red social permite a los dueños de mascotas realizar diversas acciones, como crear perfiles individuales para cada una de sus mascotas, acceder como usuario invitado con funciones limitadas. Subir imágenes, videos y texto para realizar publicaciones, visualizar las publicaciones de las mascotas seguidas en la sección de Inicio (home), recibir notificaciones sobre la actividad en su perfil, buscar un nick único para la mascota y filtrar según el tipo de mascota, así como expresar aprecio mediante "Me gusta" y comentarios tanto en sus propias publicaciones como en las de otros usuarios.
 
@@ -38,20 +38,18 @@ La red social permite a los dueños de mascotas realizar diversas acciones, como
 ![Markdown](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white)
 ![VSCode](https://img.shields.io/badge/Visual_Studio-0078d7?style=for-the-badge&logo=visual%20studio&logoColor=white)
 
-<br/>
+**Redux Toolkit**
+**RTK Query**
+**GITHUB**
+**Cloudinary**
+**Axios**
 
-**Redux Toolkit
-RTK Query
-GITHUB
-Cloudinary
-Axios
+**Python**
+**MySQL**
+**Django rest**
 
-**Python
-MySQL
-Django rest**
-
-**Figma
-Jira**
+**Figma**
+**Jira**
 
 ## Integrantes y roles
 
@@ -68,7 +66,7 @@ Integrantes:
 - Nahuel Arrieta - Backend
 - Santiago Cabral - Backend
 - Cynthia García - QA Tester
-- Mariana Miño - Diseño UX/UI y PM
+- Mariana Miño - Diseño UX/UI y PM [Perfil linkedin](https://www.linkedin.com/in/mino-mariana/) [Instagram](https://www.instagram.com/soylaprofemarian/)
 
 ## Link deploy
 
@@ -79,4 +77,4 @@ Integrantes:
 
 ....
 
-<p align="right">(<a href="#readme-top">Ir arriba</a>)</p>
+
