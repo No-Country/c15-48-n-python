@@ -5,23 +5,30 @@ const extendedTokenApiSlice = apiSlice.injectEndpoints({
     createToken: builder.mutation({
       query: (userData) => {
         console.log(userData);
-        return { url: "/token", method: "POST", body: userData };
+        return { url: "token/", method: "POST", body: userData };
       },
       providesTags: ["token"],
     }),
     verifyToken: builder.mutation({
-      query: (token) => ({
-        url: "/token",
-        method: "POST",
-        body: token,
-      }),
+      query: (token) => {
+        console.log(token);
+        return {
+          url: "/token/verify/",
+          method: "POST",
+          body: token,
+        };
+      },
     }),
     refreshToken: builder.mutation({
-      query: (refresh_token) => ({
-        url: "/token",
-        method: "POST",
-        body: refresh_token,
-      }),
+      query: (refresh_token) => {
+        console.log(refresh_token);
+
+        return {
+          url: "/token/refresh/",
+          method: "POST",
+          body: refresh_token,
+        };
+      },
       invalidatesTags: ["token"],
     }),
   }),
