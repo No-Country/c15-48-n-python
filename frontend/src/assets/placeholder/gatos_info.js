@@ -6,6 +6,9 @@ import Pugui from "./PerfilesFigma/Profile Pugui.png";
 import PuguiPubli from "./PerfilesFigma/publis/7.jpg";
 import Alex from "../placeholder/alex.jpg";
 import AlexPubli from "./PerfilesFigma/publis/3.jpg"
+import gatogris from "./PerfilesFigma/gatogris.jpeg";
+import conejo from "./PerfilesFigma/Conejo.jpeg";
+import conejoPubli from "./PerfilesFigma/ConejoPubli.jpeg";
 import Imagen from "./gato.jpg";
 
 //* Los textos de las mascotas deberían tener un límite de caracteres. Con Abril pensamos en poder tocar la publicación para que se pueda
@@ -42,6 +45,36 @@ let gatos = {
     comments: 25,
     text: "",
   },
+  4: {
+    id: 4,
+    perfil: Tony,
+    nombre: "Tony",
+    fecha: "Hace 2 horas",
+    imagen: TonyPubli,
+    likes: 15,
+    comments: 5,
+    text: "",
+  },
+  5: {
+    id: 5,
+    perfil: gatogris,
+    nombre: "Misato",
+    fecha: "Hace 2 minutos",
+    imagen: gatogris,
+    likes: 12,
+    comments: 2,
+    text: "Hace caloooooorr!!",
+  },
+  6: {
+    id: 6,
+    perfil: conejo,
+    nombre: "Nevada",
+    fecha: "Hace 2 minutos",
+    imagen: conejoPubli,
+    likes: 12,
+    comments: 2,
+    text: "",
+  }
 };
 
 export default gatos;
