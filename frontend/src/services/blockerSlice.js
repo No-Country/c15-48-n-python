@@ -1,4 +1,4 @@
-import { apiSlice } from "../api/apiSlice.js";
+import { apiSlice } from "./apiSlice.js";
 
 const extendedBlockerApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

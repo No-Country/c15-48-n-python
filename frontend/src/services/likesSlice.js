@@ -1,4 +1,4 @@
-import { apiSlice } from "../api/apiSlice.js";
+import { apiSlice } from "./apiSlice.js";
 
 const extendedLikesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

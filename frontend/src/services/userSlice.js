@@ -1,4 +1,4 @@
-import { apiSlice } from "../api/apiSlice.js";
+import { apiSlice } from "./apiSlice.js";
 
 // For what should go inside userData check the documentation
 const extendedUserApiSlice = apiSlice.injectEndpoints({

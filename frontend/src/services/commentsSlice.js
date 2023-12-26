@@ -1,4 +1,4 @@
-import { apiSlice } from "../api/apiSlice.js";
+import { apiSlice } from "./apiSlice.js";
 
 const extendedCommentsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
