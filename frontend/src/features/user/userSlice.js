@@ -28,7 +28,7 @@ const extendedUserApiSlice = apiSlice.injectEndpoints({
     }),
     updateUser: builder.mutation({
       query: (userData) => ({
-        url: `/user/${userData.username}`,
+        url: `/user/${userData.username}/`,
         method: "PUT",
         body: userData,
       }),
@@ -41,7 +41,7 @@ const extendedUserApiSlice = apiSlice.injectEndpoints({
     }),
     deleteUser: builder.mutation({
       query: (username) => ({
-        url: `user/${username}`,
+        url: `user/${username}/`,
         method: "DELETE",
       }),
       invalidatesTags: (_result, _error, arg) => [
