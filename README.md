@@ -1,4 +1,3 @@
-
 <h1 align="center"> Red Social para Mascotas </h1> <br>
 
 <p align="center">
@@ -75,6 +74,4 @@ Integrantes:
 
 ## Licencia
 
-....
-
-
+The backend (only the code inside the `backend/` folder) is licensed under the GNU AGPLv3 license.
