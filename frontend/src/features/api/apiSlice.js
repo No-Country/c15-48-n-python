@@ -6,8 +6,7 @@ export const apiSlice = createApi({
     baseUrl: "https://maskotapp.pythonanywhere.com/api/",
   }),
   prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.user.token;
-    console.log(getState());
+    const token = getState().token;
 
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
