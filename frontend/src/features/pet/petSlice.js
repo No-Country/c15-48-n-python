@@ -3,7 +3,7 @@ import { apiSlice } from "../api/apiSlice.js";
 const extendedPetApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPets: builder.query({
-      query: () => "/pet",
+      query: () => "/pet/",
       providesTags: (result, _error, _arg) => [
         "pets",
         ...result.map((pet) => ({ type: "pet", pet: pet.nick })),
@@ -27,7 +27,7 @@ const extendedPetApiSlice = apiSlice.injectEndpoints({
     }),
     updatePet: builder.mutation({
       query: (petData) => ({
-        url: `/pet/${petData.nick}`,
+        url: `/pet/${petData.nick}/`,
         method: "PUT",
         body: petData,
       }),
@@ -40,7 +40,7 @@ const extendedPetApiSlice = apiSlice.injectEndpoints({
     }),
     deletePet: builder.mutation({
       query: (nick) => ({
-        url: `pet/${nick}`,
+        url: `pet/${nick}/`,
         method: "DELETE",
       }),
       invalidatesTags: (_result, _error, arg) => [
