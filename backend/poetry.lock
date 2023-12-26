@@ -190,6 +190,21 @@ files = [
 django = "*"
 
 [[package]]
+name = "django-cors-headers"
+version = "4.3.1"
+description = "django-cors-headers is a Django application for handling the server headers required for Cross-Origin Resource Sharing (CORS)."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django-cors-headers-4.3.1.tar.gz", hash = "sha256:0bf65ef45e606aff1994d35503e6b677c0b26cafff6506f8fd7187f3be840207"},
+    {file = "django_cors_headers-4.3.1-py3-none-any.whl", hash = "sha256:0b1fd19297e37417fc9f835d39e45c8c642938ddba1acce0c1753d3edef04f36"},
+]
+
+[package.dependencies]
+asgiref = ">=3.6"
+Django = ">=3.2"
+
+[[package]]
 name = "django-imagekit"
 version = "5.0.0"
 description = "Automated image processing for Django models."
@@ -969,4 +984,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "56407af09e74e916aaeba503746554658657a3ef0fb804110fbc25bde821a9ef"
+content-hash = "cfa742cc8840a786e1690b99d7e55b4d4348c633f188a0d4a4616a2e593398a7"
