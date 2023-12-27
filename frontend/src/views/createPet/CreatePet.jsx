@@ -5,7 +5,7 @@ import GoBackButton from "../../components/GoBackButton.jsx";
 import arrowLeftIcon from "../../assets/icons/arrow_left.svg";
 import profilePlaceholder from "../../assets/profile_placeholder.png";
 import SubmitGradientBtn from "../../components/SubmitGradientBtn.jsx";
-import validate from "../create/validate.js";
+import validate from "./validate.js";
 import fileUpload from "../Publish/fileUpload.js";
 import humans from "../../assets/placeholder/humans_data.js";
 import petsProfiles from "../../assets/placeholder/perfiles_mascotas.js";
