@@ -3,6 +3,7 @@ import { useParams, NavLink, useNavigate } from "react-router-dom";
 import Publication from "../../components/publication.jsx";
 import FollowButton from "../../components/FollowButton.jsx";
 import GoBackButton from "../../components/GoBackButton.jsx";
+import { useGetPetQuery } from "../../services/petSlice.js";
 import perfiles_mascotas from "../../assets/placeholder/perfiles_mascotas.js";
 import gatos from "../../assets/placeholder/gatos_info.js";
 import arrowLeftIcon from "../../assets/icons/arrow_left.svg";
@@ -16,15 +17,16 @@ const Profile = () => {
   let perfiles = perfiles_mascotas;
   const user = perfiles[1];
   const params = useParams();
-  const navigate = useNavigate();
   const petProfile = perfiles.find((pet) => pet.id === parseInt(params.id));
+  const { data, isLoading, isFetching, isError, isSuccess } = useGetPetQuery(petProfile.username);
+  const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [active, setActive] = useState(false);
-
+  
   const handleMenu = () => {
     active ? setActive(false) : setActive(true);
   };
-
+  
   const handleOpenFollowers = () => {
     if(isMobile){
       navigate(`/followers/${params.id}`);
@@ -33,11 +35,11 @@ const Profile = () => {
       setOpenModal(true);
     }
   };
-
+  
   const handleCloseFollowers = () => {
     setOpenModal(false);
   }
-
+  
   if (!petProfile) {
     return (
       <h2 className="font-custom text-white font-bold text-3xl text-center m-10">
@@ -47,7 +49,13 @@ const Profile = () => {
   }
   // placeholder publis
   let gatosInfo = gatos;
-
+  
+  if (isError) {
+    console.log()
+  }
+  if (isSuccess) {
+    console.log("QUERY: ", data)
+  }
   return (
     <div className="w-full flex flex-col items-center overflow-hidden">
       <div className="flex justify-between px-8 pt-8 md:max-w-4xl w-full">

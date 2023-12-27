@@ -1,11 +1,11 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import Register from "./components/registerComponent/register";
+import Register from "./views/register/register.jsx";
 import HomeComp from "./views/home/homeComp";
 import Login from "./views/login/login";
 import HumanData from "./views/humanData/HumanData";
 import Explore from "./views/explore/explore";
-import Create from "./views/create/Create";
+import Create from "./views/createPet/Create.jsx";
 import CreatePublish from "./views/Publish/CreatePublish";
 import Profile from "./views/profile/profile";
 import Notifications from "./views/notifications/notifications";

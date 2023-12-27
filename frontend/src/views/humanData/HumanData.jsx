@@ -24,7 +24,7 @@ export default function HumanData() {
   // let humanUrl = `http://127.0.0.1:8000/api/user/${params.human}/`
   let humanUrl = `http://127.0.0.1:8000/api/user/sergiomusta2/`; // tendria que ir al nombre no al username xq no tiene
 
-  const token = useSelector((state) => state.user.tokenUser);
+  // const token = useSelector((state) => state.user.tokenUser);
 //   console.log("Token link:", token.access);
   useEffect(() => {
     axios

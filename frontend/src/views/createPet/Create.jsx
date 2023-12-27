@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import InputComp from "../../components/InputComp";
 import "../../App.css";
 import GoBackButton from "../../components/GoBackButton";
 import arrowLeftIcon from "../../assets/icons/arrow_left.svg";
 import profilePlaceholder from "../../assets/profile_placeholder.png";
 import SubmitGradientBtn from "../../components/SubmitGradientBtn";
-import validate from "../create/validate.js";
+import validate from "../createPet/validate.js";
 import fileUpload from "../Publish/fileUpload.js";
 import humans from "../../assets/placeholder/humans_data.js";
 import petsProfiles from "../../assets/placeholder/perfiles_mascotas.js";
@@ -13,12 +13,31 @@ import { useParams } from "react-router-dom";
 import addPetToUser from "./addPetToUser.js";
 import axios from "axios";
 import createToken from "./createToken.js";
+import { useCreateNewPetMutation } from "../../services/petSlice.js";
+import { useCreateTokenMutation } from "../../services/tokenSlice.js";
+import { useDispatch } from "react-redux";
 
 export default function Create() {
-  const tipos = ["Perro", "Gato", "Ave", "Conejo", "Caballo", "Hamster", "Tortuga", "Oveja", "Gallina", "Cerdo", "Otro"];
+  const tipos = [
+    "Perro",
+    "Gato",
+    "Ave",
+    "Conejo",
+    "Caballo",
+    "Hamster",
+    "Tortuga",
+    "Oveja",
+    "Gallina",
+    "Cerdo",
+    "Otro",
+  ];
+  const humanProfile = "";
+
+  const dispatch = useDispatch()
+  const [CreateToken, tokenData] = useCreateTokenMutation();
+  console.log(tokenData.data.access)
   // const users = humans;
-  
-  // console.log("Token link:", token.access);
+  const [CreateNewPet, { isError, isLoading, data }] = useCreateNewPetMutation();
 
   // const owner = users[1];
   const [humans, setHumans] = useState();
@@ -26,25 +45,6 @@ export default function Create() {
 
   const [owner, setOwner] = useState();
   const humanUrl = `http://127.0.0.1:8000/api/user/sergiomusta2/`; //
-  // const userData = useSelector((state) => state.user.userData);
-
-  const [token, setToken] = useState();
-  useEffect(() => {
-    axios
-      .get(humanUrl)
-      .then((response) => {
-        setOwner(response.data);
-        console.log(owner.first_name, owner.email);
-        setToken(createToken("sergiomusta2", "sergioMusta123!"))
-        console.log(token)
-      })
-      .catch((error) => {
-        console.error("Error al obtener datos del dueño:", error);
-      });
-    axios.get(humansList).then((res) => {
-      setHumans(res.data);
-    });
-  }, []);
 
   const params = useParams();
   let petsProf = petsProfiles;
@@ -90,9 +90,9 @@ export default function Create() {
   };
 
   const getIndex = (array, value) => {
-    let index = array.indexOf(value)
-    return index
-  }
+    let index = array.indexOf(value);
+    return index;
+  };
 
   const handleType = (e) => {
     console.log(e.target.value);
@@ -100,7 +100,7 @@ export default function Create() {
       ...prevErrors,
       ...validate("type", e.target.value),
     }));
-    let typeNumber = getIndex(tipos, e.target.value) + 1
+    let typeNumber = getIndex(tipos, e.target.value) + 1;
     error.petType ? console.log(error.petType) : setType(typeNumber);
   };
 
@@ -176,73 +176,56 @@ export default function Create() {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    let newErrors = {};
-    newErrors.petName = validate("petName", petName).petName;
-    newErrors.petType = validate("type", petType).petType;
-    newErrors.nick = validate("petNick", nick).nick;
-    newErrors.petDate = validate("petDate", petDate).petDate;
-    newErrors.petImg = validate("image", selectedImage).petImg;
+    // let newErrors = {};
+    // newErrors.petName = validate("petName", petName).petName;
+    // newErrors.petType = validate("type", petType).petType;
+    // newErrors.nick = validate("petNick", nick).nick;
+    // newErrors.petDate = validate("petDate", petDate).petDate;
+    // newErrors.petImg = validate("image", selectedImage).petImg;
 
-    console.log(newErrors);
+    // console.log(newErrors);
 
-    if (Object.values(newErrors).some((error) => error)) {
-      setError((prevErrors) => ({ ...prevErrors, ...newErrors }));
-    } else {
-      try {
-        console.log(selectedImage);
-        let imageUrl = null;
-        if (selectedImage) {
-          imageUrl = await imgUrl(selectedImage);
-          console.log(imageUrl);
-        }
-
-        const newPet = {
-          // id: newPetId,
-          name: petName,
-          username: nick,
-          // followed: 0,
-          // followers: 0,
-          date: petDate,
-          profile: imageUrl,
-          type: petType,
-        };
-
-        console.log("Nueva pet:", newPet); //
-        setPetProfile((prevPetProfile) => ({
-          ...prevPetProfile,
-          ...newPet,
-        }));
+    // if (Object.values(newErrors).some((error) => error)) {
+    //   setError((prevErrors) => ({ ...prevErrors, ...newErrors }));
+    // } else {
+    try {
+      console.log(selectedImage);
+      let imageUrl = null;
+      if (selectedImage) {
+        imageUrl = await imgUrl(selectedImage);
         console.log(imageUrl);
-        try {
-          const res = await axios.post(
-            "http://127.0.0.1:8000/api/pet/",
-            {
-              nick: nick,
-              name: petName,
-              birth_date: petDate,
-              pet_picture: imageUrl,
-              species: petType,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${token.access}`,
-              },
-            }
-          );
-          console.log(res);
-          addPetToUser(res.data.nick, res.data, humans);
-        } catch (err) {
-          console.error("Error en request", err);
-          return null;
-        }
-
-        console.log("Nueva mascota creada con éxito");
-        alert("Nueva mascota creada con éxito");
-        return imageUrl;
-      } catch (error) {
-        console.error(error);
-        return null;
       }
+
+      const newPet = {
+        // id: newPetId,
+        name: petName,
+        username: nick,
+        // followed: 0,
+        // followers: 0,
+        date: petDate,
+        profile: imageUrl,
+        type: petType,
+      };
+
+      console.log("Nueva pet:", newPet); //
+      setPetProfile((prevPetProfile) => ({
+        ...prevPetProfile,
+        ...newPet,
+      }));
+      console.log(imageUrl);
+      const tokenCreated = await CreateToken({
+        username: newPet.username,
+        password: "newPet123!"
+      });
+      dispatch(setCredentials(tokenCreated));
+      const createdPet = await CreateNewPet(newPet);
+
+      console.log("Nueva mascota creada con éxito");
+      alert("Nueva mascota creada con éxito");
+      return imageUrl;
+    } catch (error) {
+      console.error(error);
+      return null;
     }
   };
   return (
