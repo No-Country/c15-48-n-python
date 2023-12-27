@@ -8,10 +8,6 @@ import validate from "./validation";
 const Register = () => {
   const userUrl = "http://127.0.0.1:8000/api/user/";
   const tokenUrl = "http://127.0.0.1:8000/api/token/";
-  let [tokenUser, setToken] = useState({
-    access: "",
-    refresh: "",
-  });
   const [userData, setUserData] = useState({
     email: "",
     name: "",
