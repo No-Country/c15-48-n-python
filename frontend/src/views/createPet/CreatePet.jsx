@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import InputComp from "../../components/InputComp";
+import React, { useEffect, useState } from "react";
+import InputComp from "../../components/InputComp.jsx";
 import "../../App.css";
-import GoBackButton from "../../components/GoBackButton";
+import GoBackButton from "../../components/GoBackButton.jsx";
 import arrowLeftIcon from "../../assets/icons/arrow_left.svg";
 import profilePlaceholder from "../../assets/profile_placeholder.png";
-import SubmitGradientBtn from "../../components/SubmitGradientBtn";
-import validate from "../createPet/validate.js";
+import SubmitGradientBtn from "../../components/SubmitGradientBtn.jsx";
+import validate from "../create/validate.js";
 import fileUpload from "../Publish/fileUpload.js";
 import humans from "../../assets/placeholder/humans_data.js";
 import petsProfiles from "../../assets/placeholder/perfiles_mascotas.js";
@@ -13,9 +13,6 @@ import { useParams } from "react-router-dom";
 import addPetToUser from "./addPetToUser.js";
 import axios from "axios";
 import createToken from "./createToken.js";
-import { useCreateNewPetMutation } from "../../services/petSlice.js";
-import { useCreateTokenMutation } from "../../services/tokenSlice.js";
-import { useDispatch } from "react-redux";
 
 export default function Create() {
   const tipos = [
